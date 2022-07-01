@@ -15,9 +15,4 @@ const styles = StyleSheet.create({
         height: 130,
         width: 130,
     },
-
-    logoContainer: {
-        marginRight: 'auto',
-        marginHorizontal: 20
-    }
 })

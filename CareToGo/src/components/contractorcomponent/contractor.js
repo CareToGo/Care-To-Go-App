@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View, Image} from 'react-native';
-import C2G from '../../../assets/homespage/c2g.png';
 
 const Contractor = () => {
   return (
