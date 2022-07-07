@@ -13,7 +13,6 @@ export default Saved;
 const styles = StyleSheet.create({
     button: {
         marginHorizontal: 5,
-        backgroundColor: '#F1F1F1',
         height: 20,
         width: 20
     }

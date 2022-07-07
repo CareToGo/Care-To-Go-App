@@ -13,7 +13,5 @@ export default AppointButton;
 
 const styles = StyleSheet.create({
     button: {
-        marginHorizontal: 15,
-        backgroundColor: '#F1F1F1'
-    }
+        marginHorizontal: 15,    }
 })

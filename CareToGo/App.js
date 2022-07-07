@@ -1,30 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image} from 'react-native';
-import Contractor from './src/components/contractorcomponent/contractor';
-import Logo from './src/components/care-logo/logo';
-import Saved from './src/components/saved-button/savedbutton';
-import AppointButton from './src/components/calender-button/appointmentButton';
-
+import { StyleSheet, Text, View, Image, FlatList, } from 'react-native';
+import Header from './src/components/header/header';
+import Homescreen from './src/screens/homescreen/homescreen';
+import ContractorDetails from './src/screens/contractordetails/contractordetails';
+import OrderScreen from './src/screens/orderscreen/orderscreen';
 
 
 export default function App() {
   return (
     <View style={styles.container}>
-
-      <View style={styles.tabContainer}>
-
-        <View style={styles.logContainer}>
-          <Logo/>
-        </View>
-
-        <View style={styles.buttonContainer}>
-          <Saved />
-          <AppointButton />
-        </View>
-
-      </View>
-      <Contractor />
-      <Contractor />
+      <ContractorDetails/>
     </View>
   );
 }
@@ -49,7 +34,17 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     position: 'absolute',
-    top: 56,
-    left: 50
+    top: 50,
+    left: 30
+  },
+
+  buttonBackground: {
+    backgroundColor: 'lightgray',
+    width: 33,
+    height: 33,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 10,
+    borderRadius: 10
   }
 });

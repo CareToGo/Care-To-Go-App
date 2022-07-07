@@ -1,18 +1,20 @@
 import { StyleSheet, Text, View, Image} from 'react-native';
 
-const Contractor = () => {
+const Contractor = ({restaurant}) => {
+
   return (
+
     <View style={styles.resturauntContainer}>
         <Image 
           source= {{
-            uri: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant1.jpeg"
+            uri: restaurant.image
           }}
           style={styles.image}
         />
 
         <View style={styles.background}>
-            <Text style={styles.nurseTitle}>Nurse Name</Text>
-            <Text style={styles.details}> -rating- -experience- -distance-</Text>
+            <Text style={styles.nurseTitle}>{restaurant.name}</Text>
+            <Text style={styles.details}> -RATING- &#8226; -experience- &#8226; -distance-</Text>
         </View>
 
       </View>
