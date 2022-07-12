@@ -6,7 +6,12 @@ const Drawer = createDrawerNavigator();
 
 export default function DrawerNav() {
     return (
-        <Drawer.Navigator>
+        <Drawer.Navigator
+            screenOptions={{
+                drawerActiveBackgroundColor: '#001A72',
+                drawerActiveTintColor: '#FFDE59'
+            }}
+        >
             <Drawer.Screen name='Home' component={TabNav} />
         </Drawer.Navigator>
     )
