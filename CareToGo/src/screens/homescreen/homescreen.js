@@ -15,7 +15,7 @@ export default function Homescreen() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 110,
+    marginTop: 10,
     left: 20
   }
 });

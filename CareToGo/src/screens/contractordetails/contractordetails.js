@@ -1,9 +1,15 @@
 import { StyleSheet, View, Text, Image, Pressable  } from "react-native";
-import restautants from '../../../assets/data/restaurants.json';
 import Map from '../../../assets/contractor-details-page/contractorDetailsMap.png';
+import { useNavigation } from "@react-navigation/native";
 
 
 const ContractorDetails = () => {
+    const navigation = useNavigation()
+
+    const pressHandler = () => {
+        navigation.navigate('orders')
+    }
+    
     return (
         <View style={ styles.container}>
             <Image source={Map} style={styles.image} />
@@ -38,7 +44,7 @@ const ContractorDetails = () => {
             </View>
 
             <View style={styles.button}>
-                <Pressable>
+                <Pressable onPress={pressHandler}>
                     <Text style={{color: 'yellow'}}>Schedule</Text>
                 </Pressable> 
             </View>
@@ -70,7 +76,8 @@ const ContractorDetails = () => {
 const styles = StyleSheet.create({
 
     container: {
-        flex: 1
+        flex: 1,
+        left: 20
     },
 
     image: {

@@ -1,8 +1,14 @@
 import { StyleSheet, View, Text, Image, Pressable  } from "react-native";
 import Map from '../../../assets/contractor-details-page/contractorDetailsMap.png';
-
+import { useNavigation } from "@react-navigation/native";
 
 const OrderScreen = () => {
+    const navigation = useNavigation()
+
+    const pressHandler = () => {
+        navigation.navigate('date-picker')
+    }
+
     return (
         <View style={ styles.container}>
             <Image source={Map} style={styles.image} />
@@ -46,7 +52,7 @@ const OrderScreen = () => {
                     <Text style={{color: 'white'}}>Now</Text>
                 </Pressable>
 
-                <Pressable style={styles.later}>
+                <Pressable onPress={pressHandler} style={styles.later}>
                     <Text>Later</Text>
                 </Pressable>            
             </View>

@@ -1,16 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, FlatList, } from 'react-native';
-import Header from './src/components/header/header';
-import Homescreen from './src/screens/homescreen/homescreen';
-import ContractorDetails from './src/screens/contractordetails/contractordetails';
-import OrderScreen from './src/screens/orderscreen/orderscreen';
+import StackNav from './src/navigation/stacknavigator/stacknav';
 
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <ContractorDetails/>
-    </View>
+    StackNav()
   );
 }
 

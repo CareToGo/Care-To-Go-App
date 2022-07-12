@@ -1,9 +1,9 @@
 import {View, StyleSheet, Text} from 'react-native';
 
-export default function Appointments() {
+export default function SavedContractors() {
     return (
         <View style={styles.container}>
-            <Text>Appointments Screen</Text>
+            <Text>Saved Contrators Screen</Text>
         </View>
     )
 }
