@@ -1,9 +1,10 @@
 import {View, StyleSheet, Text} from 'react-native';
+import AppointmentComp from '../../components/appointmentComp/appointmentComp';
 
 export default function Appointments() {
     return (
         <View style={styles.container}>
-            <Text>Appointments Screen</Text>
+            <AppointmentComp />
         </View>
     )
 }
@@ -11,5 +12,10 @@ export default function Appointments() {
 const styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+
+    appointmentContainer: {
+        backgroundColor: '#EFECEC',
+        height: '100%'
     }
 })
