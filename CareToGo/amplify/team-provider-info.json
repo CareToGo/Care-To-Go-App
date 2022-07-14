@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-careapp-staging-00451-authRole",
+      "UnauthRoleArn": "arn:aws:iam::498517101212:role/amplify-careapp-staging-00451-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::498517101212:role/amplify-careapp-staging-00451-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-careapp-staging-00451-deployment",
+      "UnauthRoleName": "amplify-careapp-staging-00451-unauthRole",
+      "StackName": "amplify-careapp-staging-00451",
+      "StackId": "arn:aws:cloudformation:us-east-1:498517101212:stack/amplify-careapp-staging-00451/9557e2e0-0308-11ed-aa1e-12267cd789f9",
+      "AmplifyAppId": "dgng1nbl2yd1d"
+    },
+    "categories": {
+      "auth": {
+        "CareApp": {}
+      }
+    }
+  }
+}
