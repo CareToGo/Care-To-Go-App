@@ -1,34 +1,10 @@
-import {View, StyleSheet, Text, FlatList} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity, ScrollView} from 'react-native';
+import ProfileNav from './profile-navigator/profilenav';
 
 export default function Profile() {
 
-    const DailyLivingList = ['Mobility', 'Feeding', 'Toileting','Showering', 'Grooming', 'Meal Preparation']
-    const CareNeeds = ['Stoma', 'G-Tube', 'Picc Line', 'TPN', 'Wound Care']
-
-    const ActivitiesListItems = DailyLivingList.map((activity) => {
-        <Text>{activity}</Text>
-    })
-
-    const NeedsListItem = CareNeeds.map((need) => {
-        <Text>{need}</Text>
-    })
     return (
-        <View style={styles.container}>
-            <View style={styles.activities}>
-                <View style={styles.activitesTitle}>
-                    <Text style={{fontWeight: 'bold', fontSize: 15, top: 30, left: 70}}>Activites of Daily Living</Text>
-                </View>
-                <View style={styles.activitiesList}>
-                    {ActivitiesListItems}
-                </View>
-            </View>
-
-            <View style={styles.needs}>
-                <View style={styles.needsTitle}>
-                    <Text style={{fontWeight: 'bold', fontSize: 15, top: 30, left: 70}}>Care Needs</Text>
-                </View> 
-            </View> 
-        </View>
+        ProfileNav()
     )
 }
 
@@ -58,5 +34,7 @@ const styles = StyleSheet.create({
     },
     needsTitle: {
 
-    }
+    },
+
+    
 })
