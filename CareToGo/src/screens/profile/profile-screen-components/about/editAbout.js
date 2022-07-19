@@ -1,5 +1,5 @@
 import {Text, View, TouchableOpacity, StyleSheet, TextInput, ScrollView} from 'react-native'
-import { Formik, useFormik} from 'formik';
+import { Formik} from 'formik';
 import { Button, Title, RadioButton} from 'react-native-paper';
 import { useState } from 'react';
 

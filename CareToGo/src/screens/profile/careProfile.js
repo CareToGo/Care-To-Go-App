@@ -1,94 +1,43 @@
-import {View, StyleSheet, Text, TouchableOpacity, ScrollView} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import HeaderButtons from './profile-header-buttons/HeaderButtons';
-
+import React, {useState} from 'react';
+import {Text, View, ScrollView, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import CareComponent from './profile-screen-components/care/careComponent';
+import EditCare from './profile-screen-components/care/editCare';
 export default function CareProfile() {
 
-    const navigation = useNavigation()
+    const [editCare, setEditCare] = useState(false)
 
-    const ToSupport = () => {
-        navigation.navigate('support')
+    const setEditTrue = () => {
+        setEditCare(true)
     }
 
-    return (
-        <ScrollView style={styles.container}>
-            <HeaderButtons />
+    const setEditFalse = () => {
+        setEditCare(false)
+    }
 
-            <View style={styles.activities}>
-                <View style={styles.activitesTitle}>
-                    <Text style={{fontWeight: 'bold', fontSize: 15, top: 30, left: 80}}>Activites of Daily Living</Text>
-                </View>
-                <View style={{flexDirection: 'row', top: 50, left: 60}}>
-                    <Text>MOBILITY:</Text>
-                    <Text style={{left: 50}}>Indpenedent</Text>
-                </View>
-
-                <View style={{flexDirection: 'row', top: 90, left: 60}}>
-                    <Text>MOBILITY:</Text>
-                    <Text style={{left: 50}}>Indpenedent</Text>
-                </View>
-
-                <View style={{flexDirection: 'row', top: 130, left: 60}}>
-                    <Text>MOBILITY:</Text>
-                    <Text style={{left: 50}}>Indpenedent</Text>
-                </View>
+    if(editCare) {
+        return (
+            <View style={styles.container}>
+                <EditCare setFalse={setEditFalse} />
             </View>
-
-            <View style={styles.needs}>
-                <View style={styles.needsTitle}>
-                    <Text style={{fontWeight: 'bold', fontSize: 15, top: 30, left: 120}}>Care Needs</Text>
-                </View>
-                <View style={{flexDirection: 'row', top: 50, left: 60}}>
-                    <Text>MOBILITY:</Text>
-                    <Text style={{left: 50}}>Indpenedent</Text>
-                </View>
-
-                <View style={{flexDirection: 'row', top: 90, left: 60}}>
-                    <Text>MOBILITY:</Text>
-                    <Text style={{left: 50}}>Indpenedent</Text>
-                </View>
-
-                <View style={{flexDirection: 'row', top: 130, left: 60}}>
-                    <Text>MOBILITY:</Text>
-                    <Text style={{left: 50}}>Indpenedent</Text>
-                </View>
-                
-            </View>
-                <TouchableOpacity style={styles.editProfile}>
-                    <Text>Edit Profile</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.support} onPress={ToSupport}>
-                    <Text>Support</Text>
-                </TouchableOpacity>
-        </ScrollView>
-    )
+        )
+    } else {
+        return (
+            <View style={styles.container}>
+                <CareComponent />
+                <TouchableOpacity style={styles.buttonContainer} onPress={setEditTrue}>
+                    <Text>Edit Care Profile</Text>
+                </TouchableOpacity> 
+            </View> 
+        )
+    }
 }
 
 const styles = StyleSheet.create({
-
     container: {
         flex: 1
     },
-    
-    activities: {
-        backgroundColor: 'white',
-        width: '80%',
-        height: '80%',
-        borderRadius: 40,
-        top: 50,
-        left: 45,
-    },
-    needs: {
-        backgroundColor: '#D1D9E6',
-        width: '80%',
-        height: '80%',
-        borderRadius: 40,
-        marginTop: 80,
-        left: 45,
-    },
-    editProfile: {
-        width: '60%',
+    buttonContainer: {
+        width: '40%',
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 12,
@@ -96,20 +45,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         elevation: 3,
         backgroundColor: '#C4C4C4',
-        marginTop: 30,
-        left: 85
+        bottom: 70,
+        left: 120
     },
-
-    support: {
-        width: '60%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 20,
-        borderRadius: 20,
-        elevation: 3,
-        backgroundColor: '#C4C4C4',
-        marginTop: 20,
-        left: 85
-    }
 })
