@@ -7,34 +7,3 @@ export default function Profile() {
         ProfileNav()
     )
 }
-
-const styles = StyleSheet.create({
-
-    container: {
-        flex: 1
-    },
-    activities: {
-        backgroundColor: 'white',
-        width: '80%',
-        height: '50%',
-        borderRadius: 40,
-        top: 50,
-        left: 45,
-    },
-    activitesTitle: {
-
-    },
-    needs: {
-        backgroundColor: '#D1D9E6',
-        width: '80%',
-        height: '50%',
-        borderRadius: 40,
-        marginTop: 80,
-        left: 45,
-    },
-    needsTitle: {
-
-    },
-
-    
-})
