@@ -17,7 +17,7 @@ export default function CareProfile() {
     if(editCare) {
         return (
             <View style={styles.container}>
-                <EditCare setFalse={setEditFalse} />
+                <EditCare setEditFalse={setEditFalse} />
             </View>
         )
     } else {

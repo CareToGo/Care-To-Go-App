@@ -74,7 +74,7 @@ export default function EditCare({setEditFalse}) {
         return (item) => {setCareNeed}
     }
     return(
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Formik
                 initialValues={{
                     mobility: '',
@@ -151,16 +151,53 @@ export default function EditCare({setEditFalse}) {
                             isMulti
                         />
                     </View>
+                    <View style={styles.buttonContainer}>
+                            <TouchableOpacity style={styles.cancel} onPress={setEditFalse}>
+                                <Text>Cancel</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.save}>
+                                <Text>Save</Text>
+                            </TouchableOpacity>
+                        </View>
                 </View>
                 
                 )}
             </Formik>
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        left: 20,
+    },
+    cancel: {
+        width: '30%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        marginHorizontal: 30,
+        borderRadius: 20,
+        elevation: 3,
+        backgroundColor: '#C4C4C4',
+        top: 30,
+        left: 10
+    },
+    save: {
+        width: '30%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 20,
+        elevation: 3,
+        backgroundColor: '#C4C4C4',
+        top: 30,
+        left: 10
     }
 })
