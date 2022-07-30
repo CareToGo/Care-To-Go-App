@@ -56,6 +56,11 @@ const OrderScreen = () => {
   const pressHandler = () => {
     navigation.navigate("date-picker");
   };
+
+  const paymentInit = () => {
+    navigation.navigate("instant-payment")
+  }
+  
   let initialSelected = {};
   for (let item of data) {
     initialSelected[item.id] = false;
@@ -96,7 +101,7 @@ const OrderScreen = () => {
       />
 
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.now}>
+        <Pressable style={styles.now} onPress={paymentInit}>
           <Text style={{ color: "white" }}>Now</Text>
         </Pressable>
 

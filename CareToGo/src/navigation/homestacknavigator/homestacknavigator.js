@@ -4,6 +4,8 @@ import ContractorDetails from '../../screens/contractordetails/contractordetails
 import OrderScreen from '../../screens/orderscreen/orderscreen';
 import Datepicker from '../../screens/datepicker/datepicker';
 import Appointments from "../../screens/appointments/appointments";
+import InstantPayments from "../../screens/paymentscreens/instantpayment";
+import ScheduledPayments from "../../screens/paymentscreens/scheduledpayment";
 
 const HomeStack = createNativeStackNavigator()
 
@@ -15,6 +17,8 @@ const HomeStackNavigator = () => {
             <HomeStack.Screen name='orders' component={OrderScreen} options={{headerShown: false}}/>
             <HomeStack.Screen name='date-picker' component={Datepicker} options={{headerShown: false}}/>
             <HomeStack.Screen name='appointment-order' component={Appointments} options={{headerShown: false}}/>
+            <HomeStack.Screen name='instant-payment' component={InstantPayments} options={{headerShown: false}} />
+            <HomeStack.Screen name= 'scheduled-payments' component={ScheduledPayments} options={{headerShown: false}} />
         </HomeStack.Navigator>
     )
 }
