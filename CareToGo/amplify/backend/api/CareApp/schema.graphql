@@ -1,9 +1,45 @@
+type Basket @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Services: [Service] @hasMany(indexName: "byBasket", fields: ["id"])
+  userID: ID! @index(name: "byUser")
+  workerID: ID! @index(name: "byWorker")
+}
+
+enum OrderStatus {
+  NEW
+  HEADING
+  READY
+  COMPLETED
+}
+
+type Order @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  Worker: Worker @hasOne
+  total: Float!
+  Services: [Service] @hasMany(indexName: "byOrder", fields: ["id"])
+  status: OrderStatus!
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  sub: String!
+  address: String!
+  lat: Float!
+  lng: Float!
+  Orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
+  Baskets: [Basket] @hasMany(indexName: "byUser", fields: ["id"])
+  name: String!
+}
+
 type Service @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   description: String
   price: Float!
   workerID: ID! @index(name: "byWorker")
+  orderID: ID! @index(name: "byOrder")
+  basketID: ID! @index(name: "byBasket")
 }
 
 type Worker @model @auth(rules: [{allow: public}]) {
@@ -16,6 +52,8 @@ type Worker @model @auth(rules: [{allow: public}]) {
   rating: Float
   address: String!
   lat: Float!
-  log: Float!
+  lng: Float!
   Services: [Service] @hasMany(indexName: "byWorker", fields: ["id"])
+  Baskets: [Basket] @hasMany(indexName: "byWorker", fields: ["id"])
 }
+ 

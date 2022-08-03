@@ -11,11 +11,13 @@ export default function Homescreen() {
   const fetchWorkers = async () => {
     const results = await DataStore.query(Worker);
     setWorkers(results);
+    console.log(results);
   };
 
   useEffect(() => {
     fetchWorkers();
   }, []);
+
   return (
     <View style={styles.container}>
       <FlatList

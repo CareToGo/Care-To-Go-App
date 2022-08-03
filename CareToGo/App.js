@@ -13,14 +13,15 @@ Amplify.configure({
   },
 });
 
-const PUBLISHABLE_KEY = 'pk_test_51LPvpUDNDwI2KDMrrnp2QTRXShgLkjMZME7p8cSlhOvGa9XxXtMPbfJiLCgCLWE7z2PcDvULJdoiP5rpW9u7KMD200dEKnJAmM'
+const PUBLISHABLE_KEY =
+  "pk_test_51LPvpUDNDwI2KDMrrnp2QTRXShgLkjMZME7p8cSlhOvGa9XxXtMPbfJiLCgCLWE7z2PcDvULJdoiP5rpW9u7KMD200dEKnJAmM";
 
 function App() {
   return (
     <StripeProvider publishableKey={PUBLISHABLE_KEY}>
       {StackNav()}
     </StripeProvider>
-    );
+  );
 }
 
 export default withAuthenticator(App);

@@ -21,7 +21,7 @@ const Contractor = ({ worker }) => {
         <Text style={styles.nurseTitle}>{worker.name}</Text>
         <Text style={styles.details}>
           {" "}
-          -RATING- &#8226; -experience- &#8226; -distance-
+          -{worker.rating}- &#8226; -experience- &#8226; -distance-
         </Text>
       </View>
     </Pressable>
