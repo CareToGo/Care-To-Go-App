@@ -5,11 +5,13 @@ import StackNav from "./src/navigation/stacknavigator/stacknav";
 import { Amplify } from "aws-amplify";
 import config from "./src/aws-exports";
 import { withAuthenticator } from "aws-amplify-react-native/dist/Auth";
+import AuthContextProvider from "./src/contexts/AuthContext";
+import { NavigationContainer } from "@react-navigation/native";
 
 Amplify.configure({
   ...config,
   Analytics: {
-    disavled: true,
+    disabled: true,
   },
 });
 
@@ -18,9 +20,13 @@ const PUBLISHABLE_KEY =
 
 function App() {
   return (
-    <StripeProvider publishableKey={PUBLISHABLE_KEY}>
-      {StackNav()}
-    </StripeProvider>
+    <NavigationContainer>
+      <AuthContextProvider>
+        <StripeProvider publishableKey={PUBLISHABLE_KEY}>
+          <StackNav />
+        </StripeProvider>
+      </AuthContextProvider>
+    </NavigationContainer>
   );
 }
 
