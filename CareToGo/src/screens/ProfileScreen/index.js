@@ -12,9 +12,8 @@ const Profile = () => {
   const [address, setAddress] = useState(dbUser?.address || "");
   const [lat, setLat] = useState(dbUser?.lat + "" || "0");
   const [lng, setLng] = useState(dbUser?.lng + "" || "0");
-
   const { sub, setDbUser } = useAuthContext();
-
+  const [count, setCount] = useState(0);
   const navigation = useNavigation();
 
   const onSave = async () => {
@@ -32,16 +31,12 @@ const Profile = () => {
         updated.address = address;
         updated.lat = parseFloat(lat);
         updated.lng = parseFloat(lng);
+        updated._version = count + 1;
       })
     );
+    setCount(count + 1);
     setDbUser(user);
-    if ((user._version = !NaN)) {
-      const user1 = User.copyOf(dbUser, (updated) => {
-        updated._version = Number(user._version) + 1;
-      });
-      console.log(user1);
-      setDbUser(user1);
-    }
+    console.log(user);
   };
 
   const createUser = async () => {
@@ -55,7 +50,6 @@ const Profile = () => {
           name,
         })
       );
-
       setDbUser(user);
     } catch (e) {
       Alert.alert("Error", e.message);
