@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabNav from "../tabnavigator/tabnav";
 import { useAuthContext } from "../../contexts/AuthContext";
 import ProfileScreen from "../../screens/ProfileScreen";
+import ViewProfileScreen from "../../screens/ViewProfileScreen";
 
 const Stack = createNativeStackNavigator();
 

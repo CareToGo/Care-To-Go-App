@@ -36,7 +36,6 @@ const Profile = () => {
     );
     setCount(count + 1);
     setDbUser(user);
-    console.log(user);
   };
 
   const createUser = async () => {

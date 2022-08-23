@@ -11,6 +11,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import tw from "tailwind-react-native-classnames";
 import { useState } from "react";
+import { useBasketContext } from "../../contexts/BasketContext";
 
 const data = [
   {
@@ -58,16 +59,22 @@ const OrderScreen = () => {
   };
 
   const paymentInit = () => {
-    navigation.navigate("instant-payment")
-  }
-  
+    navigation.navigate("instant-payment");
+  };
+
+  const { addServiceToBasket } = useBasketContext();
+  const onAddToBasket = async () => {
+    await addServiceToBasket(newSelected);
+  };
+
   let initialSelected = {};
   for (let item of data) {
-    initialSelected[item.id] = false;
+    initialSelected[item.title] = false;
   }
+
   const [selected, setSelected] = useState(initialSelected);
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView nestedScrollEnabled={true} style={styles.container}>
       <View>
         <Text style={tw`text-center py-5 text-lg `}>Select</Text>
       </View>
@@ -83,12 +90,12 @@ const OrderScreen = () => {
           <TouchableOpacity
             onPress={() => {
               let newSelected = { ...selected };
-              newSelected[item.id] = !newSelected[item.id];
+              newSelected[item.title] = !newSelected[item.title];
               setSelected(newSelected);
               console.log(newSelected);
             }}
             style={tw`flex-row items-center justify-between p-5 ${
-              selected[id] && "bg-gray-200"
+              selected[title] && "bg-gray-200"
             }`}
           >
             <View>
@@ -101,7 +108,7 @@ const OrderScreen = () => {
       />
 
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.now} onPress={paymentInit}>
+        <Pressable style={styles.now} onPress={onAddToBasket}>
           <Text style={{ color: "white" }}>Now</Text>
         </Pressable>
 

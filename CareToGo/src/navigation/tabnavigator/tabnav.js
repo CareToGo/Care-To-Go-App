@@ -6,6 +6,7 @@ import Appointments from "../../screens/appointments/appointments";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+
 // import Profile from "../../screens/profile/profile";
 
 const Tab = createMaterialBottomTabNavigator();
