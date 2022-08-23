@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "CareApp": {}
+      },
+      "function": {
+        "CreatePaymentIntent": {
+          "deploymentBucketName": "amplify-careapp-staging-00451-deployment",
+          "s3Key": "amplify-builds/CreatePaymentIntent-3332764647455841454f-build.zip"
+        }
       }
     }
   }

@@ -1,3 +1,11 @@
+type Mutation {
+  createPaymentIntent(amount: Int!): PaymentIntent!
+}
+
+type PaymentIntent {
+  clientSecret: String!
+}
+
 type Basket @model @auth(rules: [{allow: public}]) {
   id: ID!
   Services: [Service] @hasMany(indexName: "byBasket", fields: ["id"])
