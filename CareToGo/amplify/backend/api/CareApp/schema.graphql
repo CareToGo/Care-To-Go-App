@@ -1,5 +1,5 @@
 type Mutation {
-  createPaymentIntent(amount: Int!): PaymentIntent!
+  createPaymentIntent(amount: Int!): PaymentIntent! @function(name: "CreatePaymentIntent-${env}")
 }
 
 type PaymentIntent {

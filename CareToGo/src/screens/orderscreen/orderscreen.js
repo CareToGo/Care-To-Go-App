@@ -7,11 +7,15 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  TextInput,
+  Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import tw from "tailwind-react-native-classnames";
-import { useState } from "react";
+import { useRef, useCallback, useState, useMemo } from "react";
 import { useBasketContext } from "../../contexts/BasketContext";
+import {CardForm, useStripe } from "@stripe/stripe-react-native";
+import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
 
 const data = [
   {
@@ -53,10 +57,6 @@ const OrderScreen = () => {
     navigation.navigate("date-picker");
   };
 
-  const paymentInit = () => {
-    navigation.navigate("instant-payment");
-  };
-
   const { addServiceToBasket } = useBasketContext();
   const onAddToBasket = async () => {
     await addServiceToBasket(newSelected);
@@ -68,8 +68,27 @@ const OrderScreen = () => {
   }
 
   const [selected, setSelected] = useState(initialSelected);
+
+  const sheetRef = useRef(null)
+  const snapPoints = useMemo(() => ["50%"], []);
+
+  const handleSheetChange = useCallback((index) => {
+    console.log("handleSheetChange", index);
+  }, []);
+  const handleSnapPress = useCallback((index) => {
+    sheetRef.current?.snapToIndex(index);
+  }, []);
+  const handleClosePress = useCallback(() => {
+    sheetRef.current?.close();
+  }, []);
+
+  const placeOrder = () =>  {
+
+  }
+
   return (
-    <ScrollView nestedScrollEnabled={true} style={styles.container}>
+    <View style={styles.mainContainer}>
+      <ScrollView nestedScrollEnabled={true} style={styles.container}>
       <View>
         <Text style={tw`text-center py-5 text-lg `}>Select</Text>
       </View>
@@ -103,7 +122,7 @@ const OrderScreen = () => {
       />
 
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.now} onPress={onAddToBasket}>
+        <Pressable style={styles.now} onPress={() => handleSnapPress(0)}>
           <Text style={{ color: "white" }}>Now</Text>
         </Pressable>
 
@@ -112,10 +131,47 @@ const OrderScreen = () => {
         </Pressable>
       </View>
     </ScrollView>
+    <BottomSheet
+        ref={sheetRef}
+        snapPoints={snapPoints}
+        enablePanDownToClose={true}
+      >
+      <BottomSheetView>
+        <View style={styles.name}>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Your First Name"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Your Last Name"
+          />
+        </View>
+        <CardForm
+          onFormComplete={(cardDetails) => {
+          console.log('card details', cardDetails);
+          setCard(cardDetails);
+        }}
+        style={{height: 200, marginHorizontal: 10, top: 10}}
+        />
+        <View style={styles.buttonContainer}>
+          <Pressable onPress={placeOrder} style={styles.placeOrder}>
+            <Text style={{fontWeight: 'bold', fontSize: 17, color:'#FFDE59', textAlign: 'center'}}>Place Order</Text>
+          </Pressable>
+          <Pressable onPress={() => handleClosePress()} style={styles.close}>
+            <Text style={{fontWeight: 'bold', fontSize: 17, color:'#FFFFFF', textAlign: 'center'}}>Close</Text>
+          </Pressable>
+        </View>
+      </BottomSheetView> 
+    </BottomSheet>
+    </View> 
   );
 };
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1
+  },
   container: {
     flex: 1,
   },
@@ -138,7 +194,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   buttonContainer: {
-    top: 100,
+    top: 40,
     flexDirection: "row",
     left: 10,
   },
@@ -164,6 +220,35 @@ const styles = StyleSheet.create({
     elevation: 3,
     backgroundColor: "#C4C4C4",
   },
+  name: {
+    flexDirection: 'row'
+  },
+  input: {
+    height: 40,
+    width: '44%',
+    marginHorizontal: 12,
+    borderWidth: 1,
+    borderColor: 'gray',
+    paddingHorizontal: 10,
+    marginTop: 20
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    marginLeft: 20
+  },
+  placeOrder: {
+    backgroundColor: '#001A72',
+    width: '55%',
+    borderRadius: 20,
+    paddingVertical: 20
+  },
+  close: {
+    backgroundColor: '#000000',
+    width: '35%',
+    borderRadius: 20,
+    paddingVertical: 20,
+    marginLeft: 15
+  }
 });
 
 export default OrderScreen;
