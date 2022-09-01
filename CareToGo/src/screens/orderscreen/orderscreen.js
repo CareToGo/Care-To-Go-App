@@ -59,12 +59,28 @@ const OrderScreen = () => {
 
   const { addServiceToBasket } = useBasketContext();
   const onAddToBasket = async () => {
-    await addServiceToBasket(newSelected);
+    Object.keys(selected).forEach(function (key) {
+      if (selected[key] === false) {
+        delete selected[key];
+      }
+    });
+    const keys = Object.keys(selected);
+    const Service = [];
+
+    for (let i = 0; i < keys.length; i++) {
+      for (let j = 0; j < data.length; j++) {
+        if (data[j].id == keys[i]) {
+          Service.push(data[j]);
+        }
+      }
+    }
+    await addServiceToBasket(Service);
+    console.log(Service);
   };
 
   let initialSelected = {};
   for (let item of data) {
-    initialSelected[item.title] = false;
+    initialSelected[item.id] = false;
   }
 
   const [selected, setSelected] = useState(initialSelected);
@@ -104,12 +120,12 @@ const OrderScreen = () => {
           <TouchableOpacity
             onPress={() => {
               let newSelected = { ...selected };
-              newSelected[item.title] = !newSelected[item.title];
+              newSelected[item.id] = !newSelected[item.id];
               setSelected(newSelected);
               console.log(newSelected);
             }}
             style={tw`flex-row items-center justify-between p-5 ${
-              selected[title] && "bg-gray-200"
+              selected[id] && "bg-gray-200"
             }`}
           >
             <View>
@@ -122,7 +138,7 @@ const OrderScreen = () => {
       />
 
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.now} onPress={() => handleSnapPress(0)}>
+        <Pressable style={styles.now} onPress={(onAddToBasket) => handleSnapPress(0)}>
           <Text style={{ color: "white" }}>Now</Text>
         </Pressable>
 
