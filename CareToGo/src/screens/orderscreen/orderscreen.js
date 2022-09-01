@@ -138,7 +138,7 @@ const OrderScreen = () => {
       />
 
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.now} onPress={(onAddToBasket) => handleSnapPress(0)}>
+        <Pressable style={styles.now} onPress={() => handleSnapPress(0)}>
           <Text style={{ color: "white" }}>Now</Text>
         </Pressable>
 
