@@ -10,12 +10,14 @@ import {
   TextInput,
   Alert,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import tw from "tailwind-react-native-classnames";
-import { useRef, useCallback, useState, useMemo } from "react";
+import { useRef, useCallback, useState, useMemo, useEffect } from "react";
 import { useBasketContext } from "../../contexts/BasketContext";
 import { CardForm, useStripe } from "@stripe/stripe-react-native";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import { Service, Worker } from "../../models";
+import { DataStore } from "aws-amplify";
 
 const data = [
   {
@@ -52,10 +54,24 @@ const data = [
 
 const OrderScreen = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const [worker, setWorker] = useState(null);
+  const [services, setServices] = useState([]);
 
   const pressHandler = () => {
     navigation.navigate("date-picker");
   };
+
+  const id = route.params.id;
+
+  useEffect(() => {
+    console.log("----------------------");
+    console.log(id);
+    DataStore.query(Worker, id).then(setWorker);
+    DataStore.query(Service, (service) => service.workerID("eq", id)).then(
+      setServices
+    );
+  }, []);
 
   const { addServiceToBasket } = useBasketContext();
   const onAddToBasket = async () => {
@@ -108,7 +124,7 @@ const OrderScreen = () => {
         <View style={tw`border-t border-gray-200 flex`}></View>
 
         <FlatList
-          data={data}
+          data={services}
           keyExtractor={(item) => item.id}
           ItemSeparatorComponent={() => (
             <View style={tw` border-t border-gray-200 flex-shrink py-0`} />

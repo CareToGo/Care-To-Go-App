@@ -7,7 +7,7 @@ const ContractorDetails = () => {
   const route = useRoute();
 
   const pressHandler = () => {
-    navigation.navigate("orders");
+    navigation.navigate("orders", { id: route.params.id });
   };
 
   return (
