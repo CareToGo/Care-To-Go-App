@@ -10,20 +10,24 @@ const BasketContextProvider = ({ children }) => {
   const [basket, setBasket] = useState(null);
   const [worker, setWorker] = useState(null);
 
-  // useEffect(() => {
-  //   DataStore.query(Basket, (b) =>
-  //     b.workerID("eq", worker.id).userID("eq", dbUser.id)
-  //   ).then((baskets) => setBasket(baskets[0]));
-  // }, [dbUser, worker]);
+  useEffect(() => {
+    DataStore.query(Basket, (b) =>
+      b.workerID("eq", worker.id).userID("eq", dbUser.id)
+    ).then((baskets) => setBasket(baskets[0]));
+  }, [dbUser, worker]);
 
-  const addServiceToBasket = async (Service) => {};
+  const addServiceToBasket = async (Service) => {
+    let theBasket = basket || (await createNewBasket());
+    DataStore.save(new Basket({ Services: Service }));
+  };
 
-  // const createNewBasket = async () => {
-  //   const newBasket = await DataStore.save(
-  //     new Basket({ userID: dbUser.id, workerID: worker.id })
-  //   );
-  //   setBasket(newBasket);
-  // };
+  const createNewBasket = async () => {
+    const newBasket = await DataStore.save(
+      new Basket({ userID: dbUser.id, workerID: worker.id })
+    );
+    setBasket(newBasket);
+    return newBasket;
+  };
 
   return (
     <BasketContext.Provider value={{ addServiceToBasket, setWorker }}>

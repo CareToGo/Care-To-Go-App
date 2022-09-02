@@ -2,17 +2,13 @@ import { StyleSheet, View, Text, Image, Pressable } from "react-native";
 import Map from "../../../assets/contractor-details-page/contractorDetailsMap.png";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-
 const ContractorDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-
   const pressHandler = () => {
     navigation.navigate("orders");
   };
-  
-
 
   return (
     <View style={styles.container}>

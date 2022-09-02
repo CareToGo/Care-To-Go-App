@@ -20,33 +20,33 @@ import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 const data = [
   {
     id: "3",
-    title: "Personal Care",
+    name: "Personal Care",
     price: 35,
-    detail: "Hygiene, dressing, toileting, and mobilizing.",
+    description: "Hygiene, dressing, toileting, and mobilizing.",
   },
   {
     id: "4",
-    title: "Meal Preparation",
+    name: "Meal Preparation",
     price: 35,
-    detail: "Nutrition, support, and cooking.",
+    description: "Nutrition, support, and cooking.",
   },
   {
     id: "5",
-    title: "Transportation",
+    name: "Transportation",
     price: 35,
-    detail: "Mobility support and driving.",
+    description: "Mobility support and driving.",
   },
   {
     id: "6",
-    title: "Home Support",
+    name: "Home Support",
     price: 35,
-    detail: "Light housekeeping and pet care.",
+    description: "Light housekeeping and pet care.",
   },
   {
     id: "7",
-    title: "Respite Care",
+    name: "Respite Care",
     price: 35,
-    detail: "Companionship and personal Support",
+    description: "Companionship and personal Support",
   },
 ];
 
@@ -75,7 +75,6 @@ const OrderScreen = () => {
       }
     }
     await addServiceToBasket(Service);
-    console.log(Service);
   };
 
   let initialSelected = {};
@@ -114,7 +113,7 @@ const OrderScreen = () => {
           ItemSeparatorComponent={() => (
             <View style={tw` border-t border-gray-200 flex-shrink py-0`} />
           )}
-          renderItem={({ item: { id, title, detail, price }, item }) => (
+          renderItem={({ item: { id, name, description, price }, item }) => (
             <TouchableOpacity
               onPress={() => {
                 let newSelected = { ...selected };
@@ -127,8 +126,8 @@ const OrderScreen = () => {
               }`}
             >
               <View>
-                <Text style={tw`font-semibold text-lg`}>{title}</Text>
-                <Text style={tw`text-gray-500`}>{detail}</Text>
+                <Text style={tw`font-semibold text-lg`}>{name}</Text>
+                <Text style={tw`text-gray-500`}>{description}</Text>
               </View>
               <Text style={tw`text-lg`}>${price}</Text>
             </TouchableOpacity>
