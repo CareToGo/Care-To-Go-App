@@ -608,19 +608,6 @@ export const schema = {
             ]
         }
     },
-    "nonModels": {
-        "PaymentIntent": {
-            "name": "PaymentIntent",
-            "fields": {
-                "clientSecret": {
-                    "name": "clientSecret",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                }
-            }
-        }
-    },
-    "version": "f8ec4bdfe5a868035f440f6fa67d8593"
+    "nonModels": {},
+    "version": "441c78fc955c6659f51ade138ff8e16a"
 };
