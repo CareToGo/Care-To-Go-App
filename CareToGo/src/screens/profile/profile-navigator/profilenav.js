@@ -3,7 +3,7 @@ import CareProfile from "../careProfile";
 import ProfileAbout from "../profileAbout";
 import ProfilePayment from "../profilePayment";
 import Support from "../support";
-import ProfileScreen from "../../screens/ProfileScreen";
+import Profile from "../../screens/profile/profile";
 
 const ProfileStack = createNativeStackNavigator();
 
@@ -32,7 +32,7 @@ const ProfileNav = () => {
       />
       <ProfileStack.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={Profile}
         options={{ headerShown: false }}
       />
     </ProfileStack.Navigator>

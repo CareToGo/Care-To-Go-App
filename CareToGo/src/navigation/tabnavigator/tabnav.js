@@ -3,6 +3,7 @@ import HomeStackNavigator from "../homestacknavigator/homestacknavigator";
 import SavedContractors from "../../screens/savedcontractors/savedcontractors";
 import ProfileScreen from "../../screens/ProfileScreen";
 import Appointments from "../../screens/appointments/appointments";
+import Profile from "../../screens/profile/profile";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -46,7 +47,7 @@ export default function TabNav() {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={Profile}
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
