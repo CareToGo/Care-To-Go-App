@@ -3,7 +3,7 @@ import CareProfile from "../careProfile";
 import ProfileAbout from "../profileAbout";
 import ProfilePayment from "../profilePayment";
 import Support from "../support";
-import Profile from "../../screens/profile/profile";
+import Profile from "../../ProfileScreen";
 
 const ProfileStack = createNativeStackNavigator();
 
