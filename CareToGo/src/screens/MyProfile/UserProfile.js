@@ -8,22 +8,26 @@ import {
   Image,
   Button,
 } from "react-native";
-import { useAuthContext } from "../../contexts/AuthContext";
-// import EditAbout from "../profile/profile-screen-components/about/editAbout";
-// import AboutComponent from "../profile/profile-screen-components/about/aboutComponent";
+import { Auth } from "aws-amplify";
+import UserProfileComp from "../../components/UserProfileComp/UserProfileComp"
 
-export default function ViewProfileScreen() {
-  const { dbUser } = useAuthContext();
-  return (
-    <View style={styles.container}>
-      {/* <AboutComponent /> */}
-    </View>
-  );
-}
+export default function UserProfile() {
+    return (
+      <View style={styles.container}>
+        <UserProfileComp />
+        <Text
+          style={{ textAlign: "center", color: "red", margin: 10 }}
+          onPress={() => Auth.signOut()}
+        >
+          Sign Out
+        </Text>
+      </View>
+    );
+  }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   buttonContainer: {
     width: "40%",

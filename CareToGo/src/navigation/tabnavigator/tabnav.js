@@ -2,12 +2,11 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import HomeStackNavigator from "../homestacknavigator/homestacknavigator";
 import SavedContractors from "../../screens/savedcontractors/savedcontractors";
 import Appointments from "../../screens/appointments/appointments";
-import Profile from "../../screens/profile/profile";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import UserProfileNav from "../UserProfileNavigator/UserProfileNav";
 
-// import Profile from "../../screens/profile/profile";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -15,7 +14,7 @@ export default function TabNav() {
   return (
     <Tab.Navigator barStyle={{ backgroundColor: "white" }}>
       <Tab.Screen
-        name="home"
+        name="Home"
         component={HomeStackNavigator}
         options={{
           headerShown: false,
@@ -45,8 +44,8 @@ export default function TabNav() {
         }}
       />
       <Tab.Screen
-        name="Profile"
-        component={Profile}
+        name="My Profile"
+        component={UserProfileNav}
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (

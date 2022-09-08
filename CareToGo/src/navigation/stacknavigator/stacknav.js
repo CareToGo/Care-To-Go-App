@@ -4,7 +4,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabNav from "../tabnavigator/tabnav";
 import { useAuthContext } from "../../contexts/AuthContext";
 import ProfileScreen from "../../screens/ProfileScreen";
-import ViewProfileScreen from "../../screens/ViewProfileScreen";
+import UserProfileNav from "../UserProfileNavigator/UserProfileNav";
+import { StorageClass } from "aws-amplify";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +19,7 @@ const StackNav = () => {
     <Stack.Navigator>
       {dbUser ? (
         <Stack.Screen
-          name="Home"
+          name="MainHome"
           component={TabNav}
           options={{ headerTitle: (props) => <LogoTitle {...props} /> }}
         />

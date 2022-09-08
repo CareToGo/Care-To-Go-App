@@ -4,37 +4,67 @@ import {
   View,
   ScrollView,
   StyleSheet,
-  TouchableOpacity,
+  TouchableHighlight,
   Image,
+  Dimensions,
+  Pressable
 } from "react-native";
-import HeaderButtons from "../../profile-header-buttons/HeaderButtons";
-// import DummyImage from "../../../../../assets/profile-dummy-image/emily.png";
-import { useAuthContext } from "../../../../contexts/AuthContext";
+import { useAuthContext } from "../../contexts/AuthContext";
 import { useNavigation } from "@react-navigation/native";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export default function AboutComponent() {
+export default function UserProfileComp() {
   const { dbUser } = useAuthContext();
+
   const navigation = useNavigation();
+
+  const pressHandler = () => {
+    navigation.navigate('EditUserProfile');
+
+  }
+
+  const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+  } = Dimensions.get('window');
+
+  const namewidth = SCREEN_WIDTH * 0.75 / dbUser.name.length;
+  let namesize;
+  if (namewidth <= 27) {
+    namesize = namewidth;
+  } else {
+    namesize = 27;
+  }
+
   return (
     <ScrollView style={{ paddingHorizontal: "5%", paddingBottom: 20 }}>
-      <HeaderButtons />
       <View style={styles.mainContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-          {/* <Image
-            source={DummyImage}
-            style={{ paddingHorizontal: "5%", paddingVertical: "5%" }}
-          /> */}
-        </TouchableOpacity>
-
-        <View style={styles.detailsContainer}>
-          <Text style={{ fontWeight: "bold" }}>{dbUser.name}</Text>
-          <View style={styles.phone}>
+        <TouchableHighlight style={styles.editbtn}>
+          <Pressable onPress={pressHandler}>
+            <MaterialCommunityIcons name="account-edit" size={27} color="#001A72" />
+          </Pressable>
+        </TouchableHighlight>
+        <Image
+          source={{ uri: 'https://i.ibb.co/gvpcXQr/23333927-361240270993890-3212046802957152739-o.jpg' }}
+          style={{ width: SCREEN_WIDTH * 0.35, height: SCREEN_WIDTH * 0.4, borderRadius: 10 }}
+        />
+        <View style={{ paddingLeft: "5%" }}>
+          <Text style={{ fontSize: namesize, fontWeight: "bold" }}>{dbUser.name}</Text>
+          <View style={{ top: 15 }}>
             <Text
-              style={{ fontSize: 10, fontWeight: "bold", color: "#B8C5D0" }}
+              style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}
             >
               Address
             </Text>
             <Text>{dbUser.address}</Text>
+          </View>
+          <View style={{ top: 20 }}>
+            <Text
+              style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}
+            >
+              Contact Number
+            </Text>
+            <Text>+14163181502</Text>
           </View>
         </View>
       </View>
@@ -66,6 +96,7 @@ export default function AboutComponent() {
           <Text>647-420-420</Text>
         </View>
       </View>
+      <View style={{ height: 300 }} />
     </ScrollView>
   );
 }
@@ -79,10 +110,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginVertical: "2%",
   },
-  detailsContainer: { padding: "5%" },
-  phone: {
-    top: 10,
+  editbtn: {
+    position: 'absolute',
+    right: 10,
+    top: +10,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
+  detailsContainer: { padding: "5%" },
   email: {
     top: 20,
   },
