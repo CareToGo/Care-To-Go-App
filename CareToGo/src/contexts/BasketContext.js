@@ -9,6 +9,7 @@ const BasketContextProvider = ({ children }) => {
   const { dbUser } = useAuthContext();
   const [basket, setBasket] = useState(null);
   const [worker, setWorker] = useState(null);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     DataStore.query(Basket, (b) =>
@@ -18,7 +19,8 @@ const BasketContextProvider = ({ children }) => {
 
   const addServiceToBasket = async (Service) => {
     let theBasket = basket || (await createNewBasket());
-    DataStore.save(new Basket({ Services: Service }));
+    console.log(Service);
+    DataStore.save(new Basket({ Services: Service, basketID: theBasket.id }));
   };
 
   const createNewBasket = async () => {

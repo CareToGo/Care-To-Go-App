@@ -8,6 +8,7 @@ import { withAuthenticator } from "aws-amplify-react-native/dist/Auth";
 import AuthContextProvider from "./src/contexts/AuthContext";
 import { NavigationContainer } from "@react-navigation/native";
 import BasketContextProvider from "./src/contexts/BasketContext";
+import OrderContextProvider from "./src/contexts/OrderContext";
 
 Amplify.configure({
   ...config,
@@ -24,9 +25,11 @@ function App() {
     <NavigationContainer>
       <AuthContextProvider>
         <BasketContextProvider>
-          <StripeProvider publishableKey={PUBLISHABLE_KEY}>
-            <StackNav />
-          </StripeProvider>
+          <OrderContextProvider>
+            <StripeProvider publishableKey={PUBLISHABLE_KEY}>
+              <StackNav />
+            </StripeProvider>
+          </OrderContextProvider>
         </BasketContextProvider>
       </AuthContextProvider>
     </NavigationContainer>

@@ -19,45 +19,13 @@ import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { Service, Worker } from "../../models";
 import { DataStore } from "aws-amplify";
 
-const data = [
-  {
-    id: "3",
-    name: "Personal Care",
-    price: 35,
-    description: "Hygiene, dressing, toileting, and mobilizing.",
-  },
-  {
-    id: "4",
-    name: "Meal Preparation",
-    price: 35,
-    description: "Nutrition, support, and cooking.",
-  },
-  {
-    id: "5",
-    name: "Transportation",
-    price: 35,
-    description: "Mobility support and driving.",
-  },
-  {
-    id: "6",
-    name: "Home Support",
-    price: 35,
-    description: "Light housekeeping and pet care.",
-  },
-  {
-    id: "7",
-    name: "Respite Care",
-    price: 35,
-    description: "Companionship and personal Support",
-  },
-];
-
 const OrderScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const [worker, setWorker] = useState(null);
   const [services, setServices] = useState([]);
 
+  const [count, setCount] = useState(0);
   const pressHandler = () => {
     navigation.navigate("date-picker");
   };
@@ -65,8 +33,6 @@ const OrderScreen = () => {
   const id = route.params.id;
 
   useEffect(() => {
-    console.log("----------------------");
-    console.log(id);
     DataStore.query(Worker, id).then(setWorker);
     DataStore.query(Service, (service) => service.workerID("eq", id)).then(
       setServices
@@ -74,31 +40,23 @@ const OrderScreen = () => {
   }, []);
 
   const { addServiceToBasket } = useBasketContext();
+
   const onAddToBasket = async () => {
     Object.keys(selected).forEach(function (key) {
       if (selected[key] === false) {
         delete selected[key];
       }
     });
-    const keys = Object.keys(selected);
-    const Service = [];
 
-    for (let i = 0; i < keys.length; i++) {
-      for (let j = 0; j < data.length; j++) {
-        if (data[j].id == keys[i]) {
-          Service.push(data[j]);
-        }
-      }
-    }
-    await addServiceToBasket(Service);
+    const keys = Object.keys(selected);
+    let service_array = [];
+    service_array = services.filter((g) => keys.includes(g.id)).map((g) => g);
+    await addServiceToBasket(service_array);
+    console.log("---------------");
+    console.log(service_array);
   };
 
-  let initialSelected = {};
-  for (let item of data) {
-    initialSelected[item.id] = false;
-  }
-
-  const [selected, setSelected] = useState(initialSelected);
+  const [selected, setSelected] = useState({});
 
   const sheetRef = useRef(null);
   const snapPoints = useMemo(() => [370], []);
@@ -135,7 +93,6 @@ const OrderScreen = () => {
                 let newSelected = { ...selected };
                 newSelected[item.id] = !newSelected[item.id];
                 setSelected(newSelected);
-                console.log(newSelected);
               }}
               style={tw`flex-row items-center justify-between p-5 ${
                 selected[id] && "bg-gray-200"
