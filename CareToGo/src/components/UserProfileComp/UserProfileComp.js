@@ -48,7 +48,7 @@ export default function UserProfileComp() {
           source={{ uri: 'https://i.ibb.co/gvpcXQr/23333927-361240270993890-3212046802957152739-o.jpg' }}
           style={{ width: SCREEN_WIDTH * 0.35, height: SCREEN_WIDTH * 0.4, borderRadius: 10 }}
         />
-        <View style={{ paddingLeft: "5%" }}>
+        <View style={{ paddingLeft: "5%", Top: 10 }}>
           <Text style={{ fontSize: namesize, fontWeight: "bold" }}>{dbUser.name}</Text>
           <View style={{ top: 15 }}>
             <Text
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
   },
   editbtn: {
     position: 'absolute',
-    right: 10,
-    top: +10,
+    right: 3,
+    top: +3,
     alignItems: 'center',
     justifyContent: 'center'
   },

@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  TouchableHighlight,
   Image,
   Button,
 } from "react-native";
@@ -12,18 +13,17 @@ import { Auth } from "aws-amplify";
 import UserProfileComp from "../../components/UserProfileComp/UserProfileComp"
 
 export default function UserProfile() {
-    return (
-      <View style={styles.container}>
-        <UserProfileComp />
-        <Text
-          style={{ textAlign: "center", color: "red", margin: 10 }}
-          onPress={() => Auth.signOut()}
-        >
-          Sign Out
-        </Text>
+  return (
+    <View style={styles.container}>
+      <UserProfileComp />
+      <View style={{ flexDirection: "row", justifyContent: "center", marginBottom: 15 }}>
+        <TouchableHighlight underlayColor="#b55e5e" style={styles.signout} onPress={() => Auth.signOut()}>
+          <Text style={{ color: "white" }}>Sign Out</Text>
+        </TouchableHighlight>
       </View>
-    );
-  }
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -41,4 +41,13 @@ const styles = StyleSheet.create({
     bottom: 70,
     left: 120,
   },
+  signout: {
+    justifyContent: 'center',
+    textAlign: "center",
+    alignItems: "center",
+    backgroundColor: "#ff6666",
+    padding: 10,
+    width: 120,
+    borderRadius: 6
+  }
 });
