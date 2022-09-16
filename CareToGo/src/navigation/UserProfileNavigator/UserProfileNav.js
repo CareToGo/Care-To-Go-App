@@ -16,7 +16,8 @@ const UserProfileNav = () => {
       <ProfileStack.Screen
         name="EditUserProfile"
         component={EditUserProfile}
-        options={{ headerShown: false }}
+        options={{ headerShown: false,
+                     animation: 'slide_from_right' }}
       />
     </ProfileStack.Navigator>
   );

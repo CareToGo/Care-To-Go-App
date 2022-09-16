@@ -57,7 +57,7 @@ const EditUserProfile = () => {
 
   return (
     <SafeAreaView>
-      <Text style={styles.title}>Profile</Text>
+      <Text style={styles.title}>Edit My Profile</Text>
       <TextInput
         value={name}
         onChangeText={setName}

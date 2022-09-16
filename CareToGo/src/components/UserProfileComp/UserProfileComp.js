@@ -41,7 +41,7 @@ export default function UserProfileComp() {
       <View style={styles.mainContainer}>
         <TouchableHighlight style={styles.editbtn}>
           <Pressable onPress={pressHandler}>
-            <MaterialCommunityIcons name="account-edit" size={27} color="#001A72" />
+            <MaterialCommunityIcons name="account-edit" size={namesize+3} color="#001A72" />
           </Pressable>
         </TouchableHighlight>
         <Image
@@ -50,7 +50,7 @@ export default function UserProfileComp() {
         />
         <View style={{ paddingLeft: "5%", Top: 10 }}>
           <Text style={{ fontSize: namesize, fontWeight: "bold" }}>{dbUser.name}</Text>
-          <View style={{ top: 15 }}>
+          <View style={{ top: 10 }}>
             <Text
               style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}
             >
@@ -58,11 +58,19 @@ export default function UserProfileComp() {
             </Text>
             <Text>{dbUser.address}</Text>
           </View>
-          <View style={{ top: 20 }}>
+          <View style={{ top: 10 }}>
             <Text
               style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}
             >
               Contact Number
+            </Text>
+            <Text>+14163181502</Text>
+          </View>
+          <View style={{ top: 10 }}>
+            <Text
+              style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}
+            >
+              Emergency Contact
             </Text>
             <Text>+14163181502</Text>
           </View>

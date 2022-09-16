@@ -3,8 +3,7 @@ import C2G from "../../../assets/homespage/c2g.png";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabNav from "../tabnavigator/tabnav";
 import { useAuthContext } from "../../contexts/AuthContext";
-import ProfileScreen from "../../screens/ProfileScreen";
-import UserProfileNav from "../UserProfileNavigator/UserProfileNav";
+import EditUserProfile from "../../screens/EditUserProfile/EditUserProfile";
 import { StorageClass } from "aws-amplify";
 
 const Stack = createNativeStackNavigator();
@@ -19,12 +18,19 @@ const StackNav = () => {
     <Stack.Navigator>
       {dbUser ? (
         <Stack.Screen
-          name="MainHome"
+          name="HomeTabs"
           component={TabNav}
           options={{ headerTitle: (props) => <LogoTitle {...props} /> }}
         />
       ) : (
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen
+          name="EditUserProfile"
+          component={EditUserProfile}
+          options={{
+            headerShown: false,
+            animation: 'slide_from_right'
+          }}
+        />
       )}
     </Stack.Navigator>
   );

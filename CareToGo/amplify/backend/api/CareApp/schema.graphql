@@ -1,8 +1,20 @@
+type OrderService @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Service: Service @hasOne
+  orderID: ID! @index(name: "byOrder")
+}
+
+type BasketService @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Service: Service @hasOne
+  basketID: ID! @index(name: "byBasket")
+}
+
 type Basket @model @auth(rules: [{allow: public}]) {
   id: ID!
   userID: ID! @index(name: "byUser")
   workerID: ID! @index(name: "byWorker")
-  Services: [Service] @hasMany(indexName: "byBasket", fields: ["id"])
+  BasketServices: [BasketService] @hasMany(indexName: "byBasket", fields: ["id"])
 }
 
 enum OrderStatus {
@@ -18,6 +30,7 @@ type Order @model @auth(rules: [{allow: public}]) {
   Worker: Worker @hasOne
   status: OrderStatus!
   total: Float!
+  OrderServices: [OrderService] @hasMany(indexName: "byOrder", fields: ["id"])
 }
 
 type User @model @auth(rules: [{allow: public}]) {
@@ -37,7 +50,6 @@ type Service @model @auth(rules: [{allow: public}]) {
   description: String
   price: Float!
   workerID: ID! @index(name: "byWorker")
-  basketID: ID! @index(name: "byBasket")
 }
 
 type Worker @model @auth(rules: [{allow: public}]) {
