@@ -1,24 +1,10 @@
-import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
+import { ModelInit, MutableModel } from "@aws-amplify/datastore";
 
 export enum OrderStatus {
   NEW = "NEW",
   HEADING = "HEADING",
   READY = "READY",
   COMPLETED = "COMPLETED"
-}
-
-
-
-type OrderServiceMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-type ServiceMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-type BasketServiceMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
 type BasketMetaData = {
@@ -33,49 +19,18 @@ type WorkerMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UserMetaData = {
+type ServiceMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class OrderService {
-  readonly id: string;
-  readonly Service?: Service | null;
-  readonly orderID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly orderServiceServiceId?: string | null;
-  constructor(init: ModelInit<OrderService, OrderServiceMetaData>);
-  static copyOf(source: OrderService, mutator: (draft: MutableModel<OrderService, OrderServiceMetaData>) => MutableModel<OrderService, OrderServiceMetaData> | void): OrderService;
-}
-
-export declare class Service {
-  readonly id: string;
-  readonly name: string;
-  readonly description?: string | null;
-  readonly price: number;
-  readonly workerID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Service, ServiceMetaData>);
-  static copyOf(source: Service, mutator: (draft: MutableModel<Service, ServiceMetaData>) => MutableModel<Service, ServiceMetaData> | void): Service;
-}
-
-export declare class BasketService {
-  readonly id: string;
-  readonly Service?: Service | null;
-  readonly basketID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly basketServiceServiceId?: string | null;
-  constructor(init: ModelInit<BasketService, BasketServiceMetaData>);
-  static copyOf(source: BasketService, mutator: (draft: MutableModel<BasketService, BasketServiceMetaData>) => MutableModel<BasketService, BasketServiceMetaData> | void): BasketService;
+type UserMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
 export declare class Basket {
   readonly id: string;
   readonly userID: string;
   readonly workerID: string;
-  readonly BasketServices?: (BasketService | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Basket, BasketMetaData>);
@@ -88,7 +43,7 @@ export declare class Order {
   readonly Worker?: Worker | null;
   readonly status: OrderStatus | keyof typeof OrderStatus;
   readonly total: number;
-  readonly OrderServices?: (OrderService | null)[] | null;
+  readonly service: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly orderWorkerId?: string | null;
@@ -113,6 +68,18 @@ export declare class Worker {
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Worker, WorkerMetaData>);
   static copyOf(source: Worker, mutator: (draft: MutableModel<Worker, WorkerMetaData>) => MutableModel<Worker, WorkerMetaData> | void): Worker;
+}
+
+export declare class Service {
+  readonly id: string;
+  readonly name: string;
+  readonly description?: string | null;
+  readonly price: number;
+  readonly workerID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Service, ServiceMetaData>);
+  static copyOf(source: Service, mutator: (draft: MutableModel<Service, ServiceMetaData>) => MutableModel<Service, ServiceMetaData> | void): Service;
 }
 
 export declare class User {

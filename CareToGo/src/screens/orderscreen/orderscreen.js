@@ -39,9 +39,9 @@ const OrderScreen = () => {
     );
   }, []);
 
-  const { addServiceToBasket } = useBasketContext();
+  const { createOrder } = useBasketContext();
 
-  const onAddToBasket = async () => {
+  const onAddToOrder = async () => {
     Object.keys(selected).forEach(function (key) {
       if (selected[key] === false) {
         delete selected[key];
@@ -51,9 +51,8 @@ const OrderScreen = () => {
     const keys = Object.keys(selected);
     let service_array = [];
     service_array = services.filter((g) => keys.includes(g.id)).map((g) => g);
-    await addServiceToBasket(service_array);
-    console.log("---------------");
-    console.log(service_array);
+    service_string = JSON.stringify(service_array);
+    await createOrder(service_string, service_array.length * 35);
   };
 
   const [selected, setSelected] = useState({});
@@ -112,7 +111,7 @@ const OrderScreen = () => {
             style={styles.now}
             onPress={() => {
               handleSnapPress(0);
-              onAddToBasket();
+              onAddToOrder();
             }}
           >
             <Text style={{ color: "white" }}>Now</Text>

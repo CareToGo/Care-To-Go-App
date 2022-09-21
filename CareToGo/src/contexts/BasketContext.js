@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Auth, DataStore } from "aws-amplify";
-import { Basket } from "../models";
+import { Basket, Order } from "../models";
 import { useAuthContext } from "./AuthContext";
 
 const BasketContext = createContext({});
@@ -17,10 +17,17 @@ const BasketContextProvider = ({ children }) => {
     ).then((baskets) => setBasket(baskets[0]));
   }, [dbUser, worker]);
 
-  const addServiceToBasket = async (Service) => {
-    let theBasket = basket || (await createNewBasket());
-    console.log(Service);
-    DataStore.save(new Basket({ Services: Service, basketID: theBasket.id }));
+  const createOrder = async (Service, price) => {
+    console.log(worker);
+    const newOrder = await DataStore.save(
+      new Order({
+        userID: dbUser.id,
+        Worker: worker,
+        status: "NEW",
+        total: price,
+        service: Service,
+      })
+    );
   };
 
   const createNewBasket = async () => {
@@ -32,7 +39,7 @@ const BasketContextProvider = ({ children }) => {
   };
 
   return (
-    <BasketContext.Provider value={{ addServiceToBasket, setWorker }}>
+    <BasketContext.Provider value={{ createOrder, setWorker }}>
       {children}
     </BasketContext.Provider>
   );

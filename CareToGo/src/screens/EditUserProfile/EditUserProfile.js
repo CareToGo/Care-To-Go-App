@@ -36,6 +36,8 @@ const EditUserProfile = () => {
     );
     setCount(count + 1);
     setDbUser(user);
+    console.log(user.name);
+    console.log(count);
   };
 
   const createUser = async () => {
