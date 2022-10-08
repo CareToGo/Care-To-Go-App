@@ -494,18 +494,18 @@ export const schema = {
                         "associatedWith": "userID"
                     }
                 },
-                "name": {
-                    "name": "name",
+                "firstname": {
+                    "name": "firstname",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
-                "email": {
-                    "name": "email",
+                "lastname": {
+                    "name": "lastname",
                     "isArray": false,
-                    "type": "AWSEmail",
-                    "isRequired": false,
+                    "type": "String",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -563,9 +563,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-<<<<<<< HEAD
-    "version": "484061ad162a31e7437abb140a77fff6"
-=======
-    "version": "84f74255e1b53fded401a1fcdeca0964"
->>>>>>> 0af0e9c465b9475e013239c519349dbd5e47723e
+    "version": "5038a29421b4f623f0c530a438cdb1b5"
 };

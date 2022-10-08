@@ -29,7 +29,7 @@ export default function UserProfileComp() {
   } = Dimensions.get('window');
 
   const namewidth = SCREEN_WIDTH * 0.75 / (dbUser.firstname.length + dbUser.lastname.length);
-  let namesize;
+  let namesize = 27;
   if (namewidth <= 27) {
     namesize = namewidth;
   } else {

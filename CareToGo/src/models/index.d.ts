@@ -1,4 +1,4 @@
-import { ModelInit, MutableModel } from "@aws-amplify/datastore";
+import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
 export enum OrderStatus {
   NEW = "NEW",
@@ -6,6 +6,8 @@ export enum OrderStatus {
   READY = "READY",
   COMPLETED = "COMPLETED"
 }
+
+
 
 type BasketMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
@@ -90,8 +92,8 @@ export declare class User {
   readonly lng: number;
   readonly Orders?: (Order | null)[] | null;
   readonly Baskets?: (Basket | null)[] | null;
-  readonly name: string;
-  readonly email?: string | null;
+  readonly firstname: string;
+  readonly lastname: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<User, UserMetaData>);

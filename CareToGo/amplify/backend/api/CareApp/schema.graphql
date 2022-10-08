@@ -28,8 +28,8 @@ type User @model @auth(rules: [{allow: public}]) {
   lng: Float!
   Orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
   Baskets: [Basket] @hasMany(indexName: "byUser", fields: ["id"])
-  name: String!
-  email: AWSEmail
+  firstname: String!
+  lastname: String!
 }
 
 type Service @model @auth(rules: [{allow: public}]) {

@@ -8,8 +8,8 @@ import { useNavigation } from "@react-navigation/native";
 
 const EditUserProfile = () => {
   const { dbUser } = useAuthContext();
-  const [fname, setFName] = useState(dbUser?.fname || "");
-  const [lname, setLName] = useState(dbUser?.lname || "");
+  const [firstname, setFName] = useState(dbUser?.firstname || "");
+  const [lastname, setLName] = useState(dbUser?.lastname || "");
   const [address, setAddress] = useState(dbUser?.address || "");
   const [lat, setLat] = useState(dbUser?.lat + "" || "0");
   const [lng, setLng] = useState(dbUser?.lng + "" || "0");
@@ -28,8 +28,8 @@ const EditUserProfile = () => {
   const updateUser = async () => {
     const user = await DataStore.save(
       User.copyOf(dbUser, (updated) => {
-        updated.firstname = fname;
-        updated.lastname = lname;
+        updated.firstname = firstname;
+        updated.lastname = lastname;
         updated.address = address;
         updated.lat = parseFloat(lat);
         updated.lng = parseFloat(lng);
@@ -50,8 +50,8 @@ const EditUserProfile = () => {
           address,
           lat: parseFloat(lat),
           lng: parseFloat(lng),
-          fname,
-          lname
+          firstname,
+          lastname
         })
       );
       setDbUser(user);
@@ -64,13 +64,13 @@ const EditUserProfile = () => {
     <SafeAreaView>
       <Text style={styles.title}>Edit My Profile</Text>
       <TextInput
-        value={fname}
+        value={firstname}
         onChangeText={setFName}
         placeholder="First Name"
         style={styles.input}
       />
       <TextInput
-        value={lname}
+        value={lastname}
         onChangeText={setLName}
         placeholder="Last Name"
         style={styles.input}
