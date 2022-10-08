@@ -124,6 +124,7 @@ export declare class User {
   readonly Orders?: (Order | null)[] | null;
   readonly Baskets?: (Basket | null)[] | null;
   readonly name: string;
+  readonly email?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<User, UserMetaData>);

@@ -28,7 +28,7 @@ export default function UserProfileComp() {
     height: SCREEN_HEIGHT,
   } = Dimensions.get('window');
 
-  const namewidth = SCREEN_WIDTH * 0.75 / dbUser.name.length;
+  const namewidth = SCREEN_WIDTH * 0.75 / (dbUser.firstname.length);
   let namesize;
   if (namewidth <= 27) {
     namesize = namewidth;
@@ -49,7 +49,7 @@ export default function UserProfileComp() {
           style={{ width: SCREEN_WIDTH * 0.35, height: SCREEN_WIDTH * 0.4, borderRadius: 10 }}
         />
         <View style={{ paddingLeft: "5%", Top: 10 }}>
-          <Text style={{ fontSize: namesize, fontWeight: "bold" }}>{dbUser.name}</Text>
+          <Text style={{ fontSize: namesize, fontWeight: "bold" }}>{dbUser.firstname} {dbUser.lastname}</Text>
           <View style={{ top: 10 }}>
             <Text
               style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}

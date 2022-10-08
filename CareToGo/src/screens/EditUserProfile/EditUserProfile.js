@@ -8,7 +8,8 @@ import { useNavigation } from "@react-navigation/native";
 
 const EditUserProfile = () => {
   const { dbUser } = useAuthContext();
-  const [name, setName] = useState(dbUser?.name || "");
+  const [fname, setFName] = useState(dbUser?.fname || "");
+  const [lname, setLName] = useState(dbUser?.lname || "");
   const [address, setAddress] = useState(dbUser?.address || "");
   const [lat, setLat] = useState(dbUser?.lat + "" || "0");
   const [lng, setLng] = useState(dbUser?.lng + "" || "0");
@@ -27,7 +28,8 @@ const EditUserProfile = () => {
   const updateUser = async () => {
     const user = await DataStore.save(
       User.copyOf(dbUser, (updated) => {
-        updated.name = name;
+        updated.firstname = fname;
+        updated.lastname = lname;
         updated.address = address;
         updated.lat = parseFloat(lat);
         updated.lng = parseFloat(lng);
@@ -46,7 +48,8 @@ const EditUserProfile = () => {
           address,
           lat: parseFloat(lat),
           lng: parseFloat(lng),
-          name,
+          fname,
+          lname
         })
       );
       setDbUser(user);
@@ -59,9 +62,15 @@ const EditUserProfile = () => {
     <SafeAreaView>
       <Text style={styles.title}>Edit My Profile</Text>
       <TextInput
-        value={name}
-        onChangeText={setName}
-        placeholder="Name"
+        value={fname}
+        onChangeText={setFName}
+        placeholder="First Name"
+        style={styles.input}
+      />
+      <TextInput
+        value={lname}
+        onChangeText={setLName}
+        placeholder="Last Name"
         style={styles.input}
       />
       <TextInput
@@ -82,12 +91,12 @@ const EditUserProfile = () => {
         placeholder="Longitude"
         style={styles.input}
       />
-      <Button onPress={onSave} title="Save" style={{ margin: 10 }} />
+      <Button onPress={onSave} title="Save" style={{ margin: 10, backgroundColor: "blue" }} />
       <Text
         onPress={() => Auth.signOut()}
         style={{ textAlign: "center", color: "red", margin: 10 }}
       >
-        Sign out
+        Sign Out
       </Text>
     </SafeAreaView>
   );

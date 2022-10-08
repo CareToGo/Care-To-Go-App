@@ -700,6 +700,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "AWSEmail",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -755,5 +762,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "b8a5d92858709e7f49c9f9f7f5f9185b"
+    "version": "484061ad162a31e7437abb140a77fff6"
 };

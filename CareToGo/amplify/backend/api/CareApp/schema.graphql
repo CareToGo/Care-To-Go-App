@@ -42,6 +42,7 @@ type User @model @auth(rules: [{allow: public}]) {
   Orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
   Baskets: [Basket] @hasMany(indexName: "byUser", fields: ["id"])
   name: String!
+  email: AWSEmail
 }
 
 type Service @model @auth(rules: [{allow: public}]) {
