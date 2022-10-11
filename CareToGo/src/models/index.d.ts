@@ -94,6 +94,7 @@ export declare class User {
   readonly Baskets?: (Basket | null)[] | null;
   readonly firstname: string;
   readonly lastname: string;
+  readonly ver: number;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<User, UserMetaData>);

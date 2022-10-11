@@ -30,6 +30,7 @@ type User @model @auth(rules: [{allow: public}]) {
   Baskets: [Basket] @hasMany(indexName: "byUser", fields: ["id"])
   firstname: String!
   lastname: String!
+  ver: Int!
 }
 
 type Service @model @auth(rules: [{allow: public}]) {

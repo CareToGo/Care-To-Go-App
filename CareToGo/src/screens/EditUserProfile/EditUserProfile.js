@@ -23,9 +23,12 @@ const EditUserProfile = () => {
     } else {
       await createUser();
     }
+    navigation.goBack();
   };
 
   const updateUser = async () => {
+    console.log("-----------------")
+    console.log(dbUser)
     const user = await DataStore.save(
       User.copyOf(dbUser, (updated) => {
         updated.firstname = firstname;
@@ -33,13 +36,13 @@ const EditUserProfile = () => {
         updated.address = address;
         updated.lat = parseFloat(lat);
         updated.lng = parseFloat(lng);
-        updated._version = count + 1;
+        updated._version = dbUser._version;
       })
     );
-    setCount(count + 1);
-    setDbUser(user);
-    console.log(user.name);
-    console.log(count);
+    console.log(user);
+    newuser = {...user, _version: dbUser._version + 1}
+    console.log(newuser);
+    setDbUser(newuser);
   };
 
   const createUser = async () => {
