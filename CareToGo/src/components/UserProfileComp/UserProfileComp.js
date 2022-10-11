@@ -1,26 +1,15 @@
 import React, { useState } from "react";
-import {
-  Text,
-  View,
-  ScrollView,
-  StyleSheet,
-  TouchableHighlight,
-  Image,
-  Dimensions,
-  Pressable
-} from "react-native";
+import { Text, View, ScrollView, StyleSheet, TouchableHighlight, Image, Dimensions, Pressable } from "react-native";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function UserProfileComp() {
   const { dbUser } = useAuthContext();
-
   const navigation = useNavigation();
 
   const pressHandler = () => {
     navigation.navigate('EditUserProfile');
-
   }
 
   const {
@@ -37,13 +26,8 @@ export default function UserProfileComp() {
   }
 
   return (
-    <ScrollView style={{ paddingHorizontal: "5%", paddingBottom: 20 }}>
+    <ScrollView style={{ paddingHorizontal: "3%", paddingVertical: 0 }}>
       <View style={styles.mainContainer}>
-        <TouchableHighlight style={styles.editbtn}>
-          <Pressable onPress={pressHandler}>
-            <MaterialCommunityIcons name="account-edit" size={namesize+3} color="#001A72" />
-          </Pressable>
-        </TouchableHighlight>
         <Image
           source={{ uri: 'https://i.ibb.co/gvpcXQr/23333927-361240270993890-3212046802957152739-o.jpg' }}
           style={{ width: SCREEN_WIDTH * 0.35, height: SCREEN_WIDTH * 0.4, borderRadius: 10 }}
@@ -117,13 +101,6 @@ const styles = StyleSheet.create({
     top: "5%",
     flexDirection: "row",
     marginVertical: "2%",
-  },
-  editbtn: {
-    position: 'absolute',
-    right: 3,
-    top: +3,
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   detailsContainer: { padding: "5%" },
   email: {

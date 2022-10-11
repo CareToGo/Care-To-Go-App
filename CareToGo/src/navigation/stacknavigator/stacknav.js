@@ -1,5 +1,5 @@
 import { Image } from "react-native";
-import C2G from "../../../assets/homespage/c2g.png";
+import C2G from "../../../assets/homespage/C2G.png";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabNav from "../tabnavigator/tabnav";
 import { useAuthContext } from "../../contexts/AuthContext";
@@ -20,7 +20,9 @@ const StackNav = () => {
         <Stack.Screen
           name="HomeTabs"
           component={TabNav}
-          options={{ headerTitle: (props) => <LogoTitle {...props} /> }}
+          options={{ 
+            headerShown: false
+          }}
         />
       ) : (
         <Stack.Screen

@@ -7,15 +7,21 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 
 const EditUserProfile = () => {
-  const { dbUser } = useAuthContext();
+  const { dbUser ,sub, setDbUser } = useAuthContext();
   const [firstname, setFName] = useState(dbUser?.firstname || "");
   const [lastname, setLName] = useState(dbUser?.lastname || "");
   const [address, setAddress] = useState(dbUser?.address || "");
   const [lat, setLat] = useState(dbUser?.lat + "" || "0");
   const [lng, setLng] = useState(dbUser?.lng + "" || "0");
-  const { sub, setDbUser } = useAuthContext();
   const [count, setCount] = useState(0);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    DataStore.query(User, (user) => user.sub("eq", sub)).then((users) =>
+      setDbUser(users[0])
+    );
+    console.log(dbUser);
+  }, [sub]);
 
   const onSave = async () => {
     if (dbUser) {
@@ -27,8 +33,7 @@ const EditUserProfile = () => {
   };
 
   const updateUser = async () => {
-    console.log("-----------------")
-    console.log(dbUser)
+
     const user = await DataStore.save(
       User.copyOf(dbUser, (updated) => {
         updated.firstname = firstname;
@@ -36,13 +41,12 @@ const EditUserProfile = () => {
         updated.address = address;
         updated.lat = parseFloat(lat);
         updated.lng = parseFloat(lng);
-        updated._version = dbUser._version;
+        updated._version = parseInt(dbUser.ver);
+        updated.ver = dbUser.ver + 1;
       })
     );
     console.log(user);
-    newuser = {...user, _version: dbUser._version + 1}
-    console.log(newuser);
-    setDbUser(newuser);
+    setDbUser(user);
   };
 
   const createUser = async () => {
@@ -54,7 +58,8 @@ const EditUserProfile = () => {
           lat: parseFloat(lat),
           lng: parseFloat(lng),
           firstname,
-          lastname
+          lastname, 
+          ver: 1,
         })
       );
       setDbUser(user);
