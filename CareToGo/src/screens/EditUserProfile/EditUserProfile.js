@@ -16,20 +16,20 @@ const EditUserProfile = () => {
   const [count, setCount] = useState(0);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    DataStore.query(User, (user) => user.sub("eq", sub)).then((users) =>
-      setDbUser(users[0])
-    );
-    console.log(dbUser);
-  }, [sub]);
+  // useEffect(() => {
+  //   DataStore.query(User, (user) => user.sub("eq", sub)).then((users) =>
+  //     setDbUser(users[0])
+  //   );
+  //   console.log(dbUser);
+  // }, [sub]);
 
   const onSave = async () => {
     if (dbUser) {
       await updateUser();
+      navigation.goBack();
     } else {
       await createUser();
     }
-    navigation.goBack();
   };
 
   const updateUser = async () => {
@@ -63,6 +63,7 @@ const EditUserProfile = () => {
         })
       );
       setDbUser(user);
+
     } catch (e) {
       Alert.alert("Error", e.message);
     }

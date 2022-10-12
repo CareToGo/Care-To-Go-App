@@ -5,12 +5,16 @@ import TabNav from "../tabnavigator/tabnav";
 import { useAuthContext } from "../../contexts/AuthContext";
 import EditUserProfile from "../../screens/EditUserProfile/EditUserProfile";
 import { StorageClass } from "aws-amplify";
+import { Auth, DataStore } from "aws-amplify";
+import { User } from "../../models";
+import { useEffect } from "react";
 
 const Stack = createNativeStackNavigator();
 
 const LogoTitle = () => {
   return <Image style={{ width: 150, height: 30 }} source={C2G} />;
 };
+
 
 const StackNav = () => {
   const { dbUser } = useAuthContext();
@@ -30,7 +34,7 @@ const StackNav = () => {
           component={EditUserProfile}
           options={{
             headerShown: false,
-            animation: 'slide_from_right'
+            animation: 'slide_from_bottom'
           }}
         />
       )}
