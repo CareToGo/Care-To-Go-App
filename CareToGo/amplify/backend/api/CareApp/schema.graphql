@@ -1,3 +1,8 @@
+enum TransportationModes {
+  DRIVING
+  BICYCLING
+}
+
 type Basket @model @auth(rules: [{allow: public}]) {
   id: ID!
   userID: ID! @index(name: "byUser")
@@ -45,14 +50,13 @@ type Worker @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   image: String!
-  travelFee: Float!
-  minTravelTime: Int!
-  maxTravelTime: Int!
   rating: Float
   address: String!
   lat: Float!
   lng: Float!
   Services: [Service] @hasMany(indexName: "byWorker", fields: ["id"])
   Baskets: [Basket] @hasMany(indexName: "byWorker", fields: ["id"])
+  transportationMode: TransportationModes
+  sub: String!
 }
  

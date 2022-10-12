@@ -1,5 +1,10 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
+export enum TransportationModes {
+  DRIVING = "DRIVING",
+  BICYCLING = "BICYCLING"
+}
+
 export enum OrderStatus {
   NEW = "NEW",
   HEADING = "HEADING",
@@ -57,15 +62,14 @@ export declare class Worker {
   readonly id: string;
   readonly name: string;
   readonly image: string;
-  readonly travelFee: number;
-  readonly minTravelTime: number;
-  readonly maxTravelTime: number;
   readonly rating?: number | null;
   readonly address: string;
   readonly lat: number;
   readonly lng: number;
   readonly Services?: (Service | null)[] | null;
   readonly Baskets?: (Basket | null)[] | null;
+  readonly transportationMode?: TransportationModes | keyof typeof TransportationModes | null;
+  readonly sub: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Worker, WorkerMetaData>);

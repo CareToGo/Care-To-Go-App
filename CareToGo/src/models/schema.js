@@ -220,27 +220,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "travelFee": {
-                    "name": "travelFee",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "minTravelTime": {
-                    "name": "minTravelTime",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "maxTravelTime": {
-                    "name": "maxTravelTime",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "rating": {
                     "name": "rating",
                     "isArray": false,
@@ -296,6 +275,22 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "workerID"
                     }
+                },
+                "transportationMode": {
+                    "name": "transportationMode",
+                    "isArray": false,
+                    "type": {
+                        "enum": "TransportationModes"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "sub": {
+                    "name": "sub",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -559,6 +554,13 @@ export const schema = {
         }
     },
     "enums": {
+        "TransportationModes": {
+            "name": "TransportationModes",
+            "values": [
+                "DRIVING",
+                "BICYCLING"
+            ]
+        },
         "OrderStatus": {
             "name": "OrderStatus",
             "values": [
@@ -570,5 +572,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "6a06d3143a7430bc6c71441e09daaa58"
+    "version": "2acb699c4ccce0b95be3f1064697639a"
 };

@@ -65,31 +65,21 @@ export default function UserProfileComp() {
         <Text style={{ fontSize: namewidth, fontStyle: "italic", width: "15%", paddingRight: 10 }}>BIO</Text>
         <View style={{ width: "85%", padding: 10, borderColor: "#001A72", paddingVertical: 5, borderLeftWidth: 2, backgroundColor: "#FFFFFF", borderRadius: 10 }}>
           <Text style={{ fontSize: 15, textAlign: "left" }}>
-            I am a student/young adult. I am mainly using this app for my routine std checkups. 
-            I find it extremely convinient that a nurse can come to me at the comfort of my own home to help me deliver test kits and samples, 
-            and it is very reasonably priced. 
+            I am a student/young adult. I am mainly using this app for my routine std checkups.
+            I find it extremely convinient that a nurse can come to me at the comfort of my own home to help me deliver test kits and samples,
+            and it is very reasonably priced.
             I am thrilled to start using this platform.
           </Text>
-          <View style={{height: 10}}>
+          <View style={{ height: 10 }}>
           </View>
         </View>
       </View>
 
       <View style={styles.mainContainer}>
-        <Text
-          style={{
-            paddingLeft: 20,
-            paddingTop: 10,
-            fontSize: 12,
-            fontStyle: "italic",
-            fontWeight: "bold",
-          }}
-        >
-          Emergency Contact
-        </Text>
-        <View style={{ paddingLeft: 70, paddingTop: 10 }}>
-          <Text>Tommy Sawyer</Text>
-          <Text>647-420-420</Text>
+        <Text style={{ fontSize: namewidth, fontStyle: "italic", width: "21%", paddingRight: 10 }}>MORE</Text>
+        <View style={{ width: "79%", padding: 10, borderColor: "#001A72", paddingVertical: 5, borderLeftWidth: 2, backgroundColor: "#FFFFFF", borderRadius: 10 }}>
+          <Text style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}>Emergency Contact</Text>
+          <Text>+1647420420</Text>
         </View>
       </View>
       <View style={{ height: 300 }} />
