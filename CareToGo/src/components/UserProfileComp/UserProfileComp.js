@@ -30,9 +30,9 @@ export default function UserProfileComp() {
       <View style={styles.mainContainer}>
         <Image
           source={{ uri: 'https://i.ibb.co/gvpcXQr/23333927-361240270993890-3212046802957152739-o.jpg' }}
-          style={{ width: SCREEN_WIDTH * 0.35, height: SCREEN_WIDTH * 0.4, borderRadius: 10 }}
+          style={{ width: SCREEN_WIDTH * 0.35, height: SCREEN_WIDTH * 0.4, borderRadius: 10, marginRight: 12 }}
         />
-        <View style={{ paddingLeft: "5%", Top: 10 }}>
+        <View style={{ paddingLeft: "5%", Top: 10, borderLeftWidth: 2, borderRadius: 10, borderLeftColor: "#001A72" }}>
           <Text style={{ fontSize: namesize, fontWeight: "bold" }}>{dbUser.firstname} {dbUser.lastname}</Text>
           <View style={{ top: 10 }}>
             <Text
@@ -62,13 +62,17 @@ export default function UserProfileComp() {
       </View>
 
       <View style={styles.mainContainer}>
-        <Text style={{ fontSize: 20, fontStyle: "italic" }}>BIO</Text>
-        <Text style={{ top: 10, fontSize: 12, paddingHorizontal: 15 }}>
-          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-          ea commodo consequat..
-        </Text>
+        <Text style={{ fontSize: namewidth, fontStyle: "italic", width: "15%", paddingRight: 10 }}>BIO</Text>
+        <View style={{ width: "85%", padding: 10, borderColor: "#001A72", paddingVertical: 5, borderLeftWidth: 2, backgroundColor: "#FFFFFF", borderRadius: 10 }}>
+          <Text style={{ fontSize: 15, textAlign: "left" }}>
+            I am a student/young adult. I am mainly using this app for my routine std checkups. 
+            I find it extremely convinient that a nurse can come to me at the comfort of my own home to help me deliver test kits and samples, 
+            and it is very reasonably priced. 
+            I am thrilled to start using this platform.
+          </Text>
+          <View style={{height: 10}}>
+          </View>
+        </View>
       </View>
 
       <View style={styles.mainContainer}>
