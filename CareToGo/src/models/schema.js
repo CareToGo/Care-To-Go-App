@@ -227,13 +227,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "address": {
-                    "name": "address",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "lat": {
                     "name": "lat",
                     "isArray": false,
@@ -510,6 +503,27 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "dob": {
+                    "name": "dob",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "contactnum": {
+                    "name": "contactnum",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -572,5 +586,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "2acb699c4ccce0b95be3f1064697639a"
+    "version": "d2e79b8dfaf171c63c6c57997cf9a5eb"
 };

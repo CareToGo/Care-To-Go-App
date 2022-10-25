@@ -27,12 +27,14 @@ export default function UserProfileComp() {
 
   return (
     <ScrollView style={{ paddingHorizontal: "3%", paddingVertical: 0 }}>
-      <View style={{...styles.mainContainer, height: "20%"}}>
-        <Image
-          source={{ uri: 'https://i.ibb.co/gvpcXQr/23333927-361240270993890-3212046802957152739-o.jpg' }}
-          style={{ width: SCREEN_WIDTH * 0.3, height: SCREEN_WIDTH * 0.4, borderRadius: 10, marginRight: 12 }}
-        />
-        <View style={{ padding: "2.5%", Top: 10, borderLeftWidth: 2, borderRadius: 10, borderLeftColor: "#001A72", backgroundColor: "#EAF2F8" }}>
+      <View style={{ ...styles.mainContainer, height: "20%", justifyContent: "space-between" }}>
+        <View style={{ width: "35%" }}>
+          <Image
+            source={{ uri: 'https://i.ibb.co/gvpcXQr/23333927-361240270993890-3212046802957152739-o.jpg' }}
+            style={{ width: "100%", height: "100%", borderRadius: 10 }}
+          />
+        </View>
+        <View style={{ width: "60%", padding: "2.5%", borderLeftWidth: 2, borderRadius: 10, borderLeftColor: "#001A72", backgroundColor: "#EAF2F8" }}>
           <Text style={{ fontSize: namesize, fontWeight: "bold" }}>{dbUser.firstname} {dbUser.lastname}</Text>
           <View style={{ top: 10 }}>
             <Text
@@ -54,18 +56,18 @@ export default function UserProfileComp() {
             <Text
               style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}
             >
-              Emergency Contact
+              City
             </Text>
-            <Text>+14163181502</Text>
+            <Text>Toronto</Text>
           </View>
         </View>
       </View>
 
       <View style={styles.mainContainer}>
         <Text style={{ fontSize: namewidth, fontStyle: "italic", width: "15%", paddingRight: 10 }}>BIO</Text>
-        <View style={{ width: "85%", padding: 10, borderColor: "#001A72", paddingVertical: 5, borderLeftWidth: 2, backgroundColor: "#EAF2F8", borderRadius: 10 }}>
-          <Text style={{ fontSize: 15, textAlign: "left" }}>
-            I am a student/young adult. I am mainly using this app for my routine std checkups.
+        <View style={{ width: "85%", padding: 10, borderColor: "#001A72", paddingVertical: 5, borderLeftWidth: 2, backgroundColor: "#EBF5FB", borderRadius: 10 }}>
+          <Text style={{ fontSize: 15, textAlign: "justify" }}>
+            I am a student / young adult. I am mainly using this app for my routine std checkups.
             I find it extremely convinient that a nurse can come to me at the comfort of my own home to help me deliver test kits and samples,
             and it is very reasonably priced.
             I am thrilled to start using this platform.
@@ -77,7 +79,7 @@ export default function UserProfileComp() {
 
       <View style={styles.mainContainer}>
         <Text style={{ fontSize: namewidth, fontStyle: "italic", width: "21%", paddingRight: 10 }}>MORE</Text>
-        <View style={{ width: "79%", padding: 10, borderColor: "#001A72", paddingVertical: 5, borderLeftWidth: 2, backgroundColor: "#FFFFFF", borderRadius: 10 }}>
+        <View style={{ width: "79%", padding: 10, borderColor: "#001A72", paddingVertical: 5, borderLeftWidth: 2, backgroundColor: "#EBF5FB", borderRadius: 10 }}>
           <Text style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}>Emergency Contact</Text>
           <Text>+1647420420</Text>
         </View>
