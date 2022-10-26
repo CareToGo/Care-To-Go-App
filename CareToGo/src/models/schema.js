@@ -275,7 +275,7 @@ export const schema = {
                     "type": {
                         "enum": "TransportationModes"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "sub": {
@@ -586,5 +586,6 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "d2e79b8dfaf171c63c6c57997cf9a5eb"
+    "codegenVersion": "3.2.0",
+    "version": "ca1c17642edfa51254629321c1b68c55"
 };

@@ -58,7 +58,7 @@ type Worker @model @auth(rules: [{allow: public}]) {
   lng: Float!
   Services: [Service] @hasMany(indexName: "byWorker", fields: ["id"])
   Baskets: [Basket] @hasMany(indexName: "byWorker", fields: ["id"])
-  transportationMode: TransportationModes
+  transportationMode: TransportationModes!
   sub: String!
 }
  

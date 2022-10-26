@@ -5,7 +5,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 const ContractorDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
-
+  const services = route.params.service;
   const pressHandler = () => {
     navigation.navigate("orders", { id: route.params.id });
   };
@@ -65,7 +65,7 @@ const ContractorDetails = () => {
 
       <View style={styles.servicesList}>
         <Text style={{ fontWeight: "bold", marginHorizontal: 10 }}>
-          Stoma Care
+          {route.params.service}
         </Text>
         <Text style={{ fontWeight: "bold", marginHorizontal: 10 }}>
           Stoma Care

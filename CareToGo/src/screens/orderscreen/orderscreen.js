@@ -34,9 +34,6 @@ const OrderScreen = () => {
 
   useEffect(() => {
     DataStore.query(Worker, id).then(setWorker);
-    DataStore.query(Service, (service) => service.workerID("eq", id)).then(
-      setServices
-    );
   }, []);
 
   const { createOrder } = useBasketContext();
