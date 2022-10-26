@@ -4,6 +4,8 @@ import EditUserProfile from "../../screens/EditUserProfile/EditUserProfile";
 import { Text, View, ScrollView, StyleSheet, TouchableHighlight, Image, Dimensions, Pressable } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
+import { useAuthContext } from "../../contexts/AuthContext";
+
 
 const ProfileStack = createNativeStackNavigator();
 
@@ -33,6 +35,7 @@ const UserProfileNav = () => {
           headerStyle: {
             backgroundColor: "#FFFFFF",
           },
+          headerShadowVisible: false,
           headerTitleAlign: "left",
           headerRight: () => (
             <TouchableHighlight style={{ textAlign: "right", width: 120, marginRight: -100 }}>
@@ -42,7 +45,7 @@ const UserProfileNav = () => {
             </TouchableHighlight>
           ),
           headerLeft: () => (
-            <Text style={{ fontSize: namewidth / 10 }}>
+            <Text style={{ fontSize: namewidth / 10, fontStyle:"italic" }}>
               My Profile
             </Text>
           )

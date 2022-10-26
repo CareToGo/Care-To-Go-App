@@ -17,54 +17,78 @@ export default function UserProfileComp() {
     height: SCREEN_HEIGHT,
   } = Dimensions.get('window');
 
-  const namewidth = SCREEN_WIDTH * 0.75 / (dbUser.firstname.length + dbUser.lastname.length);
-  let namesize = 27;
-  if (namewidth <= 27) {
+  const namewidth = SCREEN_WIDTH / (dbUser.firstname.length + dbUser.lastname.length);
+  let namesize = 33;
+  if (namewidth <= 33) {
     namesize = namewidth;
   } else {
-    namesize = 27;
+    namesize = 33;
   }
 
   return (
-    <ScrollView style={{ paddingHorizontal: "3%", paddingVertical: 0 }}>
-      <View style={{ ...styles.mainContainer, height: "20%", justifyContent: "space-between" }}>
-        <View style={{ width: "35%" }}>
+    <View style={{ paddingHorizontal: "0%", paddingVertical: 0 }}>
+      <View style={{ ...styles.mainContainer, ...styles.shadowProp, height: 105, justifyContent: "space-between", elevation: 15, shadowColor: '#CDB050', }}>
+        <View style={{ width: "30%", justifyContent:"center", alignItems:"center" }}>
           <Image
             source={{ uri: 'https://i.ibb.co/gvpcXQr/23333927-361240270993890-3212046802957152739-o.jpg' }}
-            style={{ width: "100%", height: "100%", borderRadius: 10 }}
+            style={{ width: "80%", height: undefined, aspectRatio: 1, borderRadius: 100 }}
           />
         </View>
-        <View style={{ width: "60%", padding: "2.5%", borderLeftWidth: 2, borderRadius: 10, borderLeftColor: "#001A72", backgroundColor: "#EAF2F8" }}>
-          <Text style={{ fontSize: namesize, fontWeight: "bold" }}>{dbUser.firstname} {dbUser.lastname}</Text>
-          <View style={{ top: 10 }}>
-            <Text
-              style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}
-            >
-              Address
-            </Text>
-            <Text>{dbUser.address}</Text>
-          </View>
-          <View style={{ top: 10 }}>
-            <Text
-              style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}
-            >
-              Contact Number
-            </Text>
-            <Text>+14163181502</Text>
-          </View>
-          <View style={{ top: 10 }}>
-            <Text
-              style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}
-            >
-              City
-            </Text>
-            <Text>Toronto</Text>
-          </View>
+
+        <View style={{ width: "70%", padding: "3%", justifyContent: "space-between" }}>
+          
+          <Text 
+            style={{
+              fontStyle: "italic",
+              fontSize: 12,
+              fontWeight: "bold",
+              color: "gray"
+            }}>
+              WELCOME!
+          </Text>
+          <Text 
+            style={{
+              color:"#001A72",
+              fontSize: SCREEN_WIDTH/dbUser.firstname.length,
+              fontWeight: "bold"
+            }}>
+              {dbUser.firstname}
+          </Text>  
+          <Text 
+            style={{
+              color:"#001A72",
+              fontSize: 12,
+            }}>
+              +1{dbUser.contactnum}
+          </Text> 
+          <Text 
+            style={{
+              color:"#001A72",
+              fontSize: 12,
+            }}>
+              {dbUser.email}
+          </Text>  
         </View>
+
+        <View style={{ ...styles.mainContainer }}>
+
+          
+          <Text 
+            style={{
+              fontStyle: "italic",
+              fontSize: 12,
+              fontWeight: "bold",
+              color: "gray"
+            }}>
+              WELCOME!
+          </Text>
+
+        </View>
+
       </View>
 
-      <View style={styles.mainContainer}>
-        <Text style={{ fontSize: namewidth, fontStyle: "italic", width: "15%", paddingRight: 10 }}>BIO</Text>
+      {/* <View style={styles.mainContainer}>
+        <Text style={{ fontSize: namewidth, fontStyle: "italic", width: "15%", paddingRight: 10 }} numberOfLines={1} adjustsFontSizeToFit >BIO</Text>
         <View style={{ width: "85%", padding: 10, borderColor: "#001A72", paddingVertical: 5, borderLeftWidth: 2, backgroundColor: "#EBF5FB", borderRadius: 10 }}>
           <Text style={{ fontSize: 15, textAlign: "justify" }}>
             I am a student / young adult. I am mainly using this app for my routine std checkups.
@@ -78,14 +102,14 @@ export default function UserProfileComp() {
       </View>
 
       <View style={styles.mainContainer}>
-        <Text style={{ fontSize: namewidth, fontStyle: "italic", width: "21%", paddingRight: 10 }}>MORE</Text>
+        <Text style={{ fontSize: namewidth, fontStyle: "italic", width: "21%", paddingRight: 10 }} numberOfLines={1} adjustsFontSizeToFit >MORE</Text>
         <View style={{ width: "79%", padding: 10, borderColor: "#001A72", paddingVertical: 5, borderLeftWidth: 2, backgroundColor: "#EBF5FB", borderRadius: 10 }}>
           <Text style={{ fontSize: 12, fontWeight: "bold", color: "#B8C5D0" }}>Emergency Contact</Text>
           <Text>+1647420420</Text>
         </View>
-      </View>
-      <View style={{ height: 300 }} />
-    </ScrollView>
+      </View> */}
+      <View style={{ height: 100 }} />
+    </View>
   );
 }
 
@@ -93,10 +117,10 @@ const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: "#FFFFFF",
     padding: "5%",
-    borderRadius: 20,
-    top: "5%",
+    borderRadius: 0,
+    // top: "5%",
     flexDirection: "row",
-    marginVertical: "2%",
+    // marginVertical: "2%",
   },
   detailsContainer: { padding: "5%" },
   email: {
@@ -113,7 +137,6 @@ const styles = StyleSheet.create({
     top: 50,
     left: 45,
   },
-
   emergencyContainer: {
     backgroundColor: "#FFFFFF",
     width: "80%",
@@ -122,5 +145,11 @@ const styles = StyleSheet.create({
     top: 70,
     left: 45,
     flexDirection: "row",
+  },
+  shadowProp: {
+    shadowColor: 'green',
+    shadowOffset: {width: 0, height: 3},
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
 });

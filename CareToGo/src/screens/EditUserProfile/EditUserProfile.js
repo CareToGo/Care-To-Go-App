@@ -100,7 +100,7 @@ const EditUserProfile = () => {
         <TextInput
           value={dob}
           onChangeText={setDOB}
-          placeholder="Date of Birth"
+          placeholder="Date of Birth (YYYY/MM/DD)"
           style={styles.input}
         />
         <TextInput
