@@ -1,10 +1,20 @@
-import { View, Text, TextInput, StyleSheet, Button, Alert, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Button,
+  Alert,
+  ScrollView,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Auth, DataStore } from "aws-amplify";
 import { User } from "../../models";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useNavigation } from "@react-navigation/native";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { GOOGLE_MAPS_APIKEY } from "@env";
 
 const EditUserProfile = () => {
   const { dbUser, sub, setDbUser } = useAuthContext();
@@ -18,15 +28,8 @@ const EditUserProfile = () => {
   const [lng, setLng] = useState(dbUser?.lng + "" || "0");
   const [count, setCount] = useState(0);
   const navigation = useNavigation();
-  const isAWSDate = /^([+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24:?00)([.,]\d+(?!:))?)?(\17[0-5]\d([.,]\d+)?)?([zZ]|([+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?(Z|[+-](?:2[0-3]|[01][0-9])(?::?(?:[0-5][0-9]))?)?$/;
-
-
-  // useEffect(() => {
-  //   DataStore.query(User, (user) => user.sub("eq", sub)).then((users) =>
-  //     setDbUser(users[0])
-  //   );
-  //   console.log(dbUser);
-  // }, [sub]);
+  const isAWSDate =
+    /^([+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24:?00)([.,]\d+(?!:))?)?(\17[0-5]\d([.,]\d+)?)?([zZ]|([+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?(Z|[+-](?:2[0-3]|[01][0-9])(?::?(?:[0-5][0-9]))?)?$/;
 
   const onSave = async () => {
     if (dbUser) {
@@ -69,11 +72,10 @@ const EditUserProfile = () => {
           ver: 1,
           dob,
           email,
-          contactnum
+          contactnum,
         })
       );
       setDbUser(user);
-
     } catch (e) {
       Alert.alert("Error", e.message);
     }
@@ -81,8 +83,6 @@ const EditUserProfile = () => {
 
   return (
     <ScrollView style={{ paddingHorizontal: "3%", paddingVertical: 0 }}>
-
-
       <SafeAreaView>
         <Text style={styles.title}>Edit My Profile</Text>
         <TextInput
@@ -115,7 +115,23 @@ const EditUserProfile = () => {
           placeholder="Phone Number"
           style={styles.input}
         />
-        <TextInput
+        <GooglePlacesAutocomplete
+          placeholder="Address"
+          styles={styles.input}
+          nearbyPlacesAPI="GooglePlacesSearch"
+          onPress={(data, detail = null) => {
+            setAddress(data.description);
+
+            setLat(detail.geometry.location.lat);
+            setLng(detail.geometry.location.lng);
+          }}
+          fetchDetails={true}
+          enablePoweredByContainer={false}
+          minLength={2}
+          query={{ key: GOOGLE_MAPS_APIKEY, language: "en" }}
+          debounce={400}
+        />
+        {/* <TextInput
           value={address}
           onChangeText={setAddress}
           placeholder="Address"
@@ -132,8 +148,12 @@ const EditUserProfile = () => {
           onChangeText={setLng}
           placeholder="Longitude"
           style={styles.input}
+        /> */}
+        <Button
+          onPress={onSave}
+          title="Save"
+          style={{ margin: 10, backgroundColor: "blue" }}
         />
-        <Button onPress={onSave} title="Save" style={{ margin: 10, backgroundColor: "blue" }} />
         <Text
           onPress={() => Auth.signOut()}
           style={{ textAlign: "center", color: "red", margin: 10 }}

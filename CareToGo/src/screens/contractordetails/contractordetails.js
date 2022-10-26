@@ -6,7 +6,7 @@ import { FlatList } from "react-native";
 const ContractorDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const services = JSON.parse(JSON.parse(route.params.service));
+  const services = JSON.parse(route.params.service);
 
   const pressHandler = () => {
     navigation.navigate("orders", {

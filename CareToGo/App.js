@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image, FlatList } from "react-native";
+import { KeyboardAvoidingView, Platform } from "react-native";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import StackNav from "./src/navigation/stacknavigator/stacknav";
 import { Amplify } from "aws-amplify";
@@ -25,7 +25,13 @@ function App() {
       <AuthContextProvider>
         <BasketContextProvider>
           <StripeProvider publishableKey={PUBLISHABLE_KEY}>
-            <StackNav />
+            <KeyboardAvoidingView
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+              style={{ flex: 1 }}
+              keyboardVerticalOffset={Platform.OS === "ios" ? -64 : 0}
+            >
+              <StackNav />
+            </KeyboardAvoidingView>
           </StripeProvider>
         </BasketContextProvider>
       </AuthContextProvider>
