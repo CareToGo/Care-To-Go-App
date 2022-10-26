@@ -1,3 +1,11 @@
+type Service @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  description: String!
+  price: Float!
+  workable: Boolean!
+}
+
 enum TransportationModes {
   DRIVING
   BICYCLING
@@ -41,14 +49,6 @@ type User @model @auth(rules: [{allow: public}]) {
   contactnum: String
 }
 
-type Service @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  name: String!
-  description: String
-  price: Float!
-  workerID: ID! @index(name: "byWorker")
-}
-
 type Worker @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
@@ -56,9 +56,9 @@ type Worker @model @auth(rules: [{allow: public}]) {
   rating: Float
   lat: Float!
   lng: Float!
-  Services: [Service] @hasMany(indexName: "byWorker", fields: ["id"])
   Baskets: [Basket] @hasMany(indexName: "byWorker", fields: ["id"])
   transportationMode: TransportationModes!
   sub: String!
+  service: String!
 }
  

@@ -1,13 +1,18 @@
 import { StyleSheet, View, Text, Image, Pressable } from "react-native";
 import Map from "../../../assets/contractor-details-page/contractorDetailsMap.png";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { FlatList } from "react-native";
 
 const ContractorDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const services = route.params.service;
+  const services = JSON.parse(JSON.parse(route.params.service));
+
   const pressHandler = () => {
-    navigation.navigate("orders", { id: route.params.id });
+    navigation.navigate("orders", {
+      id: route.params.id,
+      service: route.params.service,
+    });
   };
 
   return (
@@ -58,21 +63,21 @@ const ContractorDetails = () => {
 
       <View style={styles.services}>
         <Text style={{ color: "lightgray", fontWeight: "bold" }}>
-          {" "}
-          Services Provided (9)
+          Services Provided
         </Text>
       </View>
 
       <View style={styles.servicesList}>
-        <Text style={{ fontWeight: "bold", marginHorizontal: 10 }}>
-          {route.params.service}
-        </Text>
-        <Text style={{ fontWeight: "bold", marginHorizontal: 10 }}>
-          Stoma Care
-        </Text>
-        <Text style={{ fontWeight: "bold", marginHorizontal: 10 }}>
-          Stoma Care
-        </Text>
+        <FlatList
+          data={services}
+          horizontal={true}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item: { id, name, description, price }, item }) => (
+            <Text style={{ fontWeight: "bold", marginHorizontal: 10 }}>
+              {name}
+            </Text>
+          )}
+        />
       </View>
 
       <View style={styles.experience}>

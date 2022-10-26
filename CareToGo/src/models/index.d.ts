@@ -14,6 +14,10 @@ export enum OrderStatus {
   COMPLETED = "COMPLETED"
 }
 
+type ServiceMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type BasketMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -26,12 +30,34 @@ type WorkerMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type ServiceMetaData = {
+type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UserMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
+type EagerService = {
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
+  readonly price: number;
+  readonly workable: boolean;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyService = {
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
+  readonly price: number;
+  readonly workable: boolean;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Service = LazyLoading extends LazyLoadingDisabled ? EagerService : LazyService
+
+export declare const Service: (new (init: ModelInit<Service, ServiceMetaData>) => Service) & {
+  copyOf(source: Service, mutator: (draft: MutableModel<Service, ServiceMetaData>) => MutableModel<Service, ServiceMetaData> | void): Service;
 }
 
 type EagerBasket = {
@@ -93,10 +119,10 @@ type EagerWorker = {
   readonly rating?: number | null;
   readonly lat: number;
   readonly lng: number;
-  readonly Services?: (Service | null)[] | null;
   readonly Baskets?: (Basket | null)[] | null;
   readonly transportationMode: TransportationModes | keyof typeof TransportationModes;
   readonly sub: string;
+  readonly service: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -108,10 +134,10 @@ type LazyWorker = {
   readonly rating?: number | null;
   readonly lat: number;
   readonly lng: number;
-  readonly Services: AsyncCollection<Service>;
   readonly Baskets: AsyncCollection<Basket>;
   readonly transportationMode: TransportationModes | keyof typeof TransportationModes;
   readonly sub: string;
+  readonly service: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -120,32 +146,6 @@ export declare type Worker = LazyLoading extends LazyLoadingDisabled ? EagerWork
 
 export declare const Worker: (new (init: ModelInit<Worker, WorkerMetaData>) => Worker) & {
   copyOf(source: Worker, mutator: (draft: MutableModel<Worker, WorkerMetaData>) => MutableModel<Worker, WorkerMetaData> | void): Worker;
-}
-
-type EagerService = {
-  readonly id: string;
-  readonly name: string;
-  readonly description?: string | null;
-  readonly price: number;
-  readonly workerID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyService = {
-  readonly id: string;
-  readonly name: string;
-  readonly description?: string | null;
-  readonly price: number;
-  readonly workerID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type Service = LazyLoading extends LazyLoadingDisabled ? EagerService : LazyService
-
-export declare const Service: (new (init: ModelInit<Service, ServiceMetaData>) => Service) & {
-  copyOf(source: Service, mutator: (draft: MutableModel<Service, ServiceMetaData>) => MutableModel<Service, ServiceMetaData> | void): Service;
 }
 
 type EagerUser = {
