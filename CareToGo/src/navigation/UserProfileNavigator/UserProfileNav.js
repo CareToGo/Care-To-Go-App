@@ -37,15 +37,15 @@ const UserProfileNav = () => {
           },
           headerShadowVisible: false,
           headerTitleAlign: "left",
-          headerRight: () => (
-            <TouchableHighlight style={{ textAlign: "right", width: 120, marginRight: -100 }}>
-              <Pressable onPress={() => navigation.navigate('EditUserProfile')}>
-                <MaterialCommunityIcons name="account-edit" size={30} color="#001A72" />
-              </Pressable>
-            </TouchableHighlight>
-          ),
+          // headerRight: () => (
+          //   <TouchableHighlight style={{ textAlign: "right", width: 120, marginRight: -100 }}>
+          //     <Pressable onPress={() => navigation.navigate('EditUserProfile')}>
+          //       <MaterialCommunityIcons name="account-edit" size={30} color="#001A72" />
+          //     </Pressable>
+          //   </TouchableHighlight>
+          // ),
           headerLeft: () => (
-            <Text style={{ fontSize: namewidth / 10, fontStyle:"italic" }}>
+            <Text style={{ fontSize: namewidth / 10 }}>
               My Profile
             </Text>
           )
@@ -56,7 +56,7 @@ const UserProfileNav = () => {
         component={EditUserProfile}
         options={{
           headerShown: false,
-          animation: 'slide_from_bottom'
+          animation: 'slide_from_right'
         }}
       />
     </ProfileStack.Navigator>

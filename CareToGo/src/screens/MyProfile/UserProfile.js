@@ -16,11 +16,11 @@ export default function UserProfile() {
   return (
     <View style={styles.container}>
       <UserProfileComp />
-      <View style={{ flexDirection: "row", justifyContent: "center", marginBottom: 15 }}>
+      {/* <View style={{ flexDirection: "row", justifyContent: "center", marginBottom: 15 }}>
         <TouchableHighlight underlayColor="#b55e5e" style={styles.signout} onPress={() => Auth.signOut()}>
           <Text style={{ color: "white" }}>Sign Out</Text>
         </TouchableHighlight>
-      </View>
+      </View> */}
     </View>
   );
 }
