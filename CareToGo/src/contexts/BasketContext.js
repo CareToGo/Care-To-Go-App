@@ -25,7 +25,7 @@ const BasketContextProvider = ({ children }) => {
         Worker: worker,
         status: "NEW",
         total: price,
-        service: Service,
+        service: JSON.stringify(Service),
       })
     );
   };

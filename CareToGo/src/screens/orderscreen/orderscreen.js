@@ -16,27 +16,25 @@ import { useRef, useCallback, useState, useMemo, useEffect } from "react";
 import { useBasketContext } from "../../contexts/BasketContext";
 import { CardForm, useStripe } from "@stripe/stripe-react-native";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
-import { Service, Worker } from "../../models";
+import { Worker } from "../../models";
 import { DataStore } from "aws-amplify";
 
 const OrderScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const [worker, setWorker] = useState(null);
-  const [services, setServices] = useState([]);
-
+  const [services, setServices] = useState();
   const [count, setCount] = useState(0);
   const pressHandler = () => {
     navigation.navigate("date-picker");
   };
 
   const id = route.params.id;
+  const service = route.params.service;
 
   useEffect(() => {
     DataStore.query(Worker, id).then(setWorker);
-    DataStore.query(Service, (service) => service.workerID("eq", id)).then(
-      setServices
-    );
+    setServices(JSON.parse(service));
   }, []);
 
   const { createOrder } = useBasketContext();
@@ -51,8 +49,8 @@ const OrderScreen = () => {
     const keys = Object.keys(selected);
     let service_array = [];
     service_array = services.filter((g) => keys.includes(g.id)).map((g) => g);
-    service_string = JSON.stringify(service_array);
-    await createOrder(service_string, service_array.length * 35);
+
+    await createOrder(service_array, service_array.length * 35);
   };
 
   const [selected, setSelected] = useState({});
@@ -75,7 +73,7 @@ const OrderScreen = () => {
   return (
     <View style={styles.mainContainer}>
       <ScrollView nestedScrollEnabled={true} style={styles.container}>
-        <View>
+        <View style={{ marginTop: 50 }}>
           <Text style={tw`text-center py-5 text-lg `}>Select</Text>
         </View>
         <View style={tw`border-t border-gray-200 flex`}></View>

@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image, FlatList } from "react-native";
+import { KeyboardAvoidingView, Platform } from "react-native";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import StackNav from "./src/navigation/stacknavigator/stacknav";
 import { Amplify } from "aws-amplify";
@@ -8,7 +8,6 @@ import { withAuthenticator } from "aws-amplify-react-native/dist/Auth";
 import AuthContextProvider from "./src/contexts/AuthContext";
 import { NavigationContainer } from "@react-navigation/native";
 import BasketContextProvider from "./src/contexts/BasketContext";
-import OrderContextProvider from "./src/contexts/OrderContext";
 
 Amplify.configure({
   ...config,
@@ -25,11 +24,15 @@ function App() {
     <NavigationContainer>
       <AuthContextProvider>
         <BasketContextProvider>
-          <OrderContextProvider>
-            <StripeProvider publishableKey={PUBLISHABLE_KEY}>
+          <StripeProvider publishableKey={PUBLISHABLE_KEY}>
+            <KeyboardAvoidingView
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+              style={{ flex: 1 }}
+              keyboardVerticalOffset={Platform.OS === "ios" ? -64 : 0}
+            >
               <StackNav />
-            </StripeProvider>
-          </OrderContextProvider>
+            </KeyboardAvoidingView>
+          </StripeProvider>
         </BasketContextProvider>
       </AuthContextProvider>
     </NavigationContainer>
