@@ -131,24 +131,7 @@ const EditUserProfile = () => {
           query={{ key: GOOGLE_MAPS_APIKEY, language: "en" }}
           debounce={400}
         />
-        {/* <TextInput
-          value={address}
-          onChangeText={setAddress}
-          placeholder="Address"
-          style={styles.input}
-        />
-        <TextInput
-          value={lat}
-          onChangeText={setLat}
-          placeholder="Latitude"
-          style={styles.input}
-        />
-        <TextInput
-          value={lng}
-          onChangeText={setLng}
-          placeholder="Longitude"
-          style={styles.input}
-        /> */}
+
         <Button
           onPress={onSave}
           title="Save"
