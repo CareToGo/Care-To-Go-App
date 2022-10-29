@@ -8,6 +8,7 @@ import { withAuthenticator } from "aws-amplify-react-native/dist/Auth";
 import AuthContextProvider from "./src/contexts/AuthContext";
 import { NavigationContainer } from "@react-navigation/native";
 import BasketContextProvider from "./src/contexts/BasketContext";
+import { useAuthContext } from "./src/contexts/AuthContext";
 
 Amplify.configure({
   ...config,
@@ -16,10 +17,14 @@ Amplify.configure({
   },
 });
 
+
+
 const PUBLISHABLE_KEY =
   "pk_test_51LPvpUDNDwI2KDMrrnp2QTRXShgLkjMZME7p8cSlhOvGa9XxXtMPbfJiLCgCLWE7z2PcDvULJdoiP5rpW9u7KMD200dEKnJAmM";
 
 function App() {
+  const { dbUser } = useAuthContext();
+
   return (
     <NavigationContainer>
       <AuthContextProvider>

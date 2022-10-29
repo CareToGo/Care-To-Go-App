@@ -55,8 +55,25 @@ const UserProfileNav = () => {
         name="EditUserProfile"
         component={EditUserProfile}
         options={{
-          headerShown: false,
-          animation: 'slide_from_right'
+          title: "",
+          headerStyle: {
+            backgroundColor: "#FFFFFF",
+          },
+          headerShadowVisible: false,
+          headerTitleAlign: "left",
+          animation: 'slide_from_right',
+          headerLeft: () => (
+            <Text style={{ fontSize: namewidth / 10 }}>
+              Edit My Profile
+            </Text>
+          ),
+          headerRight: () => (
+            <TouchableHighlight style={{ textAlign: "right", width: 120, marginRight: -100 }}>
+              <Pressable onPress={() => navigation.navigate('EditUserProfile')}>
+                <MaterialCommunityIcons name="account-edit" size={30} color="#001A72" />
+              </Pressable>
+            </TouchableHighlight>
+          ),
         }}
       />
     </ProfileStack.Navigator>

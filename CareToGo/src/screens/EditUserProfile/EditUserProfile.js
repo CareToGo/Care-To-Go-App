@@ -84,7 +84,6 @@ const EditUserProfile = () => {
   return (
     <ScrollView style={{ paddingHorizontal: "3%", paddingVertical: 0 }}>
       <SafeAreaView>
-        <Text style={styles.title}>Edit My Profile</Text>
         <TextInput
           value={firstname}
           onChangeText={setFName}

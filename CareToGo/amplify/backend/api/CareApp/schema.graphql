@@ -11,12 +11,6 @@ enum TransportationModes {
   BICYCLING
 }
 
-type Basket @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  userID: ID! @index(name: "byUser")
-  workerID: ID! @index(name: "byWorker")
-}
-
 enum OrderStatus {
   NEW
   HEADING
@@ -31,6 +25,10 @@ type Order @model @auth(rules: [{allow: public}]) {
   status: OrderStatus!
   total: Float!
   service: String!
+  lat: Float!
+  lng: Float!
+  name: String!
+  address: String!
 }
 
 type User @model @auth(rules: [{allow: public}]) {
@@ -40,7 +38,6 @@ type User @model @auth(rules: [{allow: public}]) {
   lat: Float!
   lng: Float!
   Orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
-  Baskets: [Basket] @hasMany(indexName: "byUser", fields: ["id"])
   firstname: String!
   lastname: String!
   ver: Int!
@@ -56,7 +53,6 @@ type Worker @model @auth(rules: [{allow: public}]) {
   rating: Float
   lat: Float!
   lng: Float!
-  Baskets: [Basket] @hasMany(indexName: "byWorker", fields: ["id"])
   transportationMode: TransportationModes!
   sub: String!
   service: String!

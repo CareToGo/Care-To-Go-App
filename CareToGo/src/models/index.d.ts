@@ -16,10 +16,6 @@ type ServiceMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type BasketMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
 type OrderMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -44,16 +40,6 @@ export declare class Service {
   static copyOf(source: Service, mutator: (draft: MutableModel<Service, ServiceMetaData>) => MutableModel<Service, ServiceMetaData> | void): Service;
 }
 
-export declare class Basket {
-  readonly id: string;
-  readonly userID: string;
-  readonly workerID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Basket, BasketMetaData>);
-  static copyOf(source: Basket, mutator: (draft: MutableModel<Basket, BasketMetaData>) => MutableModel<Basket, BasketMetaData> | void): Basket;
-}
-
 export declare class Order {
   readonly id: string;
   readonly userID: string;
@@ -61,6 +47,10 @@ export declare class Order {
   readonly status: OrderStatus | keyof typeof OrderStatus;
   readonly total: number;
   readonly service: string;
+  readonly lat: number;
+  readonly lng: number;
+  readonly name: string;
+  readonly address: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly orderWorkerId?: string | null;
@@ -75,7 +65,6 @@ export declare class Worker {
   readonly rating?: number | null;
   readonly lat: number;
   readonly lng: number;
-  readonly Baskets?: (Basket | null)[] | null;
   readonly transportationMode: TransportationModes | keyof typeof TransportationModes;
   readonly sub: string;
   readonly service: string;
@@ -92,7 +81,6 @@ export declare class User {
   readonly lat: number;
   readonly lng: number;
   readonly Orders?: (Order | null)[] | null;
-  readonly Baskets?: (Basket | null)[] | null;
   readonly firstname: string;
   readonly lastname: string;
   readonly ver: number;
