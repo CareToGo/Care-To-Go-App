@@ -5,7 +5,7 @@ import { Text, View, ScrollView, StyleSheet, TouchableHighlight, Image, Dimensio
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import { useAuthContext } from "../../contexts/AuthContext";
-
+import { Entypo } from '@expo/vector-icons';
 
 const ProfileStack = createNativeStackNavigator();
 
@@ -37,13 +37,6 @@ const UserProfileNav = () => {
           },
           headerShadowVisible: false,
           headerTitleAlign: "left",
-          // headerRight: () => (
-          //   <TouchableHighlight style={{ textAlign: "right", width: 120, marginRight: -100 }}>
-          //     <Pressable onPress={() => navigation.navigate('EditUserProfile')}>
-          //       <MaterialCommunityIcons name="account-edit" size={30} color="#001A72" />
-          //     </Pressable>
-          //   </TouchableHighlight>
-          // ),
           headerLeft: () => (
             <Text style={{ fontSize: namewidth / 10 }}>
               My Profile
@@ -62,15 +55,15 @@ const UserProfileNav = () => {
           headerShadowVisible: false,
           headerTitleAlign: "left",
           animation: 'slide_from_right',
-          headerLeft: () => (
+          headerRight: () => (
             <Text style={{ fontSize: namewidth / 10 }}>
               Edit My Profile
             </Text>
           ),
-          headerRight: () => (
+          headerLeft: () => (
             <TouchableHighlight style={{ textAlign: "right", width: 120, marginRight: -100 }}>
-              <Pressable onPress={() => navigation.navigate('EditUserProfile')}>
-                <MaterialCommunityIcons name="account-edit" size={30} color="#001A72" />
+              <Pressable onPress={() => navigation.navigate('UserProfile')}>
+                <Entypo name="arrow-with-circle-left" size={33} color="black" />              
               </Pressable>
             </TouchableHighlight>
           ),

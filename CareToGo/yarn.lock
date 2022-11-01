@@ -8950,6 +8950,11 @@
   "resolved" "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.2.4.tgz"
   "version" "4.2.4"
 
+"react-native-scale-button@^1.0.4":
+  "integrity" "sha512-Q0gRIyD5FVoEIWgZnHg8A4NHH6flZvqrNjP8wj5Uksh/OaGDdeYfHU10ABmutIdlkNFdoi67Z14chHaHayeRLQ=="
+  "resolved" "https://registry.npmjs.org/react-native-scale-button/-/react-native-scale-button-1.0.4.tgz"
+  "version" "1.0.4"
+
 "react-native-screens@>= 3.0.0", "react-native-screens@~3.11.1":
   "integrity" "sha512-ziQqVm97tNtovacyHwNmDwJPb8n9CqwsfttXx2p5Hk7wUWemDcPAX0ZJ/nNnGMSq2p2QPhPjjUpr3qKXuES0sQ=="
   "resolved" "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.11.1.tgz"

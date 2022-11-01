@@ -6,20 +6,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Auth } from "aws-amplify";
 
-
 export default function UserProfileComp() {
   const { dbUser } = useAuthContext();
-  const [estado, setEstado] = useState(false);
   const navigation = useNavigation();
 
   const editprofile = () => {
     navigation.navigate('EditUserProfile');
   }
-
-  // const editprofile = () => {
-  //   navigation.navigate('EditUserProfile');
-  // }
-
 
   const {
     width: SCREEN_WIDTH,
