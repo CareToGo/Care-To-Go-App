@@ -13,9 +13,9 @@ enum TransportationModes {
 
 enum OrderStatus {
   NEW
-  HEADING
-  READY
+  ARRIVED
   COMPLETED
+  ACCEPTED
 }
 
 type Order @model @auth(rules: [{allow: public}]) {
@@ -44,6 +44,7 @@ type User @model @auth(rules: [{allow: public}]) {
   dob: String
   email: String
   contactnum: String
+  image: String!
 }
 
 type Worker @model @auth(rules: [{allow: public}]) {

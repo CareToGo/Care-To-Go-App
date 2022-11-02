@@ -7,7 +7,8 @@ import {
   Alert,
   ScrollView,
   Dimensions,
-  Image
+  Image,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,7 +18,11 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_APIKEY } from "@env";
-
+import { Storage } from "aws-amplify";
+import * as Clipboard from "expo-clipboard";
+import Constants from "expo-constants";
+import * as ImagePicker from "expo-image-picker";
+import { set } from "react-native-reanimated";
 
 const EditUserProfile = () => {
   const { dbUser, sub, setDbUser } = useAuthContext();
@@ -32,7 +37,8 @@ const EditUserProfile = () => {
   const navigation = useNavigation();
   const isAWSDate =
     /^([+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24:?00)([.,]\d+(?!:))?)?(\17[0-5]\d([.,]\d+)?)?([zZ]|([+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?(Z|[+-](?:2[0-3]|[01][0-9])(?::?(?:[0-5][0-9]))?)?$/;
-
+  const [imageData, setImageData] = useState(null);
+  const [percentage, setPercentage] = useState(0);
   const onSave = async () => {
     if (dbUser) {
       await updateUser();
@@ -41,11 +47,94 @@ const EditUserProfile = () => {
       await createUser();
     }
   };
+  useEffect(() => {
+    (async () => {
+      if (Constants.platform.ios) {
+        const cameraRollStatus =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        const cameraStatus = await ImagePicker.requestCameraPermissionsAsync();
+        if (
+          cameraRollStatus.status !== "granted" ||
+          cameraStatus.status !== "granted"
+        ) {
+          alert("Sorry, we need these permissions to make this work!");
+        }
+      }
+    })();
+  }, []);
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: "Images",
+      aspect: [4, 3],
+      quality: 1,
+    });
 
-  const {
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
-  } = Dimensions.get('window');
+    handleImagePicked(result);
+  };
+
+  const handleImagePicked = async (pickerResult) => {
+    try {
+      if (pickerResult.cancelled) {
+        alert("Upload cancelled");
+        return;
+      } else {
+        setPercentage(0);
+        const img = await fetchImageFromUri(pickerResult.uri);
+        const uploadUrl = await uploadImage({ sub } + ".jpg", img);
+        const result = await Storage.get(uploadUrl);
+        setImageData(result);
+        setImageData((state) => {
+          console.log(state);
+          return state;
+        });
+      }
+    } catch (e) {
+      console.log(e);
+      alert("Upload failed");
+    }
+  };
+
+  const uploadImage = (filename, img) => {
+    Auth.currentCredentials();
+    return Storage.put(filename, img, {
+      level: "public",
+      contentType: "image/jpeg",
+      progressCallback(progress) {
+        setLoading(progress);
+      },
+    })
+      .then((response) => {
+        return response.key;
+      })
+      .catch((error) => {
+        console.log(error);
+        return error.response;
+      });
+  };
+
+  const setLoading = (progress) => {
+    const calculated = parseInt((progress.loaded / progress.total) * 100);
+    updatePercentage(calculated);
+  };
+
+  const updatePercentage = (number) => {
+    setPercentage(number);
+  };
+
+  // const downloadImage = (uri) => {
+  //   Storage.get(uri)
+  //     .then((result) => setImage(result))
+  //     .catch((err) => console.log(err));
+  // };
+
+  const fetchImageFromUri = async (uri) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    return blob;
+  };
+
+  const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } =
+    Dimensions.get("window");
 
   const updateUser = async () => {
     const user = await DataStore.save(
@@ -60,6 +149,7 @@ const EditUserProfile = () => {
         updated.lng = parseFloat(lng);
         updated._version = parseInt(dbUser.ver);
         updated.ver = dbUser.ver + 1;
+        updated.image = imageData;
       })
     );
     console.log(user);
@@ -80,6 +170,7 @@ const EditUserProfile = () => {
           dob,
           email,
           contactnum,
+          image: imageData,
         })
       );
       setDbUser(user);
@@ -90,22 +181,66 @@ const EditUserProfile = () => {
 
   return (
     <View>
-      <View style={{ ...styles.mainContainer, padding: "0%", height: SCREEN_HEIGHT / 4 }}>
-
-        <View style={{ width: "100%", borderWidth: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Image
-            source={{ uri: 'https://i.ibb.co/gvpcXQr/23333927-361240270993890-3212046802957152739-o.jpg' }}
-            style={{ width: "30%", height: undefined, aspectRatio: 1, borderRadius: 100 }}
-          />
+      <View
+        style={{
+          ...styles.mainContainer,
+          padding: "0%",
+          height: SCREEN_HEIGHT / 4,
+        }}
+      >
+        <View
+          style={{
+            width: "100%",
+            borderWidth: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {imageData || dbUser.image ? (
+            <Image
+              source={{
+                uri: imageData ? imageData : dbUser.image,
+              }}
+              style={{
+                width: "30%",
+                height: undefined,
+                aspectRatio: 1,
+                borderRadius: 100,
+              }}
+            />
+          ) : (
+            <Image
+              source={{
+                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqXhATMW-sSeAdbYfIGpe9hNhBCo_S_T1EblnSnfKYMw&s",
+              }}
+              style={{
+                width: "30%",
+                height: undefined,
+                aspectRatio: 1,
+                borderRadius: 100,
+              }}
+            />
+          )}
         </View>
 
-        <View style={{ width: "100%", borderWidth: 1, marginTop: -30, alignItems: 'center' }}>
+        <View
+          style={{
+            width: "100%",
+            borderWidth: 1,
+            marginTop: -30,
+            alignItems: "center",
+          }}
+        >
           <Text
             style={{
               color: "#001A72",
-              fontSize: ((SCREEN_WIDTH / firstname.length) > 33 ? 33 : (SCREEN_WIDTH / firstname.length)),
-              fontWeight: "bold"
-            }}>
+              fontSize:
+                SCREEN_WIDTH / firstname.length > 33
+                  ? 33
+                  : SCREEN_WIDTH / firstname.length,
+              fontWeight: "bold",
+            }}
+          >
             {firstname}
           </Text>
         </View>
@@ -133,16 +268,27 @@ const EditUserProfile = () => {
             fetchDetails={true}
             enablePoweredByContainer={false}
             minLength={2}
-            query={{ key: "AIzaSyAwqJ3mR3salkuJ6noO2q9RvslWxIX5t3Y", language: "en" }}
+            query={{
+              key: "AIzaSyAwqJ3mR3salkuJ6noO2q9RvslWxIX5t3Y",
+              language: "en",
+            }}
             debounce={400}
           />
         </View>
-
-
       </View>
 
       <ScrollView style={{ paddingHorizontal: "3%", paddingVertical: 0 }}>
         <SafeAreaView>
+          <View style={styles.container}>
+            {percentage !== 0 && (
+              <Text style={styles.percentage}>{percentage}%</Text>
+            )}
+
+            <Button
+              onPress={pickImage}
+              title="Pick an image from camera roll"
+            />
+          </View>
           <TextInput
             value={firstname}
             onChangeText={setFName}
@@ -186,6 +332,7 @@ const EditUserProfile = () => {
           </Text>
         </SafeAreaView>
         <View />
+        <View style={{ height: 200 }} />
       </ScrollView>
     </View>
   );
@@ -210,5 +357,27 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 15,
     borderRadius: 5,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF",
+  },
+  titles: {
+    fontSize: 20,
+    marginBottom: 20,
+    textAlign: "center",
+    marginHorizontal: 15,
+  },
+  percentage: {
+    marginBottom: 10,
+  },
+  result: {
+    paddingTop: 5,
+  },
+  info: {
+    textAlign: "center",
+    marginBottom: 20,
   },
 });

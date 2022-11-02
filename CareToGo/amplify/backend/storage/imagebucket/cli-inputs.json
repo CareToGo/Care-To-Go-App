@@ -1,0 +1,14 @@
+{
+  "resourceName": "imagebucket",
+  "policyUUID": "3c12fac0",
+  "bucketName": "careapp397f72dea29a4a8e84e7ac6e2bbf9486",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

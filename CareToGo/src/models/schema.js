@@ -424,6 +424,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "image": {
+                    "name": "image",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -479,12 +486,13 @@ export const schema = {
             "name": "OrderStatus",
             "values": [
                 "NEW",
-                "HEADING",
-                "READY",
-                "COMPLETED"
+                "ARRIVED",
+                "COMPLETED",
+                "ACCEPTED"
             ]
         }
     },
     "nonModels": {},
-    "version": "872bf5ecb218ae2fb94fe61fed247e60"
+    "codegenVersion": "3.3.1",
+    "version": "5c7cc26b684bba7ceb07437e5d5dbba8"
 };

@@ -9,9 +9,9 @@ const TransportationModes = {
 
 const OrderStatus = {
   "NEW": "NEW",
-  "HEADING": "HEADING",
-  "READY": "READY",
-  "COMPLETED": "COMPLETED"
+  "ARRIVED": "ARRIVED",
+  "COMPLETED": "COMPLETED",
+  "ACCEPTED": "ACCEPTED"
 };
 
 const { Service, Order, Worker, User } = initSchema(schema);
