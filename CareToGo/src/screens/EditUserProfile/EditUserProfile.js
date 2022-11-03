@@ -23,6 +23,7 @@ import * as Clipboard from "expo-clipboard";
 import Constants from "expo-constants";
 import * as ImagePicker from "expo-image-picker";
 import { set } from "react-native-reanimated";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const EditUserProfile = () => {
   const { dbUser, sub, setDbUser } = useAuthContext();
@@ -39,14 +40,18 @@ const EditUserProfile = () => {
     /^([+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24:?00)([.,]\d+(?!:))?)?(\17[0-5]\d([.,]\d+)?)?([zZ]|([+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?(Z|[+-](?:2[0-3]|[01][0-9])(?::?(?:[0-5][0-9]))?)?$/;
   const [imageData, setImageData] = useState(null);
   const [percentage, setPercentage] = useState(0);
+
   const onSave = async () => {
     if (dbUser) {
+      console.log('---------------------------')
+      console.log(imageData)
       await updateUser();
       navigation.goBack();
     } else {
       await createUser();
     }
   };
+
   useEffect(() => {
     (async () => {
       if (Constants.platform.ios) {
@@ -68,14 +73,13 @@ const EditUserProfile = () => {
       aspect: [4, 3],
       quality: 1,
     });
-
     handleImagePicked(result);
   };
 
   const handleImagePicked = async (pickerResult) => {
     try {
       if (pickerResult.cancelled) {
-        alert("Upload cancelled");
+        alert("Upload Cancelled");
         return;
       } else {
         setPercentage(0);
@@ -90,7 +94,7 @@ const EditUserProfile = () => {
       }
     } catch (e) {
       console.log(e);
-      alert("Upload failed");
+      alert("Upload Failed!");
     }
   };
 
@@ -149,7 +153,7 @@ const EditUserProfile = () => {
         updated.lng = parseFloat(lng);
         updated._version = parseInt(dbUser.ver);
         updated.ver = dbUser.ver + 1;
-        updated.image = imageData;
+        updated.image = imageData ? imageData : dbUser.image;
       })
     );
     console.log(user);
@@ -191,12 +195,12 @@ const EditUserProfile = () => {
         <View
           style={{
             width: "100%",
-            borderWidth: 1,
+            borderWidth: 0,
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          {imageData || dbUser.image ? (
+          {imageData || dbUser ? (
             <Image
               source={{
                 uri: imageData ? imageData : dbUser.image,
@@ -221,74 +225,75 @@ const EditUserProfile = () => {
               }}
             />
           )}
+          <MaterialCommunityIcons
+            onPress={pickImage}
+            name="image-edit"
+            size={24} color="#001A72"
+            style={{ position: 'absolute', top: 90, right: 140, backgroundColor: 'rgba(0, 0, 0, 0.2)', borderRadius: 10 }}
+          />
         </View>
 
         <View
           style={{
             width: "100%",
-            borderWidth: 1,
-            marginTop: -30,
+            borderWidth: 0,
+            marginTop: 0,
             alignItems: "center",
           }}
         >
-          <Text
+          {/* <Text
             style={{
               color: "#001A72",
-              fontSize:
-                SCREEN_WIDTH / firstname.length > 33
-                  ? 33
-                  : SCREEN_WIDTH / firstname.length,
+              fontSize: SCREEN_WIDTH / firstname.length > 33 ? 33 : SCREEN_WIDTH / firstname.length,
               fontWeight: "bold",
             }}
           >
             {firstname}
-          </Text>
-        </View>
+          </Text> */}
+          <View style={{ width: "90%", height: 300, marginTop: 30,  }}>
+            <GooglePlacesAutocomplete
+              placeholder = {dbUser?dbUser.address:"Address"}
+              styles={{
+                textInputContainer: {
+                  backgroundColor: 'grey',
+                },
+                textInput: {
+                  height: 38,
+                  color: '#5d5d5d',
+                  fontSize: 16,
+                  backgroundColor: 'lightgray'
+                },
+                predefinedPlacesDescription: {
+                  color: '#1faadb',
+                },
+              }}
+              nearbyPlacesAPI="GooglePlacesSearch"
+              onPress={(data, detail = null) => {
+                setAddress(data.description);
 
-        {/* <GooglePlacesAutocomplete
-          placeholder="Type a place"
-          query={{key: GOOGLE_MAPS_APIKEY}}
-          fetchDetails={true}
-          minLength={2}
-          onPress={(data, details = null) => console.log(data, details)}
-          onFail={error => console.log(error)}
-          onNotFound={() => console.log('no results')}
-        /> */}
-        <View style={{ width: "100%", borderWidth: 1, height: 100 }}>
-          <GooglePlacesAutocomplete
-            placeholder="Address"
-            styles={styles.input}
-            nearbyPlacesAPI="GooglePlacesSearch"
-            onPress={(data, detail = null) => {
-              setAddress(data.description);
-
-              setLat(detail.geometry.location.lat);
-              setLng(detail.geometry.location.lng);
-            }}
-            fetchDetails={true}
-            enablePoweredByContainer={false}
-            minLength={2}
-            query={{
-              key: "AIzaSyAwqJ3mR3salkuJ6noO2q9RvslWxIX5t3Y",
-              language: "en",
-            }}
-            debounce={400}
-          />
+                setLat(detail.geometry.location.lat);
+                setLng(detail.geometry.location.lng);
+              }}
+              fetchDetails={true}
+              enablePoweredByContainer={false}
+              minLength={2}
+              query={{
+                key: "AIzaSyAwqJ3mR3salkuJ6noO2q9RvslWxIX5t3Y",
+                language: "en",
+              }}
+              debounce={400}
+            />
+          </View>
         </View>
       </View>
 
-      <ScrollView style={{ paddingHorizontal: "3%", paddingVertical: 0 }}>
+      <ScrollView style={{ paddingHorizontal: "3%", paddingVertical: 0, zIndex: -100 }}>
         <SafeAreaView>
-          <View style={styles.container}>
+          {/* <View style={styles.container}>
             {percentage !== 0 && (
               <Text style={styles.percentage}>{percentage}%</Text>
             )}
-
-            <Button
-              onPress={pickImage}
-              title="Pick an image from camera roll"
-            />
-          </View>
+          </View> */}
           <TextInput
             value={firstname}
             onChangeText={setFName}

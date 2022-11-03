@@ -19,26 +19,26 @@ export default function UserProfileComp() {
     height: SCREEN_HEIGHT,
   } = Dimensions.get('window');
 
-  const namewidth = SCREEN_WIDTH / (dbUser.firstname.length + dbUser.lastname.length);
-  let namesize = 33;
-  if (namewidth <= 33) {
-    namesize = namewidth;
-  } else {
-    namesize = 33;
-  }
+  // const namewidth = SCREEN_WIDTH / (dbUser.firstname.length + dbUser.lastname.length);
+  // let namesize = 33;
+  // if (namewidth <= 33) {
+  //   namesize = namewidth;
+  // } else {
+  //   namesize = 33;
+  // }
 
   return (
     <View style={{ paddingHorizontal: "0%", paddingVertical: 0 }}>
 
-      <View style={{ ...styles.mainContainer, padding: "5%", ...styles.shadowProp, height: SCREEN_HEIGHT / 6, justifyContent: "space-between", elevation: 15, shadowColor: '#296899' }}>
+      <View style={{ ...styles.mainContainer, padding: "5%", ...styles.shadowProp, height: SCREEN_HEIGHT / 5.5, justifyContent: "space-between", elevation: 15, shadowColor: '#296899' }}>
         <View style={{ width: "30%", justifyContent: "center", alignItems: "center" }}>
           <Image
-            source={{ uri: 'https://i.ibb.co/gvpcXQr/23333927-361240270993890-3212046802957152739-o.jpg' }}
+            source={{ uri: dbUser.image }}
             style={{ width: "95%", height: undefined, aspectRatio: 1, borderRadius: 100 }}
           />
         </View>
 
-        <View style={{ width: "70%", paddingLeft: 30, justifyContent: "space-between" }}>
+        <View style={{ width: "70%", paddingLeft: 30, justifyContent: "space-between"}}>
 
           <Text
             style={{ fontSize: 12, fontWeight: "bold", color: "gray" }}>
