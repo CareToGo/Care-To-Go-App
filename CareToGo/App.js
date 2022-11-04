@@ -24,7 +24,6 @@ const PUBLISHABLE_KEY =
 
 function App() {
   const { dbUser } = useAuthContext();
-
   return (
     <NavigationContainer>
       <AuthContextProvider>

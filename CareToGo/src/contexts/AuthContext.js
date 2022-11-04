@@ -16,8 +16,9 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     DataStore.query(User, (user) => user.sub("eq", sub)).then((users) =>
       setDbUser(users[0])
-    );
+    );setDbUser((state)=>{console.log(state);return state})
   }, [sub]);
+
 
   return (
     <AuthContext.Provider value={{ authUser, dbUser, sub, setDbUser }}>

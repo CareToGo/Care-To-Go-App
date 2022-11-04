@@ -90,13 +90,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "userID": {
-                    "name": "userID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "Worker": {
                     "name": "Worker",
                     "isArray": false,
@@ -111,12 +104,10 @@ export const schema = {
                         "targetName": "orderWorkerId"
                     }
                 },
-                "status": {
-                    "name": "status",
+                "userID": {
+                    "name": "userID",
                     "isArray": false,
-                    "type": {
-                        "enum": "OrderStatus"
-                    },
+                    "type": "ID",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -159,6 +150,15 @@ export const schema = {
                     "name": "address",
                     "isArray": false,
                     "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": {
+                        "enum": "OrderStatus"
+                    },
                     "isRequired": true,
                     "attributes": []
                 },
@@ -368,20 +368,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "Orders": {
-                    "name": "Orders",
-                    "isArray": true,
-                    "type": {
-                        "model": "Order"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "userID"
-                    }
-                },
                 "firstname": {
                     "name": "firstname",
                     "isArray": false,
@@ -430,6 +416,20 @@ export const schema = {
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
+                },
+                "Orders": {
+                    "name": "Orders",
+                    "isArray": true,
+                    "type": {
+                        "model": "Order"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "userID"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",

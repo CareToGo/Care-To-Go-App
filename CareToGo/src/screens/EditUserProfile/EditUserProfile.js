@@ -152,7 +152,7 @@ const EditUserProfile = () => {
         updated.lat = parseFloat(lat);
         updated.lng = parseFloat(lng);
         updated._version = parseInt(dbUser.ver);
-        updated.ver = dbUser.ver + 1;
+        updated.ver = parseInt(dbUser.ver + 1);
         updated.image = imageData ? imageData : dbUser.image;
       })
     );

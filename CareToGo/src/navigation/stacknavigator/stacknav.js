@@ -17,7 +17,8 @@ const LogoTitle = () => {
 
 
 const StackNav = () => {
-  const { dbUser } = useAuthContext();
+  const { dbUser, sub, setDbUser } = useAuthContext();
+  console.log('--------------------------------',sub)
   return (
     <Stack.Navigator>
       {dbUser ? (

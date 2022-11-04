@@ -42,15 +42,15 @@ export declare class Service {
 
 export declare class Order {
   readonly id: string;
-  readonly userID: string;
   readonly Worker?: Worker | null;
-  readonly status: OrderStatus | keyof typeof OrderStatus;
+  readonly userID: string;
   readonly total: number;
   readonly service: string;
   readonly lat: number;
   readonly lng: number;
   readonly name: string;
   readonly address: string;
+  readonly status: OrderStatus | keyof typeof OrderStatus;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly orderWorkerId?: string | null;
@@ -80,7 +80,6 @@ export declare class User {
   readonly address: string;
   readonly lat: number;
   readonly lng: number;
-  readonly Orders?: (Order | null)[] | null;
   readonly firstname: string;
   readonly lastname: string;
   readonly ver: number;
@@ -88,6 +87,7 @@ export declare class User {
   readonly email?: string | null;
   readonly contactnum?: string | null;
   readonly image: string;
+  readonly Orders?: (Order | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<User, UserMetaData>);

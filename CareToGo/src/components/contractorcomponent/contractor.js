@@ -4,13 +4,12 @@ import { useBasketContext } from "../../contexts/BasketContext";
 
 const Contractor = ({ worker }) => {
   const navigation = useNavigation();
-  const { setWorker: setBasketWorker } = useBasketContext();
+
   const pressHandler = () => {
-    setBasketWorker(null);
     const data = JSON.stringify(worker);
     const dict = JSON.parse(data);
     navigation.navigate("contractor-details", dict);
-    setBasketWorker(dict);
+
   };
 
   return (

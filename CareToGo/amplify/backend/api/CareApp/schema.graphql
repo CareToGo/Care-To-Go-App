@@ -20,15 +20,15 @@ enum OrderStatus {
 
 type Order @model @auth(rules: [{allow: public}]) {
   id: ID!
-  userID: ID! @index(name: "byUser")
   Worker: Worker @hasOne
-  status: OrderStatus!
+  userID: ID! @index(name: "byUser")
   total: Float!
   service: String!
   lat: Float!
   lng: Float!
   name: String!
   address: String!
+  status: OrderStatus!
 }
 
 type User @model @auth(rules: [{allow: public}]) {
@@ -37,7 +37,6 @@ type User @model @auth(rules: [{allow: public}]) {
   address: String!
   lat: Float!
   lng: Float!
-  Orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
   firstname: String!
   lastname: String!
   ver: Int!
@@ -45,6 +44,7 @@ type User @model @auth(rules: [{allow: public}]) {
   email: String
   contactnum: String
   image: String!
+  Orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
 }
 
 type Worker @model @auth(rules: [{allow: public}]) {

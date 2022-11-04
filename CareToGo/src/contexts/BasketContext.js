@@ -7,15 +7,8 @@ const BasketContext = createContext({});
 
 const BasketContextProvider = ({ children }) => {
   const { dbUser } = useAuthContext();
-  const [basket, setBasket] = useState(null);
   const [worker, setWorker] = useState(null);
   const [total, setTotal] = useState(0);
-
-  useEffect(() => {
-    DataStore.query(Basket, (b) =>
-      b.workerID("eq", worker.id).userID("eq", dbUser.id)
-    ).then((baskets) => setBasket(baskets[0]));
-  }, [dbUser, worker]);
 
   const createOrder = async (Service, price) => {
     console.log(worker);
@@ -28,14 +21,6 @@ const BasketContextProvider = ({ children }) => {
         service: JSON.stringify(Service),
       })
     );
-  };
-
-  const createNewBasket = async () => {
-    const newBasket = await DataStore.save(
-      new Basket({ userID: dbUser.id, workerID: worker.id })
-    );
-    setBasket(newBasket);
-    return newBasket;
   };
 
   return (
