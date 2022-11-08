@@ -1,6 +1,6 @@
 import { Image, View, Text } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Homescreen from "../../screens/homescreen/homescreen";
+import Homescreen from "../../screens/Homescreen/Homescreen";
 import ContractorDetails from "../../screens/contractordetails/contractordetails";
 import OrderScreen from "../../screens/orderscreen/orderscreen";
 import Datepicker from "../../screens/datepicker/datepicker";
@@ -9,16 +9,16 @@ import C2G from "../../../assets/homespage/C2G.png";
 
 const HomeStack = createNativeStackNavigator();
 
-const HomeStackNavigator = () => {
+const HomeNav = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
-        name="contrator-list"
+        name="ContractorList"
         component={Homescreen}
         options={{
           headerShown: true,
           headerTitle: () => (
-            <View style={{ width: 100, height: 20, }}>
+            <View style={{ width: 120, height: 20 }}>
               <Image style={{ width: "100%", height: "100%", resizeMode: "contain" }} source={C2G} />
             </View>
           ),
@@ -52,4 +52,4 @@ const HomeStackNavigator = () => {
   );
 };
 
-export default HomeStackNavigator;
+export default HomeNav;

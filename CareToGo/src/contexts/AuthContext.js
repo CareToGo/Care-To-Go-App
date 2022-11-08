@@ -1,30 +1,53 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Auth, DataStore } from "aws-amplify";
+import { Auth, DataStore, Hub, syncExpression } from "aws-amplify";
 import { User } from "../models";
+import { TextComponent } from "react-native";
 
 const AuthContext = createContext({});
 
 const AuthContextProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
-  const [dbUser, setDbUser] = useState(null);
-  const sub = authUser?.attributes?.sub;
+  const [dbUser, setDbUser] = useState('no');
+  const [loading, setLoading] = useState(true);
+  const [sub, setSub] = useState(null);
 
+  const fetchsub = async () => {
+    Auth.currentAuthenticatedUser()
+      .then((results)=>{
+        setSub(results.attributes.sub)
+        setAuthUser(results)
+        queryUser(results.attributes.sub);
+      })
+      .catch((err)=>{console.log(err)})
+  }
+
+  const queryUser = async (arg) => {
+    const subscription = DataStore.observeQuery(User, (user) => 
+    user.sub("eq", arg))
+    .subscribe(snapshot => {
+      const { items } = snapshot;
+      setDbUser(items[0])
+    });
+  }
+  
   useEffect(() => {
-    Auth.currentAuthenticatedUser({ bypassCache: true }).then(setAuthUser);
+    const timeId = setTimeout(() => {
+      setLoading(false)
+    }, 2000)
+    return () => {
+      clearTimeout(timeId)
+    }
   }, []);
 
   useEffect(() => {
-    DataStore.query(User, (user) => user.sub("eq", sub)).then((users) =>
-      setDbUser(users[0])
-    );setDbUser((state)=>{console.log(state);return state})
-  }, [sub]);
-
+    fetchsub();
+  }, [])
 
   return (
-    <AuthContext.Provider value={{ authUser, dbUser, sub, setDbUser }}>
+    <AuthContext.Provider value={{ authUser, dbUser, sub, loading, setDbUser }}>
       {children}
     </AuthContext.Provider>
-  );
+  )
 };
 
 export default AuthContextProvider;

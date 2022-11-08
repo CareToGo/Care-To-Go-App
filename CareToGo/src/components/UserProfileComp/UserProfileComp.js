@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, View, ScrollView, StyleSheet, TouchableHighlight, Image, Dimensions, Pressable, Linking } from "react-native";
+import React, { useState, useEffect } from "react";
+import { SafeAreaView, Text, View, ScrollView, StyleSheet, TouchableHighlight, Image, Dimensions, Pressable, Linking } from "react-native";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -19,16 +19,8 @@ export default function UserProfileComp() {
     height: SCREEN_HEIGHT,
   } = Dimensions.get('window');
 
-  // const namewidth = SCREEN_WIDTH / (dbUser.firstname.length + dbUser.lastname.length);
-  // let namesize = 33;
-  // if (namewidth <= 33) {
-  //   namesize = namewidth;
-  // } else {
-  //   namesize = 33;
-  // }
-
   return (
-    <View style={{ paddingHorizontal: "0%", paddingVertical: 0 }}>
+    <SafeAreaView style={{ paddingHorizontal: "0%", paddingVertical: 0 }}>
 
       <View style={{ ...styles.mainContainer, padding: "5%", ...styles.shadowProp, height: SCREEN_HEIGHT / 5.5, justifyContent: "space-between", elevation: 15, shadowColor: '#296899' }}>
         <View style={{ width: "30%", justifyContent: "center", alignItems: "center" }}>
@@ -153,7 +145,7 @@ export default function UserProfileComp() {
             style={{ width: SCREEN_HEIGHT/30, height: undefined, aspectRatio: 0.87 }}
           />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

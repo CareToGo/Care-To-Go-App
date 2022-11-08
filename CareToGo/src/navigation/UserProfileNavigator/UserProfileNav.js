@@ -37,7 +37,7 @@ const UserProfileNav = () => {
           },
           headerShadowVisible: false,
           headerTitleAlign: "left",
-          headerLeft: () => (
+          headerRight: () => (
             <Text style={{ fontSize: namewidth / 10 }}>
               My Profile
             </Text>
@@ -56,14 +56,14 @@ const UserProfileNav = () => {
           headerTitleAlign: "left",
           animation: 'slide_from_right',
           headerRight: () => (
-            <Text style={{ fontSize: namewidth / 10 }}>
+            <Text style={{ fontSize: SCREEN_WIDTH / 12 }}>
               Edit My Profile
             </Text>
           ),
           headerLeft: () => (
-            <TouchableHighlight style={{ textAlign: "right", width: 120, marginRight: -100 }}>
+            <TouchableHighlight style={{ textAlign: "right", width: 100 }}>
               <Pressable onPress={() => navigation.navigate('UserProfile')}>
-                <Entypo name="arrow-with-circle-left" size={33} color="black" />              
+                <Entypo name="arrow-with-circle-left" size={30} color="black" />              
               </Pressable>
             </TouchableHighlight>
           ),

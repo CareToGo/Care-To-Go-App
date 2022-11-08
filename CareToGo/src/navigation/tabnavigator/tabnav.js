@@ -1,26 +1,27 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import HomeStackNavigator from "../homestacknavigator/homestacknavigator";
 import SavedContractors from "../../screens/savedcontractors/savedcontractors";
 import Appointments from "../../screens/appointments/appointments";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import UserProfileNav from "../UserProfileNavigator/UserProfileNav";
-
+import { Text } from "react-native";
+import HomeNav from "../HomeNavigator/HomeNav"
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function TabNav() {
   return (
-    <Tab.Navigator barStyle={{ backgroundColor: "white" }}>
+    <Tab.Navigator activeColor="#ffde59" inactiveColor="#001A72" barStyle={{ backgroundColor: "#FFFFFF" }}>
       <Tab.Screen
         name="Home"
-        component={HomeStackNavigator}
+        component={HomeNav}
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <Entypo name="home" size={24} color={color} />
+            <Entypo name="home" size={24} color={color}/>
           ),
+          tabBarLabel: <Text style={{ color:'#001A72' }}>HOME</Text>
         }}
       />
       <Tab.Screen
@@ -31,6 +32,7 @@ export default function TabNav() {
           tabBarIcon: ({ color }) => (
             <AntDesign name="heart" size={24} color={color} />
           ),
+          tabBarLabel: <Text style={{ color:'#001A72' }}>FAVORITES</Text>
         }}
       />
       <Tab.Screen
@@ -41,6 +43,7 @@ export default function TabNav() {
           tabBarIcon: ({ color }) => (
             <Entypo name="calendar" size={24} color={color} />
           ),
+          tabBarLabel: <Text style={{ color:'#001A72' }}>APPOINTMENTS</Text>
         }}
       />
       <Tab.Screen
@@ -51,6 +54,7 @@ export default function TabNav() {
           tabBarIcon: ({ color }) => (
             <Ionicons name="person" size={24} color={color} />
           ),
+          tabBarLabel: <Text style={{ color:'#001A72' }}>PROFILE</Text>
         }}
       />
     </Tab.Navigator>
