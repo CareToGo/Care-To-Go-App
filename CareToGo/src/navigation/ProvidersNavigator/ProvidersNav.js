@@ -18,20 +18,20 @@ const ProvidersNav = () => {
         component={Homescreen}
         options={{
           headerTitle:'',
-          headerShown: true,
+          headerShown: false,
           headerStyle: {
             backgroundColor: "#FFFFFF",
           },
-          headerLeft: () => (
-            <View style={{ width: 120, height: 20 }}>
-              <Image style={{ width: "100%", height: "100%", resizeMode: "contain" }} source={C2G} />
-            </View>
-          ),
-          headerRight: () => (
-            <View style={{ justifyContent:'center', width: 36, height: 36, backgroundColor:'lightgray', borderRadius: 10, alignItems:'center' }}>
-              <Ionicons name="options" size={24} color="#001A72" />
-            </View>
-          ),
+          // headerLeft: () => (
+          //   <View style={{ width: 120, height: 20 }}>
+          //     <Image style={{ width: "100%", height: "100%", resizeMode: "contain" }} source={C2G} />
+          //   </View>
+          // ),
+          // headerRight: () => (
+          //   <View style={{ justifyContent:'center', width: 36, height: 36, backgroundColor:'lightgray', borderRadius: 10, alignItems:'center' }}>
+          //     <Ionicons name="options" size={24} color="#001A72" />
+          //   </View>
+          // ),
         }}
       />
       <HomeStack.Screen
