@@ -31,17 +31,13 @@ const UserProfileNav = () => {
         name="UserProfile"
         component={UserProfile}
         options={{
+          headerShown: false,
           title: "",
           headerStyle: {
             backgroundColor: "#FFFFFF",
           },
-          headerShadowVisible: false,
+          headerShadowVisible: true,
           headerTitleAlign: "left",
-          headerRight: () => (
-            <Text style={{ fontSize: namewidth / 10 }}>
-              My Profile
-            </Text>
-          )
         }}
       />
       <ProfileStack.Screen
@@ -54,21 +50,24 @@ const UserProfileNav = () => {
           },
           headerShadowVisible: false,
           headerTitleAlign: "left",
-          animation: 'slide_from_right',
+          animation: 'slide_from_bottom',
           headerRight: () => (
             <Text style={{ fontSize: SCREEN_WIDTH / 12 }}>
               Edit My Profile
             </Text>
           ),
           headerLeft: () => (
-            <TouchableHighlight style={{ textAlign: "right", width: 100 }}>
+            <TouchableHighlight style={{ textAlign: "right" }}>
               <Pressable onPress={() => navigation.navigate('UserProfile')}>
-                <Entypo name="arrow-with-circle-left" size={30} color="black" />              
+                <Entypo name="arrow-with-circle-down" size={30} color="black" />
               </Pressable>
             </TouchableHighlight>
           ),
         }}
       />
+      {/* <ProfileStack.Group screenOptions={{ presentation:'modal' }}> */}
+
+      {/* </ProfileStack.Group> */}
     </ProfileStack.Navigator>
   );
 };

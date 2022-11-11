@@ -1,5 +1,11 @@
 import { ModelInit, MutableModel } from "@aws-amplify/datastore";
 
+export enum Caretype {
+  TOTALCARE = "TOTALCARE",
+  SOMEASSISTANCE = "SOMEASSISTANCE",
+  INDEPENDENT = "INDEPENDENT"
+}
+
 export enum TransportationModes {
   DRIVING = "DRIVING",
   BICYCLING = "BICYCLING"
@@ -12,7 +18,11 @@ export enum OrderStatus {
   ACCEPTED = "ACCEPTED"
 }
 
-type ServiceMetaData = {
+type PSWServiceMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type NurseServiceMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -28,16 +38,26 @@ type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Service {
+export declare class PSWService {
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
+  readonly price: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<PSWService, PSWServiceMetaData>);
+  static copyOf(source: PSWService, mutator: (draft: MutableModel<PSWService, PSWServiceMetaData>) => MutableModel<PSWService, PSWServiceMetaData> | void): PSWService;
+}
+
+export declare class NurseService {
   readonly id: string;
   readonly name: string;
   readonly description: string;
   readonly price: number;
-  readonly workable: boolean;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Service, ServiceMetaData>);
-  static copyOf(source: Service, mutator: (draft: MutableModel<Service, ServiceMetaData>) => MutableModel<Service, ServiceMetaData> | void): Service;
+  constructor(init: ModelInit<NurseService, NurseServiceMetaData>);
+  static copyOf(source: NurseService, mutator: (draft: MutableModel<NurseService, NurseServiceMetaData>) => MutableModel<NurseService, NurseServiceMetaData> | void): NurseService;
 }
 
 export declare class Order {
@@ -60,14 +80,20 @@ export declare class Order {
 
 export declare class Worker {
   readonly id: string;
-  readonly name: string;
-  readonly image: string;
+  readonly firstName: string;
+  readonly lastName: string;
   readonly rating?: number | null;
   readonly lat: number;
   readonly lng: number;
   readonly transportationMode: TransportationModes | keyof typeof TransportationModes;
+  readonly services?: string | null;
+  readonly gender: string;
+  readonly profession: string;
+  readonly languages: string;
+  readonly experienceDescription: string;
+  readonly bio: string;
   readonly sub: string;
-  readonly service: string;
+  readonly isVerified: boolean;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Worker, WorkerMetaData>);
@@ -83,11 +109,21 @@ export declare class User {
   readonly firstname: string;
   readonly lastname: string;
   readonly ver: number;
-  readonly dob?: string | null;
-  readonly email?: string | null;
-  readonly contactnum?: string | null;
-  readonly image: string;
+  readonly dob: string;
+  readonly email: string;
+  readonly contactnum: string;
   readonly Orders?: (Order | null)[] | null;
+  readonly postalcode: string;
+  readonly bio?: string | null;
+  readonly gender: string;
+  readonly emergency: string;
+  readonly mobility: Caretype | keyof typeof Caretype;
+  readonly feeding: Caretype | keyof typeof Caretype;
+  readonly toileting: Caretype | keyof typeof Caretype;
+  readonly bathing: Caretype | keyof typeof Caretype;
+  readonly mealprep: Caretype | keyof typeof Caretype;
+  readonly allergies: string;
+  readonly diagnosis: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<User, UserMetaData>);

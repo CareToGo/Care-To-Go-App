@@ -6,20 +6,18 @@ import { DataStore } from "aws-amplify";
 import { Worker } from "../../models";
 import { useBasketContext } from "../../contexts/BasketContext";
 
-export default function Homescreen() {
-  const { workers } = useBasketContext()
-  // useEffect(() => {
-  //   console.log(1)
-  // }, []);
+export default function FirstTimeEdit() {
+
+  useEffect(() => {
+    console.log(1)
+  }, []);
 
   
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content"  />
-      <FlatList
-        data={workers}
-        renderItem={({ item }) => <Contractor worker={item} />}
-      />
+      <Text>
+        LOADING
+      </Text>
     </View>
   );
 }
@@ -27,7 +25,6 @@ export default function Homescreen() {
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
-    alignItems:'center',
-    // borderWidth:1,
+    left: 20,
   },
 });

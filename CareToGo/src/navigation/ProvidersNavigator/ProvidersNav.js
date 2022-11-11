@@ -6,26 +6,32 @@ import OrderScreen from "../../screens/orderscreen/orderscreen";
 import Datepicker from "../../screens/datepicker/datepicker";
 import Appointments from "../../screens/appointments/appointments";
 import C2G from "../../../assets/homespage/C2G.png";
+import { Ionicons } from '@expo/vector-icons';
 
 const HomeStack = createNativeStackNavigator();
 
-const HomeNav = () => {
+const ProvidersNav = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="ContractorList"
         component={Homescreen}
         options={{
+          headerTitle:'',
           headerShown: true,
-          headerTitle: () => (
+          headerStyle: {
+            backgroundColor: "#FFFFFF",
+          },
+          headerLeft: () => (
             <View style={{ width: 120, height: 20 }}>
               <Image style={{ width: "100%", height: "100%", resizeMode: "contain" }} source={C2G} />
             </View>
           ),
-          headerTitleAlign:"center",
-          headerStyle: {
-            backgroundColor: "#FFFFFF",
-          },
+          headerRight: () => (
+            <View style={{ justifyContent:'center', width: 36, height: 36, backgroundColor:'lightgray', borderRadius: 10, alignItems:'center' }}>
+              <Ionicons name="options" size={24} color="#001A72" />
+            </View>
+          ),
         }}
       />
       <HomeStack.Screen
@@ -52,4 +58,4 @@ const HomeNav = () => {
   );
 };
 
-export default HomeNav;
+export default ProvidersNav;

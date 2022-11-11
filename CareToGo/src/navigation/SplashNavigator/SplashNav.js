@@ -6,7 +6,7 @@ import EditUserProfile from "../../screens/EditUserProfile/EditUserProfile";
 import { useEffect } from "react";
 import AnimatedSplash from "react-native-animated-splash-screen";
 import C2G from "../../../assets/homespage/C2G.png"
-
+import FirstTimeEdit from "../../screens/FirstTimeEdit/FirstTimeEdit";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,7 +31,7 @@ const SplashNav = () => {
       logoWidth={250}
     >
       <Stack.Navigator>
-        {dbUser ?
+        {!loading && dbUser ?
           (
             <Stack.Screen
               name="HomeTabs"
@@ -43,7 +43,7 @@ const SplashNav = () => {
           ) : (
             <Stack.Screen
               name="FirstTimeEditPage"
-              component={EditUserProfile}
+              component={FirstTimeEdit}
               options={{
                 title: "",
                 headerStyle: {

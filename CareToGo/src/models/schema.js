@@ -1,7 +1,80 @@
 export const schema = {
     "models": {
-        "Service": {
-            "name": "Service",
+        "PSWService": {
+            "name": "PSWService",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "price": {
+                    "name": "price",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "PSWServices",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "NurseService": {
+            "name": "NurseService",
             "fields": {
                 "id": {
                     "name": "id",
@@ -31,13 +104,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "workable": {
-                    "name": "workable",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -56,7 +122,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Services",
+            "pluralName": "NurseServices",
             "attributes": [
                 {
                     "type": "model",
@@ -230,15 +296,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "name": {
-                    "name": "name",
+                "firstName": {
+                    "name": "firstName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
-                "image": {
-                    "name": "image",
+                "lastName": {
+                    "name": "lastName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
@@ -274,6 +340,48 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "services": {
+                    "name": "services",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "gender": {
+                    "name": "gender",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "profession": {
+                    "name": "profession",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "languages": {
+                    "name": "languages",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "experienceDescription": {
+                    "name": "experienceDescription",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "bio": {
+                    "name": "bio",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "sub": {
                     "name": "sub",
                     "isArray": false,
@@ -281,10 +389,10 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "service": {
-                    "name": "service",
+                "isVerified": {
+                    "name": "isVerified",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Boolean",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -393,25 +501,18 @@ export const schema = {
                     "name": "dob",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "email": {
                     "name": "email",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "contactnum": {
                     "name": "contactnum",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "image": {
-                    "name": "image",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
@@ -430,6 +531,93 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "userID"
                     }
+                },
+                "postalcode": {
+                    "name": "postalcode",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "bio": {
+                    "name": "bio",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "gender": {
+                    "name": "gender",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "emergency": {
+                    "name": "emergency",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "mobility": {
+                    "name": "mobility",
+                    "isArray": false,
+                    "type": {
+                        "enum": "Caretype"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "feeding": {
+                    "name": "feeding",
+                    "isArray": false,
+                    "type": {
+                        "enum": "Caretype"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "toileting": {
+                    "name": "toileting",
+                    "isArray": false,
+                    "type": {
+                        "enum": "Caretype"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "bathing": {
+                    "name": "bathing",
+                    "isArray": false,
+                    "type": {
+                        "enum": "Caretype"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "mealprep": {
+                    "name": "mealprep",
+                    "isArray": false,
+                    "type": {
+                        "enum": "Caretype"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "allergies": {
+                    "name": "allergies",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "diagnosis": {
+                    "name": "diagnosis",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -475,6 +663,14 @@ export const schema = {
         }
     },
     "enums": {
+        "Caretype": {
+            "name": "Caretype",
+            "values": [
+                "TOTALCARE",
+                "SOMEASSISTANCE",
+                "INDEPENDENT"
+            ]
+        },
         "TransportationModes": {
             "name": "TransportationModes",
             "values": [
@@ -493,5 +689,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "5c7cc26b684bba7ceb07437e5d5dbba8"
+    "version": "dc373b118fd86ded3f868c7d201e3696"
 };

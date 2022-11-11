@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Auth, DataStore, Hub, syncExpression } from "aws-amplify";
 import { User } from "../models";
-import { TextComponent } from "react-native";
 
 const AuthContext = createContext({});
 
@@ -27,9 +26,9 @@ const AuthContextProvider = ({ children }) => {
     .subscribe(snapshot => {
       const { items } = snapshot;
       setDbUser(items[0])
-    });
+    })
   }
-  
+
   useEffect(() => {
     const timeId = setTimeout(() => {
       setLoading(false)
