@@ -32,6 +32,7 @@ const EditUserProfile = ({ route }) => {
   const [contactnum, setNum] = useState(dbUser?.contactnum || "");
   const [emergency, setEmer] = useState(dbUser?.emergency || "");
   const [address, setAddress] = useState(dbUser?.address || "");
+  const [address2, setAddress2] = useState(dbUser?.address || "");
   const [lat, setLat] = useState(dbUser?.lat + "" || "0");
   const [lng, setLng] = useState(dbUser?.lng + "" || "0");
   const [date, setDate] = useState(new Date('1996-12-25'));
@@ -346,7 +347,7 @@ const EditUserProfile = ({ route }) => {
                   color: "black",
                   fontSize: 18
                 }}
-                onChangeText={setNum}
+                onChangeText={setEmer}
                 value={emergency}
               />
             </View>
@@ -366,6 +367,22 @@ const EditUserProfile = ({ route }) => {
                 {address}
               </Text>
             </TouchableOpacity>
+
+            <View style={{ justifyContent: 'center', borderColor: 'lightgray', borderBottomWidth: 1 }}>
+              <Text style={{ color: 'lightgray', fontSize: 12, textAlign: 'right' }}>ADDRESS</Text>
+            </View>
+          </View>
+
+          <View style={{ ...styles.inputContainer }}>
+            <View style={{ justifyContent: 'center', width: 30 }}>
+              <MaterialIcons name="edit-location" size={30} color="#001A72" />
+            </View>
+
+            <View style={{ flex: 1, paddingLeft: 10, justifyContent: 'center', borderColor: 'lightgray', borderBottomWidth: 1 }}>
+              <Text style={{ color: 'black', fontSize: SCREEN_WIDTH * 1.1 / address.length }}>
+                {address}
+              </Text>
+            </View>
 
             <View style={{ justifyContent: 'center', borderColor: 'lightgray', borderBottomWidth: 1 }}>
               <Text style={{ color: 'lightgray', fontSize: 12, textAlign: 'right' }}>ADDRESS</Text>

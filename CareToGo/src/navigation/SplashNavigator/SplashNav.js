@@ -1,6 +1,6 @@
 import { Text, Dimensions, ActivityIndicator, SafeAreaView, StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import TabNav from "../TabNavigator/TabNav";
+import TabNav from "../TabNavigator2/TabNav";
 import { useAuthContext } from "../../contexts/AuthContext";
 import EditUserProfile from "../../screens/EditUserProfile/EditUserProfile";
 import { useEffect } from "react";
