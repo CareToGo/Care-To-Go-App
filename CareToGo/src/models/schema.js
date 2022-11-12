@@ -448,6 +448,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "ver": {
+                    "name": "ver",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "sub": {
                     "name": "sub",
                     "isArray": false,
@@ -455,18 +462,11 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "address": {
-                    "name": "address",
+                "lat": {
+                    "name": "lat",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Float",
                     "isRequired": true,
-                    "attributes": []
-                },
-                "address2": {
-                    "name": "address2",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
                     "attributes": []
                 },
                 "lng": {
@@ -490,10 +490,10 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "ver": {
-                    "name": "ver",
+                "gender": {
+                    "name": "gender",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -532,6 +532,27 @@ export const schema = {
                         "associatedWith": "userID"
                     }
                 },
+                "emergency": {
+                    "name": "emergency",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "address": {
+                    "name": "address",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "detailedaddress": {
+                    "name": "detailedaddress",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "postalcode": {
                     "name": "postalcode",
                     "isArray": false,
@@ -546,20 +567,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "gender": {
-                    "name": "gender",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "emergency": {
-                    "name": "emergency",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "mobility": {
                     "name": "mobility",
                     "isArray": false,
@@ -569,8 +576,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "feeding": {
-                    "name": "feeding",
+                "toileting": {
+                    "name": "toileting",
                     "isArray": false,
                     "type": {
                         "enum": "Caretype"
@@ -578,8 +585,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "toileting": {
-                    "name": "toileting",
+                "feeding": {
+                    "name": "feeding",
                     "isArray": false,
                     "type": {
                         "enum": "Caretype"
@@ -616,13 +623,6 @@ export const schema = {
                     "name": "diagnosis",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "lat": {
-                    "name": "lat",
-                    "isArray": false,
-                    "type": "Float",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -697,5 +697,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.1",
-    "version": "285ea19828c63317e722c44345e12178"
+    "version": "8201f91f24416276d3f9cbe99d2d675b"
 };

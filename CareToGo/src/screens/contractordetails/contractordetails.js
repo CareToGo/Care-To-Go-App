@@ -1,4 +1,11 @@
-import { StyleSheet, View, Text, Image, Pressable, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import Map from "../../../assets/contractor-details-page/contractorDetailsMap.png";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { FlatList } from "react-native";

@@ -45,29 +45,29 @@ type Order @model @auth(rules: [{allow: public}]) {
 
 type User @model @auth(rules: [{allow: public}]) {
   id: ID!
+  ver: Int!
   sub: String!
-  address: String!
-  address2: String
+  lat: Float!
   lng: Float!
   firstname: String!
   lastname: String!
-  ver: Int!
+  gender: String!
   dob: String!
   email: String!
   contactnum: String!
   Orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
+  emergency: String!
+  address: String!
+  detailedaddress: String
   postalcode: String!
   bio: String
-  gender: String!
-  emergency: String!
   mobility: Caretype!
-  feeding: Caretype!
   toileting: Caretype!
+  feeding: Caretype!
   bathing: Caretype!
   mealprep: Caretype!
   allergies: String!
   diagnosis: String!
-  lat: Float!
 }
 
 type Worker @model @auth(rules: [{allow: public}]) {

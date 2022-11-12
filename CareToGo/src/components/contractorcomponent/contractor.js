@@ -1,14 +1,15 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useBasketContext } from "../../contexts/BasketContext";
+import { FontAwesome } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+
+const height = 900;
+const width = 428;
 
 const Contractor = ({ worker }) => {
   const navigation = useNavigation();
 
   const pressHandler = () => {
-    // const data = JSON.stringify(worker);
-    // const dict = JSON.parse(data);
-
     navigation.navigate("contractor-details", worker);
     console.log(worker);
   };
@@ -19,24 +20,35 @@ const Contractor = ({ worker }) => {
       style={{ marginBottom: 10, height: 200, padding: 10 }}
     >
       <View style={styles.container}>
-        <Text style={styles.nurseTitle}>{worker.firstName}</Text>
+        <Text style={styles.nurseTitle}>
+          {worker.firstName} {worker.lastName} {`\u2022 `}
+          {worker.profession}
+        </Text>
         <Text style={styles.details}>{worker.experienceDescription}</Text>
+        <Text></Text>
         <Image
           source={{
             uri: "http://www.by-lee.com/nurse0.jpg",
           }}
           style={styles.image}
         />
-      </View>
-      {/* 
+        <View
+          style={{
+            flexDirection: "row",
 
-      <View style={styles.background}>
-        <Text style={styles.nurseTitle}>{worker.name}</Text>
-        <Text style={styles.details}>
-          {" "}
-          -{worker.rating}- &#8226; -experience- &#8226; -distance-
-        </Text>
-      </View> */}
+            alignItems: "center",
+          }}
+        >
+          <View style={{ padding: 5 }}>
+            <FontAwesome name="bicycle" size={40} color="white" />
+          </View>
+          <View style={{ flexDirection: "column", padding: 5 }}>
+            <Text> Distance</Text>
+            <AntDesign name="staro" size={24} color="white" />
+          </View>
+        </View>
+        <View style={styles.bg} />
+      </View>
     </TouchableOpacity>
   );
 };
@@ -58,6 +70,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: 15,
+    borderRadius: 32,
   },
 
   nurseTitle: {
@@ -75,5 +88,15 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 10,
     marginBottom: 20,
+  },
+  bg: {
+    position: "absolute",
+    width: width,
+    height: height,
+    backgroundColor: "white",
+    transform: [{ translateY: height }],
+    borderRadius: 32,
+    padding: 10,
+    paddingTop: 32 + 10,
   },
 });

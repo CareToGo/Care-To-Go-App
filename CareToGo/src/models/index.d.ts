@@ -174,58 +174,58 @@ export declare const Worker: (new (init: ModelInit<Worker, WorkerMetaData>) => W
 
 type EagerUser = {
   readonly id: string;
+  readonly ver: number;
   readonly sub: string;
-  readonly address: string;
-  readonly address2?: string | null;
+  readonly lat: number;
   readonly lng: number;
   readonly firstname: string;
   readonly lastname: string;
-  readonly ver: number;
+  readonly gender: string;
   readonly dob: string;
   readonly email: string;
   readonly contactnum: string;
   readonly Orders?: (Order | null)[] | null;
+  readonly emergency: string;
+  readonly address: string;
+  readonly detailedaddress?: string | null;
   readonly postalcode: string;
   readonly bio?: string | null;
-  readonly gender: string;
-  readonly emergency: string;
   readonly mobility: Caretype | keyof typeof Caretype;
-  readonly feeding: Caretype | keyof typeof Caretype;
   readonly toileting: Caretype | keyof typeof Caretype;
+  readonly feeding: Caretype | keyof typeof Caretype;
   readonly bathing: Caretype | keyof typeof Caretype;
   readonly mealprep: Caretype | keyof typeof Caretype;
   readonly allergies: string;
   readonly diagnosis: string;
-  readonly lat: number;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
 type LazyUser = {
   readonly id: string;
+  readonly ver: number;
   readonly sub: string;
-  readonly address: string;
-  readonly address2?: string | null;
+  readonly lat: number;
   readonly lng: number;
   readonly firstname: string;
   readonly lastname: string;
-  readonly ver: number;
+  readonly gender: string;
   readonly dob: string;
   readonly email: string;
   readonly contactnum: string;
   readonly Orders: AsyncCollection<Order>;
+  readonly emergency: string;
+  readonly address: string;
+  readonly detailedaddress?: string | null;
   readonly postalcode: string;
   readonly bio?: string | null;
-  readonly gender: string;
-  readonly emergency: string;
   readonly mobility: Caretype | keyof typeof Caretype;
-  readonly feeding: Caretype | keyof typeof Caretype;
   readonly toileting: Caretype | keyof typeof Caretype;
+  readonly feeding: Caretype | keyof typeof Caretype;
   readonly bathing: Caretype | keyof typeof Caretype;
   readonly mealprep: Caretype | keyof typeof Caretype;
   readonly allergies: string;
   readonly diagnosis: string;
-  readonly lat: number;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
