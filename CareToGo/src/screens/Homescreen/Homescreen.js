@@ -1,33 +1,34 @@
 import { StyleSheet, Text, View, Image, FlatList, StatusBar } from "react-native";
 import Contractor from "../../components/contractorcomponent/contractor";
-import restaurants from "../../../assets/data/restaurants.json";
-import { useState, useEffect } from "react";
-import { DataStore } from "aws-amplify";
-import { Worker } from "../../models";
 import { useBasketContext } from "../../contexts/BasketContext";
 
+const height = 900;
+const width = 428;
 export default function Homescreen() {
-  const { workers } = useBasketContext()
-  // useEffect(() => {
-  //   console.log(1)
-  // }, []);
+  const { workers } = useBasketContext();
 
-  
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content"  />
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
       <FlatList
         data={workers}
         renderItem={({ item }) => <Contractor worker={item} />}
       />
-    </View>
+      <View style={styles.bg} />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
-    alignItems:'center',
-    // borderWidth:1,
+    flex: 1,
+  },
+  bg: {
+    position: "absolute",
+    width: width,
+    height: height,
+    backgroundColor: "red",
+    transform: [{ translateY: height }],
+    borderRadius: 32,
   },
 });
