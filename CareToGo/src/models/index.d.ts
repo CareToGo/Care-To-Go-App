@@ -104,7 +104,7 @@ export declare class User {
   readonly id: string;
   readonly sub: string;
   readonly address: string;
-  readonly lat: number;
+  readonly address2?: string | null;
   readonly lng: number;
   readonly firstname: string;
   readonly lastname: string;
@@ -124,6 +124,7 @@ export declare class User {
   readonly mealprep: Caretype | keyof typeof Caretype;
   readonly allergies: string;
   readonly diagnosis: string;
+  readonly lat: number;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<User, UserMetaData>);

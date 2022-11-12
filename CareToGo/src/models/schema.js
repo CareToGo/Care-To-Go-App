@@ -462,11 +462,11 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "lat": {
-                    "name": "lat",
+                "address2": {
+                    "name": "address2",
                     "isArray": false,
-                    "type": "Float",
-                    "isRequired": true,
+                    "type": "String",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "lng": {
@@ -619,6 +619,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "lat": {
+                    "name": "lat",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -689,5 +696,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "dc373b118fd86ded3f868c7d201e3696"
+    "version": "285ea19828c63317e722c44345e12178"
 };

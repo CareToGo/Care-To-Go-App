@@ -59,7 +59,7 @@ const UserProfileNav = () => {
           headerLeft: () => (
             <TouchableHighlight style={{ textAlign: "right" }}>
               <Pressable onPress={() => navigation.navigate('UserProfile')}>
-                <Entypo name="arrow-with-circle-down" size={30} color="black" />
+                <Entypo name="arrow-with-circle-down" size={30} color="#001A72" />
               </Pressable>
             </TouchableHighlight>
           ),

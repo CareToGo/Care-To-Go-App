@@ -47,7 +47,7 @@ type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   sub: String!
   address: String!
-  lat: Float!
+  address2: String
   lng: Float!
   firstname: String!
   lastname: String!
@@ -67,6 +67,7 @@ type User @model @auth(rules: [{allow: public}]) {
   mealprep: Caretype!
   allergies: String!
   diagnosis: String!
+  lat: Float!
 }
 
 type Worker @model @auth(rules: [{allow: public}]) {
