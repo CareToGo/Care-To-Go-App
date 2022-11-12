@@ -1,12 +1,17 @@
-import { StyleSheet, View, Text, Image, Pressable } from "react-native";
+import { StyleSheet, View, Text, Image, Pressable, ScrollView } from "react-native";
 import Map from "../../../assets/contractor-details-page/contractorDetailsMap.png";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { FlatList } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+
+const height = 900;
+const width = 428;
 
 const ContractorDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const services = JSON.parse(route.params.service);
+  const services = route.params.service;
 
   const pressHandler = () => {
     navigation.navigate("orders", {
@@ -16,144 +21,124 @@ const ContractorDetails = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image source={Map} style={styles.image} />
+    <View style={{ flex: 1 }}>
+      <AntDesign
+        name="arrowleft"
+        size={28}
+        style={{
+          padding: 12,
+          position: "absolute",
+          top: 20 * 2,
+          left: 10,
+          zIndex: 2,
+        }}
+        onPress={() => {
+          navigation.goBack();
+        }}
+      />
+      <View
+        style={[
+          StyleSheet.absoluteFill,
+          {
+            backgroundColor: "#4D80C5",
+            borderRadius: 0,
+            height: height * 0.3 + 32,
+          },
+        ]}
+      ></View>
+      <Text style={styles.name}>
+        {route.params.firstName} {route.params.lastName} {`\u2022 `}
+        {route.params.profession}
+      </Text>
+      <Text style={styles.jobTitle}>{route.params.profession}</Text>
+      <Image
+        source={{
+          uri: "http://www.by-lee.com/nurse0.jpg",
+        }}
+        style={styles.image}
+      />
 
-      <View style={styles.textContainers}>
-        <View style={styles.nurseTitleContainer}>
-          <Text
+      <View style={styles.bg}>
+        <ScrollView>
+          <View
             style={{
-              fontWeight: "bold",
-              fontSize: 25,
+              flexDirection: "row",
+              justifyContent: "space-evenly",
             }}
           >
-            {route.params.name} &#8226; RN
-          </Text>
-          <Text style={{ top: 5 }}>I'm Nick, I like helping people</Text>
-        </View>
-        <View style={styles.tagContainer}>
-          <Text
-            style={{
-              marginVertical: 10,
-              fontWeight: "bold",
-              fontSize: 15,
-            }}
-          >
-            {" "}
-            Verified{" "}
-          </Text>
-
-          <Text
-            style={{
-              fontWeight: "bold",
-              fontSize: 15,
-            }}
-          >
-            {" "}
-            Save{" "}
-          </Text>
-        </View>
-      </View>
-
-      <View style={styles.button}>
-        <Pressable onPress={pressHandler}>
-          <Text style={{ color: "yellow" }}>Schedule</Text>
-        </Pressable>
-      </View>
-
-      <View style={styles.services}>
-        <Text style={{ color: "lightgray", fontWeight: "bold" }}>
-          Services Provided
-        </Text>
-      </View>
-
-      <View style={styles.servicesList}>
-        <FlatList
-          data={services}
-          horizontal={true}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item: { id, name, description, price }, item }) => (
-            <Text style={{ fontWeight: "bold", marginHorizontal: 10 }}>
-              {name}
-            </Text>
-          )}
-        />
-      </View>
-
-      <View style={styles.experience}>
-        <Text style={{ color: "lightgray", fontWeight: "bold" }}>
-          {" "}
-          Experience (4)
-        </Text>
-      </View>
-
-      <View style={styles.experiencesList}>
-        <Text style={{ fontWeight: "bold", fontSize: 15 }}>
-          Registered Nurse
-        </Text>
-        <Text style={{ fontWeight: "bold", fontSize: 13, color: "#A6A6A6" }}>
-          Mental Health - St. Joseph's Hospital
-        </Text>
-        <Text style={{ fontWeight: "bold", fontSize: 13, color: "#A6A6A6" }}>
-          Sep 2020 - Present
-        </Text>
+            <View
+              style={{
+                backgroundColor: "#A6C4DD",
+                height: 64,
+                width: 64,
+                borderRadius: 32,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <MaterialIcons name="medical-services" size={24} color="white" />
+            </View>
+            <View
+              style={{
+                backgroundColor: "#A6C4DD",
+                height: 64,
+                width: 64,
+                borderRadius: 32,
+                alignItems: "center",
+                justifyContent: "center",
+                borderColor: "black",
+              }}
+            >
+              <AntDesign name="Trophy" size={24} color="white" />
+            </View>
+            <View
+              style={{
+                backgroundColor: "#A6C4DD",
+                height: 64,
+                width: 64,
+                borderRadius: 32,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <AntDesign name="customerservice" size={24} color="white" />
+            </View>
+          </View>
+          <View>
+            <Text>{route.params.transportationMode}</Text>
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    left: 20,
+  bg: {
+    position: "absolute",
+    width: width,
+    height: height,
+    backgroundColor: "white",
+    transform: [{ translateY: height * 0.3 }],
+    borderRadius: 32,
+    padding: 10,
+    paddingTop: 32 + 10,
   },
-
   image: {
-    top: 50,
-  },
-  textContainers: {
-    flex: 1,
-    flexDirection: "row",
-    top: 10,
-  },
-
-  nurseTitleContainer: {
-    top: 65,
-  },
-  tagContainer: {
-    top: 60,
-    left: 120,
-  },
-  button: {
+    width: 120,
+    height: 120,
+    resizeMode: "contain",
     position: "absolute",
-    top: 440,
-    left: 100,
-    paddingHorizontal: 48,
-    paddingVertical: 12,
-    backgroundColor: "#001A72",
-    borderRadius: 10,
+    top: height / 6,
+    right: 15,
+    borderRadius: 32,
   },
-  services: {
+  name: {
+    fontWeight: "700",
+    fontSize: 20,
     position: "absolute",
-    top: 500,
-  },
-  servicesList: {
-    position: "absolute",
-    left: 30,
-    flexWrap: "wrap",
-    flexDirection: "row",
-    top: 530,
-    marginVertical: 5,
-  },
-  experience: {
-    position: "absolute",
-    top: 560,
-  },
-
-  experiencesList: {
-    position: "absolute",
-    top: 590,
-    left: 40,
+    top: height / 4,
+    left: "5%",
   },
 });
 
