@@ -11,6 +11,11 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { FlatList } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import {
+  SharedElement,
+  SharedElementTransition,
+  nodeFromRef,
+} from "react-native-shared-element";
 
 const height = 900;
 const width = 428;

@@ -2,6 +2,11 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import {
+  SharedElement,
+  SharedElementTransition,
+  nodeFromRef,
+} from "react-native-shared-element";
 
 const height = 900;
 const width = 428;
@@ -43,8 +48,11 @@ const Contractor = ({ worker }) => {
             <FontAwesome name="bicycle" size={40} color="white" />
           </View>
           <View style={{ flexDirection: "column", padding: 5 }}>
-            <Text> Distance</Text>
-            <AntDesign name="staro" size={24} color="white" />
+            <Text style={{ color: "white" }}> Distance: 5 Km</Text>
+            <Text style={{ color: "white", alignItems: "center" }}>
+              <AntDesign name="staro" size={12} color="white" />
+              4.98
+            </Text>
           </View>
         </View>
         <View style={styles.bg} />
