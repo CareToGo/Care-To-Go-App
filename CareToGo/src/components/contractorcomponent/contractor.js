@@ -6,20 +6,29 @@ const Contractor = ({ worker }) => {
   const navigation = useNavigation();
 
   const pressHandler = () => {
-    const data = JSON.stringify(worker);
-    const dict = JSON.parse(data);
-    navigation.navigate("contractor-details", dict);
+    // const data = JSON.stringify(worker);
+    // const dict = JSON.parse(data);
 
+    navigation.navigate("contractor-details", worker);
+    console.log(worker);
   };
 
   return (
-    <Pressable onPress={pressHandler} style={styles.resturauntContainer}>
-      <Image
-        source={{
-          uri: worker.image,
-        }}
-        style={styles.image}
-      />
+    <TouchableOpacity
+      onPress={pressHandler}
+      style={{ marginBottom: 10, height: 200, padding: 10 }}
+    >
+      <View style={styles.container}>
+        <Text style={styles.nurseTitle}>{worker.firstName}</Text>
+        <Text style={styles.details}>{worker.experienceDescription}</Text>
+        <Image
+          source={{
+            uri: "http://www.by-lee.com/nurse0.jpg",
+          }}
+          style={styles.image}
+        />
+      </View>
+      {/* 
 
       <View style={styles.background}>
         <Text style={styles.nurseTitle}>{worker.name}</Text>
@@ -27,40 +36,44 @@ const Contractor = ({ worker }) => {
           {" "}
           -{worker.rating}- &#8226; -experience- &#8226; -distance-
         </Text>
-      </View>
-    </Pressable>
+      </View> */}
+    </TouchableOpacity>
   );
 };
 
 export default Contractor;
 
 const styles = StyleSheet.create({
-  resturauntContainer: {
-    width: "90%",
-    marginVertical: 10,
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: "#4D80C5",
+    borderRadius: 16,
   },
 
   image: {
-    width: "100%",
-    aspectRatio: 4 / 3,
+    width: 120,
+    height: 120,
+    resizeMode: "contain",
+    position: "absolute",
+    bottom: 0,
+    right: 15,
   },
 
   nurseTitle: {
     color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 18,
+    fontWeight: "700",
     marginTop: 15,
     marginHorizontal: 10,
   },
 
   details: {
     color: "white",
+    fontSize: 11,
+    opacity: 0.7,
     marginVertical: 5,
     marginHorizontal: 10,
     marginBottom: 20,
-  },
-
-  background: {
-    backgroundColor: "#4D80C5",
   },
 });
