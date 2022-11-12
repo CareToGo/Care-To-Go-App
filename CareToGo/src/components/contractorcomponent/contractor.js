@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -20,23 +27,39 @@ const Contractor = ({ worker }) => {
   };
 
   return (
-    <TouchableOpacity
-      onPress={pressHandler}
-      style={{ marginBottom: 10, height: 200, padding: 10 }}
-    >
-      <View style={styles.container}>
-        <Text style={styles.nurseTitle}>
-          {worker.firstName} {worker.lastName} {`\u2022 `}
-          {worker.profession}
-        </Text>
+    <SafeAreaView style={{ padding: 10 }}>
+      <TouchableOpacity
+        onPress={pressHandler}
+        style={{ marginBottom: 10, height: 200, padding: 10 }}
+      >
+        <SharedElement id={`${worker.id}.bg`}>
+          <View
+            style={[
+              StyleSheet.absoluteFillObject,
+              {
+                backgroundColor: "#4D80C5",
+                borderRadius: 16,
+                height: height * 0.21,
+              },
+            ]}
+          />
+        </SharedElement>
+        <SharedElement id={`${worker.id}.name`}>
+          <Text style={styles.nurseTitle}>
+            {worker.firstName} {worker.lastName} {`\u2022 `}
+            {worker.profession}
+          </Text>
+        </SharedElement>
         <Text style={styles.details}>{worker.experienceDescription}</Text>
-        <Text></Text>
-        <Image
-          source={{
-            uri: "http://www.by-lee.com/nurse0.jpg",
-          }}
-          style={styles.image}
-        />
+
+        <SharedElement id={`${worker.id}.image`}>
+          <Image
+            source={{
+              uri: "http://www.by-lee.com/nurse0.jpg",
+            }}
+            style={styles.image}
+          />
+        </SharedElement>
         <View
           style={{
             flexDirection: "row",
@@ -56,27 +79,20 @@ const Contractor = ({ worker }) => {
           </View>
         </View>
         <View style={styles.bg} />
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 };
 
 export default Contractor;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: "#4D80C5",
-    borderRadius: 16,
-  },
-
   image: {
     width: 120,
     height: 120,
     resizeMode: "contain",
     position: "absolute",
-    bottom: 0,
+    bottom: -115,
     right: 15,
     borderRadius: 32,
   },
