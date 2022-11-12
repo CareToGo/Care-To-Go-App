@@ -11,7 +11,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import EditUserProfile from "../../screens/EditUserProfile/EditUserProfile";
 import { useEffect } from "react";
 import AnimatedSplash from "react-native-animated-splash-screen";
-import C2G from "../../../assets/homespage/c2g.png";
+import C2G from "../../../assets/homespage/C2G.png";
 import FirstTimeEdit from "../../screens/FirstTimeEdit/FirstTimeEdit";
 
 const Stack = createNativeStackNavigator();

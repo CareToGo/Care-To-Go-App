@@ -32,7 +32,7 @@ const EditUserProfile = ({ route }) => {
   const [contactnum, setNum] = useState(dbUser?.contactnum || "");
   const [emergency, setEmer] = useState(dbUser?.emergency || "");
   const [address, setAddress] = useState(dbUser?.address || "");
-  const [address2, setAddress2] = useState(dbUser?.address || "");
+  const [da, setDA] = useState(dbUser?.detailedaddress || "");
   const [lat, setLat] = useState(dbUser?.lat + "" || "0");
   const [lng, setLng] = useState(dbUser?.lng + "" || "0");
   const [date, setDate] = useState(new Date('1996-12-25'));
@@ -183,6 +183,7 @@ const EditUserProfile = ({ route }) => {
         updated.email = email;
         updated.contactnum = contactnum;
         updated.address = address;
+        updated.detailedaddress = da;
         updated.lat = parseFloat(lat);
         updated.lng = parseFloat(lng);
         updated._version = parseInt(dbUser.ver);
@@ -379,13 +380,20 @@ const EditUserProfile = ({ route }) => {
             </View>
 
             <View style={{ flex: 1, paddingLeft: 10, justifyContent: 'center', borderColor: 'lightgray', borderBottomWidth: 1 }}>
-              <Text style={{ color: 'black', fontSize: SCREEN_WIDTH * 1.1 / address.length }}>
-                {address}
-              </Text>
+              <TextInput
+                style={{
+                  flex: 1,
+                  color: "black",
+                  fontSize: 15
+                }}
+                onChangeText={setDA}
+                value={da}
+                placeholder='Unit, Apartment...'
+              />
             </View>
 
             <View style={{ justifyContent: 'center', borderColor: 'lightgray', borderBottomWidth: 1 }}>
-              <Text style={{ color: 'lightgray', fontSize: 12, textAlign: 'right' }}>ADDRESS</Text>
+              <Text style={{ color: 'lightgray', fontSize: 12, textAlign: 'right' }}>ADDRESS 2</Text>
             </View>
           </View>
         </View>
