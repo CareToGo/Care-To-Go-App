@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View, Image, FlatList, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  FlatList,
+  StatusBar,
+  SafeAreaView,
+} from "react-native";
 import Contractor from "../../components/contractorcomponent/contractor";
 import { useBasketContext } from "../../contexts/BasketContext";
 

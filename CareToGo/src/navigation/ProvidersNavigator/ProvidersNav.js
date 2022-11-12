@@ -5,8 +5,8 @@ import ContractorDetails from "../../screens/contractordetails/contractordetails
 import OrderScreen from "../../screens/orderscreen/orderscreen";
 import Datepicker from "../../screens/datepicker/datepicker";
 import Appointments from "../../screens/appointments/appointments";
-import C2G from "../../../assets/homespage/C2G.png";
-import { Ionicons } from '@expo/vector-icons';
+import C2G from "../../../assets/homespage/c2g.png";
+import { Ionicons } from "@expo/vector-icons";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -17,7 +17,7 @@ const ProvidersNav = () => {
         name="ContractorList"
         component={Homescreen}
         options={{
-          headerTitle:'',
+          headerTitle: "",
           headerShown: false,
           headerStyle: {
             backgroundColor: "#FFFFFF",

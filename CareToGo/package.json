@@ -19,7 +19,7 @@
     "@react-navigation/material-bottom-tabs": "^6.2.2",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/native-stack": "^6.7.0",
-    "@stripe/stripe-react-native": "^0.6.1",
+    "@stripe/stripe-react-native": "0.6.1",
     "amazon-cognito-identity-js": "^5.2.12",
     "aws-amplify": "^4.3.39",
     "aws-amplify-react-native": "^6.0.8",
@@ -42,6 +42,7 @@
     "react-native-google-places-autocomplete": "^2.4.1",
     "react-native-image-crop-picker": "^0.38.1",
     "react-native-image-picker": "^4.10.0",
+    "react-native-maps": "0.30.2",
     "react-native-multi-selectbox": "^1.5.0",
     "react-native-paper": "^4.12.3",
     "react-native-progress": "^5.0.0",
@@ -52,8 +53,7 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "0.17.7",
     "react-redux": "^8.0.2",
-    "tailwind-react-native-classnames": "^1.5.1",
-    "react-native-maps": "0.30.2"
+    "tailwind-react-native-classnames": "^1.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
