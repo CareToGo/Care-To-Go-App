@@ -1,14 +1,8 @@
-enum Caretype {
-  TOTALCARE
-  SOMEASSISTANCE
-  INDEPENDENT
-}
-
 type PSWService @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   description: String!
-  price: String!
+  price: Float!
 }
 
 type NurseService @model @auth(rules: [{allow: public}]) {
@@ -16,11 +10,6 @@ type NurseService @model @auth(rules: [{allow: public}]) {
   name: String!
   description: String!
   price: Float!
-}
-
-enum TransportationModes {
-  DRIVING
-  BICYCLING
 }
 
 enum OrderStatus {
@@ -32,15 +21,27 @@ enum OrderStatus {
 
 type Order @model @auth(rules: [{allow: public}]) {
   id: ID!
-  Worker: Worker @hasOne
-  userID: ID! @index(name: "byUser")
   total: Float!
   service: String!
   lat: Float!
   lng: Float!
   name: String!
   address: String!
-  status: OrderStatus!
+  status: OrderStatus
+  Worker: Worker @hasOne
+  userID: ID! @index(name: "byUser")
+}
+
+enum TranportationMode {
+  BICYCLE
+  CAR
+  WALK
+}
+
+enum CareType {
+  TOTALCARE
+  SOMEASSITANCE
+  INDEPENDENT
 }
 
 type User @model @auth(rules: [{allow: public}]) {
@@ -55,19 +56,19 @@ type User @model @auth(rules: [{allow: public}]) {
   dob: String!
   email: String!
   contactnum: String!
-  Orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
   emergency: String!
   address: String!
   detailedaddress: String
   postalcode: String!
   bio: String
-  mobility: Caretype!
-  toileting: Caretype!
-  feeding: Caretype!
-  bathing: Caretype!
-  mealprep: Caretype!
+  mobility: CareType!
+  toileting: CareType!
+  feeding: CareType!
+  bathing: CareType!
+  mealprep: CareType!
   allergies: String!
   diagnosis: String!
+  Orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
 }
 
 type Worker @model @auth(rules: [{allow: public}]) {
@@ -77,14 +78,12 @@ type Worker @model @auth(rules: [{allow: public}]) {
   rating: Float
   lat: Float!
   lng: Float!
-  transportationMode: TransportationModes!
   services: String
   gender: String!
-  profession: String!
-  languages: String!
+  profession: String
   experienceDescription: String!
   bio: String!
   sub: String!
   isVerified: Boolean!
+  tranportationMode: TranportationMode
 }
- 

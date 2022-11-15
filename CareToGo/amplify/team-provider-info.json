@@ -1,31 +1,22 @@
 {
   "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-careapp-staging-00451-authRole",
-      "UnauthRoleArn": "arn:aws:iam::498517101212:role/amplify-careapp-staging-00451-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::498517101212:role/amplify-careapp-staging-00451-authRole",
+      "AuthRoleName": "amplify-caretogoapp-staging-234315-authRole",
+      "UnauthRoleArn": "arn:aws:iam::498517101212:role/amplify-caretogoapp-staging-234315-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::498517101212:role/amplify-caretogoapp-staging-234315-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-careapp-staging-00451-deployment",
-      "UnauthRoleName": "amplify-careapp-staging-00451-unauthRole",
-      "StackName": "amplify-careapp-staging-00451",
-      "StackId": "arn:aws:cloudformation:us-east-1:498517101212:stack/amplify-careapp-staging-00451/9557e2e0-0308-11ed-aa1e-12267cd789f9",
-      "AmplifyAppId": "dgng1nbl2yd1d"
+      "DeploymentBucketName": "amplify-caretogoapp-staging-234315-deployment",
+      "UnauthRoleName": "amplify-caretogoapp-staging-234315-unauthRole",
+      "StackName": "amplify-caretogoapp-staging-234315",
+      "StackId": "arn:aws:cloudformation:us-east-1:498517101212:stack/amplify-caretogoapp-staging-234315/1c5a9390-6476-11ed-afee-121c8d736bc9",
+      "AmplifyAppId": "d39ldcc55x9n3z"
     },
     "categories": {
       "auth": {
-        "CareApp": {}
-      },
-      "function": {
-        "CreatePaymentIntent": {
-          "deploymentBucketName": "amplify-careapp-staging-00451-deployment",
-          "s3Key": "amplify-builds/CreatePaymentIntent-3332764647455841454f-build.zip"
-        }
-      },
-      "api": {
-        "CareApp": {}
+        "CareToGoAPP": {}
       },
       "storage": {
-        "imagebucket": {}
+        "caretogo": {}
       }
     }
   }

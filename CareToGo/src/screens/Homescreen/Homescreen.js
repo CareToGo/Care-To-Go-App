@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Contractor from "../../components/contractorcomponent/contractor";
 import { useBasketContext } from "../../contexts/BasketContext";
-import c2g from "../../../assets/homespage/c2g.png";
+import c2g from "../../../assets/homespage/C2Glogo.png";
 import tw from "tailwind-react-native-classnames";
 const height = 900;
 const width = 428;
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor:'#FFFFFF'
   },
   bg: {
     position: "absolute",

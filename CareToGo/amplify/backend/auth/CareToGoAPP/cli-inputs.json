@@ -3,8 +3,8 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "careap5bff4da3",
-    "userPoolName": "CareApp",
+    "resourceNameTruncated": "caretoe04c2635",
+    "userPoolName": "CareToGoAPP",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -30,10 +30,10 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "CareAp5bff4da3_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "CareToe04c2635_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "5bff4da3",
-    "resourceName": "CareApp",
+    "sharedId": "e04c2635",
+    "resourceName": "CareToGoAPP",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
     "usernameAttributes": [

@@ -1,13 +1,12 @@
 {
-  "resourceName": "imagebucket",
-  "policyUUID": "3c12fac0",
-  "bucketName": "careapp397f72dea29a4a8e84e7ac6e2bbf9486",
+  "resourceName": "caretogo",
+  "policyUUID": "845e404a",
+  "bucketName": "caretogoapp5d053f24a858425da76f3b413425ee64",
   "storageAccess": "auth",
   "guestAccess": [],
   "authAccess": [
     "CREATE_AND_UPDATE",
-    "READ",
-    "DELETE"
+    "READ"
   ],
   "triggerFunction": "NONE",
   "groupAccess": {}

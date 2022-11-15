@@ -1,7 +1,7 @@
 {
   "version": 1,
   "serviceConfiguration": {
-    "apiName": "CareApp",
+    "apiName": "CareToGoAPP",
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "API_KEY",

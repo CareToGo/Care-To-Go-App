@@ -15,7 +15,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function TabNav() {
   return (
-    <Tab.Navigator activeColor="#ffde59" inactiveColor="#001A72" barStyle={{ backgroundColor: "#FFFFFF" }}>
+    <Tab.Navigator activeColor="#ffde59" inactiveColor="#001A72" barStyle={{ backgroundColor: "#FFFFFF", borderTopWidth:1 }}>
       <Tab.Screen
         name="Providers"
         component={ProvidersNav}

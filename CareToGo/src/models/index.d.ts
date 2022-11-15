@@ -1,21 +1,24 @@
 import { ModelInit, MutableModel } from "@aws-amplify/datastore";
-
-export enum Caretype {
-  TOTALCARE = "TOTALCARE",
-  SOMEASSISTANCE = "SOMEASSISTANCE",
-  INDEPENDENT = "INDEPENDENT"
-}
-
-export enum TransportationModes {
-  DRIVING = "DRIVING",
-  BICYCLING = "BICYCLING"
-}
+// @ts-ignore
+import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@aws-amplify/datastore";
 
 export enum OrderStatus {
   NEW = "NEW",
   ARRIVED = "ARRIVED",
   COMPLETED = "COMPLETED",
   ACCEPTED = "ACCEPTED"
+}
+
+export enum TranportationMode {
+  BICYCLE = "BICYCLE",
+  CAR = "CAR",
+  WALK = "WALK"
+}
+
+export enum CareType {
+  TOTALCARE = "TOTALCARE",
+  SOMEASSITANCE = "SOMEASSITANCE",
+  INDEPENDENT = "INDEPENDENT"
 }
 
 type PSWServiceMetaData = {
@@ -38,69 +41,137 @@ type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class PSWService {
-  readonly id: string;
-  readonly name: string;
-  readonly description: string;
-  readonly price: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<PSWService, PSWServiceMetaData>);
-  static copyOf(source: PSWService, mutator: (draft: MutableModel<PSWService, PSWServiceMetaData>) => MutableModel<PSWService, PSWServiceMetaData> | void): PSWService;
-}
-
-export declare class NurseService {
+type EagerPSWService = {
   readonly id: string;
   readonly name: string;
   readonly description: string;
   readonly price: number;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<NurseService, NurseServiceMetaData>);
-  static copyOf(source: NurseService, mutator: (draft: MutableModel<NurseService, NurseServiceMetaData>) => MutableModel<NurseService, NurseServiceMetaData> | void): NurseService;
 }
 
-export declare class Order {
+type LazyPSWService = {
   readonly id: string;
-  readonly Worker?: Worker | null;
-  readonly userID: string;
+  readonly name: string;
+  readonly description: string;
+  readonly price: number;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type PSWService = LazyLoading extends LazyLoadingDisabled ? EagerPSWService : LazyPSWService
+
+export declare const PSWService: (new (init: ModelInit<PSWService, PSWServiceMetaData>) => PSWService) & {
+  copyOf(source: PSWService, mutator: (draft: MutableModel<PSWService, PSWServiceMetaData>) => MutableModel<PSWService, PSWServiceMetaData> | void): PSWService;
+}
+
+type EagerNurseService = {
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
+  readonly price: number;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyNurseService = {
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
+  readonly price: number;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type NurseService = LazyLoading extends LazyLoadingDisabled ? EagerNurseService : LazyNurseService
+
+export declare const NurseService: (new (init: ModelInit<NurseService, NurseServiceMetaData>) => NurseService) & {
+  copyOf(source: NurseService, mutator: (draft: MutableModel<NurseService, NurseServiceMetaData>) => MutableModel<NurseService, NurseServiceMetaData> | void): NurseService;
+}
+
+type EagerOrder = {
+  readonly id: string;
   readonly total: number;
   readonly service: string;
   readonly lat: number;
   readonly lng: number;
   readonly name: string;
   readonly address: string;
-  readonly status: OrderStatus | keyof typeof OrderStatus;
+  readonly status?: OrderStatus | keyof typeof OrderStatus | null;
+  readonly Worker?: Worker | null;
+  readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly orderWorkerId?: string | null;
-  constructor(init: ModelInit<Order, OrderMetaData>);
-  static copyOf(source: Order, mutator: (draft: MutableModel<Order, OrderMetaData>) => MutableModel<Order, OrderMetaData> | void): Order;
 }
 
-export declare class Worker {
+type LazyOrder = {
+  readonly id: string;
+  readonly total: number;
+  readonly service: string;
+  readonly lat: number;
+  readonly lng: number;
+  readonly name: string;
+  readonly address: string;
+  readonly status?: OrderStatus | keyof typeof OrderStatus | null;
+  readonly Worker: AsyncItem<Worker | undefined>;
+  readonly userID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly orderWorkerId?: string | null;
+}
+
+export declare type Order = LazyLoading extends LazyLoadingDisabled ? EagerOrder : LazyOrder
+
+export declare const Order: (new (init: ModelInit<Order, OrderMetaData>) => Order) & {
+  copyOf(source: Order, mutator: (draft: MutableModel<Order, OrderMetaData>) => MutableModel<Order, OrderMetaData> | void): Order;
+}
+
+type EagerWorker = {
   readonly id: string;
   readonly firstName: string;
   readonly lastName: string;
   readonly rating?: number | null;
   readonly lat: number;
   readonly lng: number;
-  readonly transportationMode: TransportationModes | keyof typeof TransportationModes;
   readonly services?: string | null;
   readonly gender: string;
-  readonly profession: string;
-  readonly languages: string;
+  readonly profession?: string | null;
   readonly experienceDescription: string;
   readonly bio: string;
   readonly sub: string;
   readonly isVerified: boolean;
+  readonly tranportationMode?: TranportationMode | keyof typeof TranportationMode | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Worker, WorkerMetaData>);
-  static copyOf(source: Worker, mutator: (draft: MutableModel<Worker, WorkerMetaData>) => MutableModel<Worker, WorkerMetaData> | void): Worker;
 }
 
-export declare class User {
+type LazyWorker = {
+  readonly id: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly rating?: number | null;
+  readonly lat: number;
+  readonly lng: number;
+  readonly services?: string | null;
+  readonly gender: string;
+  readonly profession?: string | null;
+  readonly experienceDescription: string;
+  readonly bio: string;
+  readonly sub: string;
+  readonly isVerified: boolean;
+  readonly tranportationMode?: TranportationMode | keyof typeof TranportationMode | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Worker = LazyLoading extends LazyLoadingDisabled ? EagerWorker : LazyWorker
+
+export declare const Worker: (new (init: ModelInit<Worker, WorkerMetaData>) => Worker) & {
+  copyOf(source: Worker, mutator: (draft: MutableModel<Worker, WorkerMetaData>) => MutableModel<Worker, WorkerMetaData> | void): Worker;
+}
+
+type EagerUser = {
   readonly id: string;
   readonly ver: number;
   readonly sub: string;
@@ -112,21 +183,54 @@ export declare class User {
   readonly dob: string;
   readonly email: string;
   readonly contactnum: string;
-  readonly Orders?: (Order | null)[] | null;
   readonly emergency: string;
   readonly address: string;
   readonly detailedaddress?: string | null;
   readonly postalcode: string;
   readonly bio?: string | null;
-  readonly mobility: Caretype | keyof typeof Caretype;
-  readonly toileting: Caretype | keyof typeof Caretype;
-  readonly feeding: Caretype | keyof typeof Caretype;
-  readonly bathing: Caretype | keyof typeof Caretype;
-  readonly mealprep: Caretype | keyof typeof Caretype;
+  readonly mobility: CareType | keyof typeof CareType;
+  readonly toileting: CareType | keyof typeof CareType;
+  readonly feeding: CareType | keyof typeof CareType;
+  readonly bathing: CareType | keyof typeof CareType;
+  readonly mealprep: CareType | keyof typeof CareType;
   readonly allergies: string;
   readonly diagnosis: string;
+  readonly Orders?: (Order | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<User, UserMetaData>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
+}
+
+type LazyUser = {
+  readonly id: string;
+  readonly ver: number;
+  readonly sub: string;
+  readonly lat: number;
+  readonly lng: number;
+  readonly firstname: string;
+  readonly lastname: string;
+  readonly gender: string;
+  readonly dob: string;
+  readonly email: string;
+  readonly contactnum: string;
+  readonly emergency: string;
+  readonly address: string;
+  readonly detailedaddress?: string | null;
+  readonly postalcode: string;
+  readonly bio?: string | null;
+  readonly mobility: CareType | keyof typeof CareType;
+  readonly toileting: CareType | keyof typeof CareType;
+  readonly feeding: CareType | keyof typeof CareType;
+  readonly bathing: CareType | keyof typeof CareType;
+  readonly mealprep: CareType | keyof typeof CareType;
+  readonly allergies: string;
+  readonly diagnosis: string;
+  readonly Orders: AsyncCollection<Order>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser : LazyUser
+
+export declare const User: (new (init: ModelInit<User, UserMetaData>) => User) & {
+  copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }
